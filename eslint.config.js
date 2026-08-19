@@ -1,19 +1,16 @@
-import js from '@eslint/js'
-import { defineConfig, globalIgnores } from 'eslint/config'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import { reactRefresh } from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
+import js from "@eslint/js";
+import { defineConfig, globalIgnores } from "eslint/config";
+import globals from "globals";
+import reactHooks from "eslint-plugin-react-hooks";
+import { reactRefresh } from "eslint-plugin-react-refresh";
+import tseslint from "typescript-eslint";
+import eslintConfigPrettier from "eslint-config-prettier";
 
 export default defineConfig([
-  globalIgnores([
-    'dist/',
-    'coverage/',
-    '.vite/',
-  ]),
+  globalIgnores(["dist/", "coverage/", ".vite/"]),
 
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ["**/*.{ts,tsx}"],
 
     extends: [
       js.configs.recommended,
@@ -23,7 +20,7 @@ export default defineConfig([
     ],
 
     languageOptions: {
-      ecmaVersion: 'latest',
+      ecmaVersion: "latest",
 
       globals: {
         ...globals.browser,
@@ -35,22 +32,24 @@ export default defineConfig([
     },
 
     rules: {
-      '@typescript-eslint/no-unused-vars': [
-        'error',
+      "@typescript-eslint/no-unused-vars": [
+        "error",
         {
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
         },
       ],
 
-      '@typescript-eslint/consistent-type-imports': [
-        'error',
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
         {
-          prefer: 'type-imports',
+          prefer: "type-imports",
         },
       ],
 
-      'react-hooks/exhaustive-deps': 'warn',
+      "react-hooks/exhaustive-deps": "warn",
     },
   },
-])
+
+  eslintConfigPrettier,
+]);

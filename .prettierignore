@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+build/
+
+# Coverage
+coverage/
+
+# Vite
+.vite/
+
+# Generated files
+src/generated/
+
+# Minified files
+*.min.js
+*.min.css
+
+# Lockfiles
+bun.lock
+
+# Environment
+.env
+.env.*
