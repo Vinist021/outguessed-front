@@ -1,128 +1,136 @@
-## Project
+## Projeto
 
-Frontend for a multiplayer question/card game built with React + TypeScript, with a separate NestJS backend.
-HTTP handles resource operations; WebSocket handles realtime multiplayer behavior.
-Architecture is feature-oriented and the backend is authoritative for gameplay.
-Existing repository code, configuration, backend contracts, and the closest applicable `AGENTS.md` are the source of truth.
+Frontend de um jogo multijogador de perguntas e cartas, desenvolvido com React e TypeScript, com um backend NestJS separado.
+HTTP cuida das operações com recursos; WebSocket cuida do comportamento multijogador em tempo real.
+A arquitetura é organizada por funcionalidades, e o backend é a autoridade sobre a partida.
+O código e as configurações existentes, os contratos do backend e o `AGENTS.md` aplicável mais próximo são as fontes de referência.
 
-## Instruction Priority
+## Referências do projeto
 
-1. Current task instructions.
-2. Closest applicable `AGENTS.md`.
-3. Explicit documentation/backend contracts.
-4. Existing repository patterns.
-5. General React/TypeScript conventions.
+Os caminhos abaixo são relativos à pasta que contém `outguessed-front/` e `outguessed-back/`:
 
-## Before Changing Code
+* As regras de negócio estão em `outguessed-back/rules.md`.
+* O diagrama DER fica em `outguessed-back/DER.txt`.
+* As inspirações visuais para o projeto ficam em `outguessed-front/inspo/`.
 
-* Inspect the affected feature and similar implementations first.
-* Check `package.json`, existing dependencies, scripts, aliases, router, styling, state, HTTP, and realtime infrastructure.
-* Classify affected state as local UI, HTTP server state, or realtime match state.
-* Reuse existing abstractions before creating new ones.
-* Prefer the smallest correct change; do not perform unrelated refactors or redesigns.
-* Preserve existing routes, API payloads, authentication semantics, and WebSocket contracts unless explicitly changing them.
+## Prioridade das instruções
 
-## Architecture
+1. Instruções da tarefa atual.
+2. `AGENTS.md` aplicável mais próximo.
+3. Documentação explícita e contratos do backend, incluindo as regras de negócio e o DER indicados acima.
+4. Padrões existentes no repositório.
+5. Convenções gerais de React e TypeScript.
 
-Dependency direction: `app → pages → features → shared`.
+## Antes de alterar o código
 
-* `app/`: bootstrap, providers, router, global configuration.
-* `pages/`: route-level composition; avoid business logic, raw HTTP, or socket registration.
-* `features/`: primary unit for domain behavior (`auth`, `decks`, `cards`, `match`, etc.).
-* `shared/`: genuinely domain-neutral reusable infrastructure/UI only.
-* `shared` MUST NOT import from `features` or `pages`; features SHOULD NOT depend on pages.
-  Keep feature-specific API, hooks, state, realtime logic, components, and types colocated.
-  Do not reorganize working code solely to match an ideal directory structure.
-  Avoid circular feature dependencies and deep imports into another feature when a public API exists.
+* Examine primeiro a funcionalidade afetada e implementações semelhantes.
+* Verifique `package.json`, dependências, scripts, aliases, roteador, estilos, gerenciamento de estado e infraestrutura HTTP e de tempo real existentes.
+* Classifique o estado afetado como estado local da interface, estado do servidor obtido por HTTP ou estado da partida em tempo real.
+* Reutilize as abstrações existentes antes de criar outras.
+* Prefira a menor alteração correta; evite refatorações ou reformulações que não tenham relação com a tarefa.
+* Preserve rotas, dados enviados e recebidos pela API, comportamento de autenticação e contratos WebSocket, exceto quando a tarefa pedir explicitamente sua alteração.
 
-## Domain & Server Authority
+## Arquitetura
 
-Use backend terminology consistently: `Deck`, `Card`, `Match`, `Player`, `Round`, `Board`, `Answer`, `Judge`.
-Cards may have different type-specific payloads; never assume identical fields.
-A `Player` may be authenticated or guest; never assume `playerId === userId`.
-The backend determines action validity, answer correctness, scores, board movement, turns, round completion, winners, and match completion.
-The frontend sends user intent and renders server-confirmed state.
-Client-side restrictions are UX, never authorization.
-Never calculate or persist authoritative score, winner, correctness, or board position as browser truth.
+Direção das dependências: `app → pages → features → shared`.
 
-## State
+* `app/`: inicialização, provedores, roteador e configuração global.
+* `pages/`: composição das rotas; evite lógica de negócio, chamadas HTTP diretas e registro de eventos de socket.
+* `features/`: unidade principal do comportamento de domínio (`auth`, `decks`, `cards`, `match` etc.).
+* `shared/`: apenas infraestrutura e componentes de interface reutilizáveis e independentes do domínio.
+* `shared` NÃO DEVE importar de `features` ou `pages`; funcionalidades DEVEM EVITAR depender de páginas.
+  Mantenha juntos API, hooks, estado, lógica de tempo real, componentes e tipos específicos de cada funcionalidade.
+  Não reorganize código funcional apenas para atender a uma estrutura ideal de diretórios.
+  Evite dependências circulares entre funcionalidades e importações internas profundas quando houver uma API pública.
 
-* Local UI state: use React state for ephemeral component concerns.
-* HTTP server state: use the repository's established server-state abstraction; do not duplicate it into global state without need.
-* Realtime match state: use the established centralized realtime/store solution.
-  Do not use one state mechanism indiscriminately for all categories.
-  Do not persist safely derivable state.
-  Use immutable updates and clear store actions/selectors.
-  Selectors may derive UI state but MUST NOT recreate backend authority.
+## Domínio e autoridade do servidor
 
-## HTTP & Contracts
+Use de forma consistente a terminologia do backend: `Deck`, `Card`, `Match`, `Player`, `Round`, `Board`, `Answer`, `Judge`.
+Cartas podem ter dados específicos de cada tipo; nunca presuma que todas possuem os mesmos campos.
+Um `Player` pode ser autenticado ou convidado; nunca presuma que `playerId === userId`.
+O backend determina a validade das ações, a correção das respostas, as pontuações, o movimento no tabuleiro, os turnos, o fim das rodadas, os vencedores e o fim da partida.
+O frontend envia a intenção do usuário e exibe o estado confirmado pelo servidor.
+Restrições no cliente servem à experiência do usuário, não à autorização.
+Nunca calcule nem persista pontuação, vencedor, correção de resposta ou posição no tabuleiro como verdade definida pelo navegador.
 
-Components SHOULD use `feature hook/action → feature API → shared HTTP client`.
-Do not scatter raw HTTP requests through components or create a giant cross-domain `ApiService`.
-Transport types must match actual backend contracts.
-Reuse shared/generated contracts when available; otherwise type boundaries explicitly.
-Do not use `any` to hide uncertain payloads or silently change endpoint paths, fields, request/response shapes, or auth behavior.
+## Estado
 
-## Realtime
+* Estado local da interface: use o estado do React para necessidades temporárias dos componentes.
+* Estado do servidor obtido por HTTP: use a abstração de estado do servidor já adotada no repositório; não a duplique no estado global sem necessidade.
+* Estado da partida em tempo real: use a solução centralizada de tempo real e armazenamento de estado já adotada.
+  Não use indiscriminadamente um único mecanismo de estado para todas as categorias.
+  Não persista estado que possa ser derivado com segurança.
+  Use atualizações imutáveis e ações e seletores claros para o armazenamento de estado.
+  Seletores podem derivar estado para a interface, mas NÃO DEVEM recriar a autoridade do backend.
 
-Use `socket client → feature realtime adapter → store/state → React`.
-Maintain one clearly owned connection lifecycle per relevant session/match; do not create sockets per component or separate chat sockets unnecessarily.
-Centralize overlapping event registration; never register listeners during render.
-Always clean up subscriptions/listeners and handle connection, disconnection, reconnection, authentication, and match entry/exit.
-Follow backend event names/payloads exactly; never invent a parallel event convention.
-Prefer typed client/server event maps when supported.
-Each server event should have one clear deterministic state-update path.
-Do not assume client-emitted actions succeed; handle protocol failures.
-After reconnecting, prefer an authoritative server snapshot/resynchronization when supported.
-Never silently present known-stale match state as current.
+## HTTP e contratos
 
-## Gameplay UI
+Componentes DEVEM seguir, sempre que possível, o fluxo `hook/ação da funcionalidade → API da funcionalidade → cliente HTTP compartilhado`.
+Não espalhe requisições HTTP diretas pelos componentes nem crie um `ApiService` enorme que reúna vários domínios.
+Os tipos de transporte devem corresponder aos contratos reais do backend.
+Reutilize contratos compartilhados ou gerados quando disponíveis; caso contrário, defina explicitamente os tipos nas fronteiras.
+Não use `any` para esconder incertezas sobre os dados nem altere silenciosamente caminhos de endpoints, campos, formatos de requisição e resposta ou comportamento de autenticação.
 
-Board, chat, judging, answer forms, and match components should render authoritative state and emit intent.
-Animations visualize state transitions; they MUST NOT determine game state.
-Use optimistic updates only when rollback/reconciliation is defined; never optimistically invent gameplay outcomes.
-Keep board/chat inside `match` while tightly coupled; extract only when independent complexity or reuse justifies it.
+## Tempo real
 
-## Authentication & Security
+Use o fluxo `cliente de socket → adaptador de tempo real da funcionalidade → armazenamento/estado → React`.
+Mantenha um único ciclo de vida da conexão, com responsável claro, por sessão ou partida relevante; não crie sockets por componente nem sockets separados para chat sem necessidade.
+Centralize o registro de eventos que se sobrepõem; nunca registre listeners durante a renderização.
+Sempre remova inscrições e listeners quando apropriado e trate conexão, desconexão, reconexão, autenticação e entrada e saída da partida.
+Siga exatamente os nomes e dados dos eventos do backend; nunca invente uma convenção paralela de eventos.
+Prefira mapas tipados de eventos de cliente e servidor quando houver suporte.
+Cada evento do servidor deve ter um único caminho claro e determinístico para atualizar o estado.
+Não presuma que ações emitidas pelo cliente terão sucesso; trate falhas do protocolo.
+Após uma reconexão, prefira obter um estado completo e autoritativo do servidor para sincronização, quando houver suporte.
+Nunca apresente silenciosamente como atual um estado da partida que se sabe desatualizado.
 
-Preserve the existing login, registration, logout, session restoration, token/cookie, guest, and route-protection strategy.
-Do not create a second authentication mechanism or fake guest users client-side.
-Backend-provided identities remain authoritative for guests and reconnection.
-Never expose/log passwords, tokens, private API keys, credentials, backend secrets, or signing/provider secrets.
-Frontend environment variables are public; follow existing env naming conventions and never store secrets in them.
-Treat user/backend content as untrusted; avoid `dangerouslySetInnerHTML` for user content without explicit sanitization.
-AI/private-provider calls requiring secrets belong behind the backend.
+## Interface da partida
 
-## React, UI & TypeScript
+Componentes do tabuleiro, chat, julgamento, formulários de resposta e partida devem exibir o estado autoritativo e emitir intenções do usuário.
+Animações representam transições de estado; NÃO DEVEM determinar o estado do jogo.
+Use atualizações otimistas apenas quando houver reversão ou reconciliação definida; nunca invente resultados da partida de forma otimista.
+Mantenha tabuleiro e chat em `match` enquanto estiverem fortemente ligados à partida; extraia apenas quando a complexidade independente ou a reutilização justificar.
 
-Keep components focused; separate rendering from API, socket, state synchronization, and complex transformations.
-Create hooks only for meaningful reusable React/feature behavior.
-Reuse existing forms, validation, UI primitives, Tailwind conventions, design tokens, and responsive/accessibility patterns.
-Do not introduce a second router, state library, HTTP client, query library, form library, validator, WebSocket client, styling system, or UI framework without explicit need.
-Prefer semantic HTML, keyboard-accessible controls, and accessible names.
-Use precise TypeScript types; prefer `unknown` + narrowing over `any`.
-Avoid unsafe assertions and MUST NOT use `@ts-ignore` to bypass implementation errors.
-Reuse existing domain/transport types instead of creating subtly different duplicates.
+## Autenticação e segurança
 
-## Errors & Async UX
+Preserve a estratégia existente de login, cadastro, logout, restauração de sessão, tokens/cookies, convidados e proteção de rotas.
+Não crie um segundo mecanismo de autenticação nem usuários convidados fictícios no cliente.
+As identidades fornecidas pelo backend continuam sendo a referência para convidados e reconexões.
+Nunca exponha nem registre senhas, tokens, chaves privadas de API, credenciais, segredos do backend ou segredos de assinatura e provedores.
+Variáveis de ambiente do frontend são públicas; siga as convenções de nomenclatura existentes e nunca armazene segredos nelas.
+Trate conteúdo de usuários e do backend como não confiável; evite `dangerouslySetInnerHTML` para conteúdo de usuários sem sanitização explícita.
+Chamadas a IA ou a provedores privados que exijam segredos devem passar pelo backend.
 
-Never silently swallow meaningful failures.
-Handle relevant loading, disabled/submitting, backend validation, authorization, session-expiry, and connection states.
-Do not expose stack traces, database details, provider internals, or raw server implementation errors.
-Do not use arbitrary delays to simulate backend completion.
+## React, interface e TypeScript
 
-## Commands & Dependencies
+Mantenha os componentes focados; separe a renderização de chamadas à API, sockets, sincronização de estado e transformações complexas.
+Crie hooks apenas para comportamentos relevantes e reutilizáveis do React ou da funcionalidade.
+Reutilize formulários, validação, componentes básicos de interface, convenções do Tailwind, padrões visuais e padrões de responsividade e acessibilidade existentes.
+Não introduza um segundo roteador, biblioteca de estado, cliente HTTP, biblioteca de consultas, biblioteca de formulários, validador, cliente WebSocket, sistema de estilos ou framework de interface sem necessidade explícita.
+Prefira HTML semântico, controles acessíveis por teclado e nomes acessíveis.
+Use tipos precisos em TypeScript; prefira `unknown` com refinamento de tipos a `any`.
+Evite asserções inseguras e NÃO use `@ts-ignore` para contornar erros de implementação.
+Reutilize tipos de domínio e transporte existentes em vez de criar duplicatas sutilmente diferentes.
 
-Inspect `package.json` before running or documenting install/dev/build/test/lint/typecheck/format commands.
-Use the repository's existing package manager and scripts; never invent commands.
-Before adding a dependency, verify existing libraries/platform APIs cannot reasonably solve the problem.
-Never replace established dependencies based only on preference.
-Only claim a command/check passed if it was actually executed successfully.
+## Erros e experiência durante operações assíncronas
 
-## Agent Workflow / Definition of Done
+Nunca ignore silenciosamente falhas relevantes.
+Trate, quando pertinentes, estados de carregamento, controles desabilitados ou em envio, validação do backend, autorização, expiração de sessão e conexão.
+Não exponha rastros de pilha, detalhes do banco de dados, informações internas de provedores ou erros brutos de implementação do servidor.
+Não use atrasos arbitrários para simular a conclusão de operações do backend.
 
-For every task: inspect → identify ownership/boundary → reuse existing patterns → implement the smallest change → validate → review the final diff.
-Before completion verify the requested behavior, architecture boundaries, backend authority, API/WebSocket contracts, listener cleanup, relevant async/error states, security, and absence of unrelated changes.
-Run relevant lint/typecheck/test/build commands when available and inspect failures instead of bypassing them.
-MUST NOT disable lint/type checking/tests, weaken tests to hide incorrect behavior, expose secrets, introduce competing infrastructure, or create abstractions for hypothetical future requirements.
-Prefer simple, explicit, feature-local code over architectural ceremony.
+## Comandos e dependências
+
+Examine `package.json` antes de executar ou documentar comandos de instalação, desenvolvimento, build, teste, lint, verificação de tipos ou formatação.
+Use o gerenciador de pacotes e os scripts existentes no repositório; nunca invente comandos.
+Antes de adicionar uma dependência, verifique se as bibliotecas existentes ou APIs da plataforma podem resolver o problema de forma razoável.
+Nunca substitua dependências estabelecidas apenas por preferência.
+Só afirme que um comando ou uma verificação passou se ele tiver sido executado com sucesso.
+
+## Fluxo de trabalho do agente e critérios de conclusão
+
+Para cada tarefa: examinar → identificar a responsabilidade e a fronteira → reutilizar padrões existentes → implementar a menor alteração → validar → revisar o diff final.
+Antes de concluir, verifique o comportamento solicitado, os limites da arquitetura, a autoridade do backend, os contratos de API e WebSocket, a remoção de listeners, os estados assíncronos e erros relevantes, a segurança e a ausência de alterações sem relação com a tarefa.
+Execute os comandos pertinentes de lint, verificação de tipos, teste e build quando disponíveis e analise falhas em vez de contorná-las.
+NÃO desative lint, verificação de tipos ou testes, não enfraqueça testes para esconder comportamentos incorretos, não exponha segredos, não introduza infraestrutura concorrente nem crie abstrações para necessidades futuras hipotéticas.
+Prefira código simples, explícito e restrito à funcionalidade em vez de complexidade arquitetural desnecessária.
