@@ -1,6 +1,6 @@
 ## Projeto
 
-Frontend de um jogo multijogador de perguntas e cartas, desenvolvido com React e TypeScript, com um backend NestJS separado.
+Frontend de um jogo multijogador de perguntas e cartas, desenvolvido com React e TypeScript, com um backend separado.
 HTTP cuida das operações com recursos; WebSocket cuida do comportamento multijogador em tempo real.
 A arquitetura é organizada por funcionalidades, e o backend é a autoridade sobre a partida.
 O código e as configurações existentes, os contratos do backend e o `AGENTS.md` aplicável mais próximo são as fontes de referência.
@@ -9,9 +9,9 @@ O código e as configurações existentes, os contratos do backend e o `AGENTS.m
 
 Os caminhos abaixo são relativos à pasta que contém `outguessed-front/` e `outguessed-back/`:
 
-* As regras de negócio estão em `outguessed-back/rules.md`.
-* O diagrama DER fica em `outguessed-back/DER.txt`.
-* As inspirações visuais para o projeto ficam em `outguessed-front/inspo/`.
+- As regras de negócio estão em `outguessed-back/rules.md`.
+- O diagrama DER fica em `outguessed-back/DER.txt`.
+- As inspirações visuais para o projeto ficam em `outguessed-front/inspo/`.
 
 ## Prioridade das instruções
 
@@ -23,25 +23,29 @@ Os caminhos abaixo são relativos à pasta que contém `outguessed-front/` e `ou
 
 ## Antes de alterar o código
 
-* Examine primeiro a funcionalidade afetada e implementações semelhantes.
-* Verifique `package.json`, dependências, scripts, aliases, roteador, estilos, gerenciamento de estado e infraestrutura HTTP e de tempo real existentes.
-* Classifique o estado afetado como estado local da interface, estado do servidor obtido por HTTP ou estado da partida em tempo real.
-* Reutilize as abstrações existentes antes de criar outras.
-* Prefira a menor alteração correta; evite refatorações ou reformulações que não tenham relação com a tarefa.
-* Preserve rotas, dados enviados e recebidos pela API, comportamento de autenticação e contratos WebSocket, exceto quando a tarefa pedir explicitamente sua alteração.
+- Examine primeiro a funcionalidade afetada e implementações semelhantes.
+- Verifique `package.json`, dependências, scripts, aliases, roteador, estilos, gerenciamento de estado e infraestrutura HTTP e de tempo real existentes.
+- Classifique o estado afetado como estado local da interface, estado do servidor obtido por HTTP ou estado da partida em tempo real.
+- Reutilize as abstrações existentes antes de criar outras.
+- Prefira a menor alteração correta; evite refatorações ou reformulações que não tenham relação com a tarefa.
+- Preserve rotas, dados enviados e recebidos pela API, comportamento de autenticação e contratos WebSocket, exceto quando a tarefa pedir explicitamente sua alteração.
 
 ## Arquitetura
 
-Direção das dependências: `app → pages → features → shared`.
+Direção das dependências: `app → modules → shared`.
 
-* `app/`: inicialização, provedores, roteador e configuração global.
-* `pages/`: composição das rotas; evite lógica de negócio, chamadas HTTP diretas e registro de eventos de socket.
-* `features/`: unidade principal do comportamento de domínio (`auth`, `decks`, `cards`, `match` etc.).
-* `shared/`: apenas infraestrutura e componentes de interface reutilizáveis e independentes do domínio.
-* `shared` NÃO DEVE importar de `features` ou `pages`; funcionalidades DEVEM EVITAR depender de páginas.
-  Mantenha juntos API, hooks, estado, lógica de tempo real, componentes e tipos específicos de cada funcionalidade.
+- `app/`: inicialização, provedores, roteador e configuração global.
+- `modules/`: unidade principal de organização por funcionalidade (`home`, `auth`, `decks`, `cards`, `match` etc.).
+- `modules/<módulo>/pages/`: composição das páginas do módulo; evite lógica de negócio, chamadas HTTP diretas e registro de eventos de socket.
+- `shared/`: apenas infraestrutura e componentes de interface reutilizáveis e independentes do domínio.
+- `shared` NÃO DEVE importar de `modules` ou `app`; módulos NÃO DEVEM importar de `app`.
+  Mantenha juntos páginas, API, hooks, estado, lógica de tempo real, componentes e tipos específicos de cada módulo.
+  Dentro do módulo, páginas compõem o comportamento; API, hooks e componentes não devem depender das páginas.
   Não reorganize código funcional apenas para atender a uma estrutura ideal de diretórios.
-  Evite dependências circulares entre funcionalidades e importações internas profundas quando houver uma API pública.
+  Evite dependências circulares entre módulos e importações internas profundas quando houver uma API pública.
+- O roteamento fica centralizado em `app/router.tsx`, com um único `BrowserRouter` em `app/App.tsx`.
+  Use caminhos em inglês e interface em português. Exporte páginas pela API pública de cada módulo.
+  Atualmente `/` renderiza a Home vazia e URLs desconhecidas redirecionam para `/` com substituição do histórico.
 
 ## Domínio e autoridade do servidor
 
@@ -55,9 +59,9 @@ Nunca calcule nem persista pontuação, vencedor, correção de resposta ou posi
 
 ## Estado
 
-* Estado local da interface: use o estado do React para necessidades temporárias dos componentes.
-* Estado do servidor obtido por HTTP: use a abstração de estado do servidor já adotada no repositório; não a duplique no estado global sem necessidade.
-* Estado da partida em tempo real: use a solução centralizada de tempo real e armazenamento de estado já adotada.
+- Estado local da interface: use o estado do React para necessidades temporárias dos componentes.
+- Estado do servidor obtido por HTTP: use a abstração de estado do servidor já adotada no repositório; não a duplique no estado global sem necessidade.
+- Estado da partida em tempo real: use a solução centralizada de tempo real e armazenamento de estado já adotada.
   Não use indiscriminadamente um único mecanismo de estado para todas as categorias.
   Não persista estado que possa ser derivado com segurança.
   Use atualizações imutáveis e ações e seletores claros para o armazenamento de estado.
