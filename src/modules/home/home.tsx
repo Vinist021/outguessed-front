@@ -1,5 +1,5 @@
 import Button from "@/shared/components/button/button";
-import Icon from "./components/icon";
+import Icon from "../../shared/components/icons/icons";
 import Field from "@/shared/components/field/field";
 import styles from "./home.module.css";
 import RoomList from "./components/roomList";

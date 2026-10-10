@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import type { IconName } from "../types";
-import styles from "../home.module.css";
+import type { IconName } from "../../../modules/home/types";
+import styles from "../../../modules/home/home.module.css";
 
 export default function Icon({ name, className = "" }: { name: IconName; className?: string }) {
   const paths: Record<IconName, ReactNode> = {

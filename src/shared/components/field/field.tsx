@@ -1,6 +1,6 @@
 import type { ComponentPropsWithoutRef } from "react";
 import type { IconName } from "@/modules/home/types";
-import Icon from "@/modules/home/components/icon";
+import Icon from "@/shared/components/icons/icons";
 import styles from "@/modules/home/home.module.css";
 
 export default function Field({

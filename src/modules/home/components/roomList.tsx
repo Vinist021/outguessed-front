@@ -1,5 +1,5 @@
 import styles from "../home.module.css";
-import Icon from "./icon";
+import Icon from "../../../shared/components/icons/icons";
 import { rooms } from "../mocks/rooms";
 
 export default function RoomList() {
