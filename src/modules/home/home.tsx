@@ -1,27 +1,6 @@
-import type { ComponentPropsWithoutRef } from "react";
-import type { IconName } from "./types";
-import Icon  from "./components/icon";
-import styles from "./home.module.css";
 import Button from "@/shared/components/button/button";
-
-function Field({
-  label,
-  icon,
-  id,
-  ...props
-}: ComponentPropsWithoutRef<"input"> & { label: string; icon: IconName; id: string }) {
-  return (
-    <div className="min-w-0">
-      <label className={styles.fieldLabel} htmlFor={id}>
-        {label}
-      </label>
-      <div className={styles.inputWrap}>
-        <Icon name={icon} />
-        <input {...props} id={id} className={styles.input} />
-      </div>
-    </div>
-  );
-}
+import Icon from "./components/icon";
+import styles from "./home.module.css";
 
 const rooms = [
   { name: "Vale tudo", category: "Conhecimentos gerais", players: 5, color: "mint" },
