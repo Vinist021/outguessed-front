@@ -1,6 +1,6 @@
 import Icon from "../../shared/components/icons/icons";
-import HowToPlay from "./components/howToPlay";
-import LoginPanel from "./components/loginPanel";
+import HowToPlay from "./components/howToPlay/howToPlay";
+import LoginPanel from "./components/loginPanel/loginPanel";
 import PlayPanel from "./components/playPanel";
 import styles from "./home.module.css";
 
