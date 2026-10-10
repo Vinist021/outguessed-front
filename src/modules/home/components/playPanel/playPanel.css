@@ -1,0 +1,106 @@
+section.homePlayPanel {
+  padding: 26px;
+}
+
+.homeOnline {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.homeOnline > svg {
+  color: var(--mint);
+}
+
+.homeOnlineCount {
+  color: var(--mint);
+  font-family: var(--hand);
+  font-size: 30px;
+}
+
+.homeRoomTabs {
+  min-height: 46px;
+  max-width: 100%;
+  padding: 4px;
+  gap: 2px;
+  border: 1px solid #5e536d;
+  border-radius: 9px;
+  background: #211d2e;
+}
+
+.homeRoomTabs button {
+  min-height: 44px;
+  flex: 1;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: var(--muted);
+  font-family: var(--hand);
+  font-size: 16px;
+  line-height: 1.15;
+  white-space: nowrap;
+  transition:
+    background-color 150ms ease-out,
+    color 150ms ease-out;
+}
+
+.homeRoomTabs .homeActiveTab {
+  background: #41464b;
+  color: var(--cyan);
+}
+
+.homePlayPanel .homePlayButton {
+  min-width: 186px;
+  min-height: 52px;
+  justify-content: space-between;
+  gap: 32px;
+  padding-inline: 26px;
+  font-size: 27px;
+}
+
+.homePlayPanel .homeCreateRoom {
+  color: var(--cyan);
+}
+
+.homePlayPanel .homeCreateRoom svg {
+  color: var(--cyan);
+}
+
+@media (hover: hover) {
+  .homeRoomTabs button:hover {
+    background: #41464b;
+    color: var(--cyan);
+  }
+}
+
+@media (max-width: 767px) {
+  section.homePlayPanel {
+    padding: 20px;
+  }
+
+  .homeOnline {
+    gap: 6px;
+  }
+
+  .homeOnline > svg {
+    display: none;
+  }
+
+  .homeRoomTabs {
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  .homeRoomTabs button {
+    font-size: 18px;
+  }
+
+  .homePlayPanel .homePlayButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 639px) {
+  .homeSecondaryActions > :last-child {
+    grid-column: 1 / -1;
+  }
+}

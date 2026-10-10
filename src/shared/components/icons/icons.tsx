@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import type { IconName } from "./types";
-import styles from "../../../modules/home/home.module.css";
+import "./icons.css";
 
 export default function Icon({ name, className = "" }: { name: IconName; className?: string }) {
   const paths: Record<IconName, ReactNode> = {
@@ -63,7 +63,7 @@ export default function Icon({ name, className = "" }: { name: IconName; classNa
 
   return (
     <svg
-      className={`${styles.icon} ${className}`}
+      className={`uiIcon ${className}`}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

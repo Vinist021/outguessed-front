@@ -1,0 +1,65 @@
+.uiFieldLabel {
+  display: block;
+  margin-bottom: 8px;
+  color: #d8d0e3;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.uiInputWrap {
+  position: relative;
+  color: var(--muted);
+}
+
+.uiInputWrap > svg {
+  position: absolute;
+  top: 50%;
+  left: 13px;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.uiInput {
+  width: 100%;
+  height: 46px;
+  min-width: 0;
+  padding: 10px 12px 10px 40px;
+  border: 1px solid #766c86;
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  caret-color: var(--cyan);
+  font-size: 14px;
+  transition:
+    border-color 150ms ease-out,
+    background-color 150ms ease-out;
+}
+
+.uiInput::placeholder {
+  color: #b4a9c4;
+  opacity: 1;
+}
+
+.uiInput:focus {
+  border-color: var(--cyan);
+  background: #191623;
+}
+
+.uiInput:-webkit-autofill {
+  -webkit-text-fill-color: var(--text);
+  box-shadow: 0 0 0 100px var(--surface) inset;
+}
+
+@media (hover: hover) {
+  .uiInput:hover {
+    border-color: #b6a6c8;
+  }
+}
+
+@media (max-width: 767px) {
+  .uiInput {
+    font-size: 16px;
+  }
+}

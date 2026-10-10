@@ -1,22 +1,23 @@
-import styles from '@/modules/home/home.module.css';
+import styles from "@/modules/home/home.module.css";
+import "./howToPlay.css";
 
 export default function HowToPlay() {
   return (
-    <section className={`${styles.panel} ${styles.howPanel}`} aria-labelledby="how-title">
+    <section className={`${styles.panel} homeHowPanel`} aria-labelledby="how-title">
       <div className="flex items-center justify-between gap-3">
-        <h2 id="how-title" className={styles.howTitle}>
+        <h2 id="how-title" className="homeHowTitle">
           Um bom palpite
           <br />
           muda o jogo.
         </h2>
-        <span className={styles.questionMark} aria-hidden="true">
+        <span className="homeQuestionMark" aria-hidden="true">
           ?
         </span>
       </div>
-      <h3 className={styles.howSubtitle}>Como jogar</h3>
+      <h3 className="homeHowSubtitle">Como jogar</h3>
       <ol className="grid gap-4">
         <li className="flex items-start gap-3">
-          <span className={`${styles.step} ${styles.cyan}`}>1</span>
+          <span className={`homeHowStep ${styles.cyan}`}>1</span>
           <p>
             <strong>Encontre sua sala.</strong>
             <br />
@@ -24,7 +25,7 @@ export default function HowToPlay() {
           </p>
         </li>
         <li className="flex items-start gap-3">
-          <span className={`${styles.step} ${styles.pink}`}>2</span>
+          <span className={`homeHowStep ${styles.pink}`}>2</span>
           <p>
             <strong>Solte seus palpites.</strong>
             <br />
@@ -32,7 +33,7 @@ export default function HowToPlay() {
           </p>
         </li>
         <li className="flex items-start gap-3">
-          <span className={`${styles.step} ${styles.yellow}`}>3</span>
+          <span className={`homeHowStep ${styles.yellow}`}>3</span>
           <p>
             <strong>Avance no tabuleiro.</strong>
             <br />

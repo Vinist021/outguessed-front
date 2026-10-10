@@ -2,15 +2,16 @@ import Field from "@/shared/components/field/field";
 import Icon from "@/shared/components/icons/icons";
 import styles from "@/modules/home/home.module.css";
 import Button from "@/shared/components/button/button";
+import "./loginPanel.css";
 
 export default function LoginPanel() {
   return (
-    <section className={`${styles.panel} ${styles.loginPanel}`} aria-labelledby="login-title">
-      <h2 id="login-title" className={`${styles.panelTitle} ${styles.loginTitle}`}>
+    <section className={`${styles.panel} homeLoginPanel`} aria-labelledby="login-title">
+      <h2 id="login-title" className={`${styles.panelTitle} homeLoginTitle`}>
         <Icon name="user" />
-        Seu cantinho<span className={styles.titleDot}>.</span>
+        Seu cantinho<span className={`${styles.titleDot} homeLoginDot`}>.</span>
       </h2>
-      <p className={styles.panelDescription}>Entre na sua conta e venha jogar.</p>
+      <p className="homePanelDescription">Entre na sua conta e venha jogar.</p>
       <div className="mt-5 grid gap-4">
         <Field
           id="email"
@@ -30,13 +31,15 @@ export default function LoginPanel() {
         />
       </div>
       <div className="mt-6 grid grid-cols-2 gap-3">
-        <Button variant="primary" className={styles.loginButton}>
+        <Button variant="primary" className="homeLoginAction homeLoginButton">
           Entrar
           <Icon name="arrow" />
         </Button>
-        <Button variant="outline">Criar conta</Button>
+        <Button variant="outline" className="homeLoginAction">
+          Criar conta
+        </Button>
       </div>
-      <p className={styles.guestNote}>
+      <p className="homeGuestNote">
         <Icon name="spark" />
         Você também pode jogar como convidado.
       </p>

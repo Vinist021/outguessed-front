@@ -1,0 +1,66 @@
+.uiButton {
+  display: inline-flex;
+  min-height: 48px;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-family: var(--hand);
+  font-size: 19px;
+  line-height: 1.25;
+  transition:
+    background-color 150ms ease-out,
+    border-color 150ms ease-out,
+    color 150ms ease-out,
+    transform 120ms ease-out;
+}
+
+.uiButtonSecondary {
+  border-color: #7a6c89;
+  background: #342d43;
+  color: #e5dcec;
+}
+
+.uiButtonSecondary svg {
+  width: 17px;
+  height: 17px;
+  color: #c9b7db;
+}
+
+.uiButtonPrimary {
+  border-color: var(--mint);
+  background: var(--mint);
+  color: #192b21;
+}
+
+.uiButtonOutline {
+  border-color: #b2a0c2;
+  color: var(--pink);
+  background: transparent;
+}
+
+@media (hover: hover) {
+  .uiButtonSecondary:hover,
+  .uiButtonOutline:hover {
+    border-color: #d4c2e6;
+    background: #423650;
+  }
+
+  .uiButtonPrimary:hover {
+    border-color: #d4f6d8;
+    background: #d4f6d8;
+  }
+}
+
+.uiButton:active {
+  transform: translateY(1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .uiButton:active {
+    transform: none;
+  }
+}

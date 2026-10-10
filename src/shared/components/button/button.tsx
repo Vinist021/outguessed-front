@@ -1,6 +1,12 @@
 import type { ComponentPropsWithoutRef } from "react";
 
-import styles from "@/modules/home/home.module.css";
+import "./button.css";
+
+const variantClasses = {
+  primary: "uiButtonPrimary",
+  secondary: "uiButtonSecondary",
+  outline: "uiButtonOutline",
+};
 
 export default function Button({
   children,
@@ -13,7 +19,7 @@ export default function Button({
       {...props}
       type="button"
       aria-disabled="true"
-      className={`${styles.button} ${styles[variant]} ${className}`}
+      className={`uiButton ${variantClasses[variant]} ${className}`}
     >
       {children}
     </button>

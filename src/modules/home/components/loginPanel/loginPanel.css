@@ -1,0 +1,85 @@
+section.homeLoginPanel {
+  padding: 25px 24px 20px;
+}
+
+section.homeLoginPanel .homeLoginTitle {
+  gap: 9px;
+  font-size: 30px;
+}
+
+section.homeLoginPanel .homeLoginTitle > svg,
+section.homeLoginPanel .homeLoginTitle .homeLoginDot {
+  color: var(--pink);
+}
+
+.homePanelDescription {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+section.homeLoginPanel .homeLoginButton {
+  border-color: var(--pink);
+  background: var(--pink);
+  color: #342036;
+}
+
+section.homeLoginPanel .homeLoginButton svg {
+  width: 17px;
+  height: 17px;
+}
+
+section.homeLoginPanel .homeLoginAction {
+  padding-inline: 8px;
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.homeGuestNote {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.homeGuestNote svg {
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+  color: var(--yellow);
+}
+
+@media (hover: hover) {
+  section.homeLoginPanel .homeLoginButton:hover {
+    border-color: #f8cff1;
+    background: #f8cff1;
+  }
+}
+
+@media (max-width: 1279px) {
+  section.homeLoginPanel {
+    padding-inline: 20px;
+  }
+
+  section.homeLoginPanel .homeLoginTitle {
+    font-size: 27px;
+  }
+}
+
+@media (max-width: 767px) {
+  section.homeLoginPanel {
+    padding: 20px;
+  }
+
+  section.homeLoginPanel .homeLoginTitle {
+    font-size: 30px;
+  }
+
+  .homeGuestNote {
+    font-size: 13px;
+  }
+}

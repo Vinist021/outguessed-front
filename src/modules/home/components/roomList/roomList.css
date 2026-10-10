@@ -1,0 +1,103 @@
+.homeRoomScroll {
+  max-height: 353px;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  border: 1px solid #494255;
+  border-radius: 10px;
+  background: var(--surface);
+  scrollbar-width: thin;
+  scrollbar-color: #7c708c var(--surface);
+  scrollbar-gutter: stable;
+}
+
+.homeRoom {
+  min-width: 0;
+  min-height: 116px;
+  padding: 15px 16px 16px;
+  border-right: 1px solid #40384e;
+  border-bottom: 1px solid #40384e;
+  transition: background-color 150ms ease-out;
+}
+
+.homeRoomCategoryDot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.homeOccupancy {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--mint);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.homeOccupancy svg {
+  width: 14px;
+  height: 14px;
+}
+
+.homeCapacity {
+  color: var(--muted);
+}
+
+.homeFull {
+  color: var(--pink);
+}
+
+.homeRoomName {
+  margin-top: 11px;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.homeRoomCategory {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.homeRoomCaption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.homeRoomCaption svg {
+  width: 13px;
+  height: 13px;
+}
+
+@media (hover: hover) {
+  .homeRoom:hover {
+    background: #30293d;
+  }
+}
+
+@media (max-width: 767px) {
+  .homeRoomScroll {
+    max-height: 337px;
+  }
+
+  .homeRoom {
+    min-height: 112px;
+    padding: 12px 15px;
+  }
+
+  .homeRoomName {
+    margin-top: 5px;
+    font-size: 15px;
+  }
+
+  .homeRoomCategory,
+  .homeOccupancy {
+    font-size: 12px;
+  }
+}

@@ -105,7 +105,7 @@
   transform: rotate(12deg);
 }
 
-.brandSpark .icon {
+.brandSpark svg {
   width: 24px;
   height: 24px;
 }
@@ -148,7 +148,7 @@
     background-color 150ms ease-out;
 }
 
-.navItem .icon {
+.navItem svg {
   width: 18px;
   height: 18px;
 }
@@ -170,10 +170,6 @@
   background: var(--panel);
 }
 
-.playPanel {
-  padding: 26px;
-}
-
 .panelTitle {
   display: flex;
   align-items: center;
@@ -184,7 +180,7 @@
   line-height: 1.2;
 }
 
-.panelTitle > .icon {
+.panelTitle > svg {
   width: 25px;
   height: 25px;
   color: var(--mint);
@@ -193,127 +189,6 @@
 .titleDot {
   margin-left: -9px;
   color: var(--mint);
-}
-
-.online {
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.3;
-}
-
-.online > .icon {
-  color: var(--mint);
-}
-
-.onlineCount {
-  color: var(--mint);
-  font-family: var(--hand);
-  font-size: 30px;
-}
-
-.fieldLabel {
-  display: block;
-  margin-bottom: 8px;
-  color: #d8d0e3;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.inputWrap {
-  position: relative;
-  color: var(--muted);
-}
-
-.inputWrap > .icon {
-  position: absolute;
-  top: 50%;
-  left: 13px;
-  width: 18px;
-  height: 18px;
-  pointer-events: none;
-  transform: translateY(-50%);
-}
-
-.input {
-  width: 100%;
-  height: 46px;
-  min-width: 0;
-  padding: 10px 12px 10px 40px;
-  border: 1px solid #766c86;
-  border-radius: 8px;
-  background: var(--surface);
-  color: var(--text);
-  caret-color: var(--cyan);
-  font-size: 14px;
-  transition:
-    border-color 150ms ease-out,
-    background-color 150ms ease-out;
-}
-
-.input::placeholder {
-  color: #b4a9c4;
-  opacity: 1;
-}
-
-.input:focus {
-  border-color: var(--cyan);
-  background: #191623;
-}
-
-.input:-webkit-autofill {
-  -webkit-text-fill-color: var(--text);
-  box-shadow: 0 0 0 100px var(--surface) inset;
-}
-
-.roomTabs {
-  min-height: 46px;
-  max-width: 100%;
-  padding: 4px;
-  gap: 2px;
-  border: 1px solid #5e536d;
-  border-radius: 9px;
-  background: #211d2e;
-}
-
-.roomTabs button {
-  min-height: 44px;
-  flex: 1;
-  padding: 6px 12px;
-  border-radius: 6px;
-  color: var(--muted);
-  font-family: var(--hand);
-  font-size: 16px;
-  line-height: 1.15;
-  white-space: nowrap;
-  transition:
-    background-color 150ms ease-out,
-    color 150ms ease-out;
-}
-
-.roomTabs .activeTab {
-  background: #41464b;
-  color: var(--cyan);
-}
-
-.roomScroll {
-  max-height: 353px;
-  overflow-y: auto;
-  overscroll-behavior-y: contain;
-  border: 1px solid #494255;
-  border-radius: 10px;
-  background: var(--surface);
-  scrollbar-width: thin;
-  scrollbar-color: #7c708c var(--surface);
-  scrollbar-gutter: stable;
-}
-
-.room {
-  min-width: 0;
-  min-height: 116px;
-  padding: 15px 16px 16px;
-  border-right: 1px solid #40384e;
-  border-bottom: 1px solid #40384e;
-  transition: background-color 150ms ease-out;
 }
 
 .cyan {
@@ -332,237 +207,6 @@
   --accent: var(--yellow);
 }
 
-.roomCategoryDot {
-  width: 7px;
-  height: 7px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
-.occupancy {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  color: var(--mint);
-  font-size: 12px;
-  font-variant-numeric: tabular-nums;
-}
-
-.occupancy .icon {
-  width: 14px;
-  height: 14px;
-}
-
-.capacity {
-  color: var(--muted);
-}
-
-.full {
-  color: var(--pink);
-}
-
-.roomName {
-  margin-top: 11px;
-  overflow-wrap: anywhere;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.4;
-}
-
-.roomCategory {
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.4;
-}
-
-.roomCaption {
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.roomCaption .icon {
-  width: 13px;
-  height: 13px;
-}
-
-.button {
-  display: inline-flex;
-  min-height: 48px;
-  min-width: 0;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  font-family: var(--hand);
-  font-size: 19px;
-  line-height: 1.25;
-  transition:
-    background-color 150ms ease-out,
-    border-color 150ms ease-out,
-    color 150ms ease-out,
-    transform 120ms ease-out;
-}
-
-.secondary {
-  border-color: #7a6c89;
-  background: #342d43;
-  color: #e5dcec;
-}
-
-.secondary .icon {
-  width: 17px;
-  height: 17px;
-  color: #c9b7db;
-}
-
-.primary {
-  border-color: var(--mint);
-  background: var(--mint);
-  color: #192b21;
-}
-
-.outline {
-  border-color: #b2a0c2;
-  color: var(--pink);
-  background: transparent;
-}
-
-.playButton {
-  min-width: 186px;
-  min-height: 52px;
-  justify-content: space-between;
-  gap: 32px;
-  padding-inline: 26px;
-  font-size: 27px;
-}
-
-.createRoom {
-  color: var(--cyan);
-}
-
-.createRoom .icon {
-  color: var(--cyan);
-}
-
-.loginPanel {
-  padding: 25px 24px 20px;
-}
-
-.loginTitle {
-  gap: 9px;
-  font-size: 30px;
-}
-
-.loginTitle > .icon,
-.loginTitle .titleDot {
-  color: var(--pink);
-}
-
-.panelDescription {
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.loginButton {
-  border-color: var(--pink);
-  background: var(--pink);
-  color: #342036;
-}
-
-.loginButton .icon {
-  width: 17px;
-  height: 17px;
-}
-
-.loginPanel .button {
-  padding-inline: 8px;
-  font-size: 18px;
-  white-space: nowrap;
-}
-
-.guestNote {
-  display: flex;
-  align-items: start;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 18px;
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.6;
-}
-
-.guestNote .icon {
-  width: 14px;
-  height: 14px;
-  margin-top: 2px;
-  color: var(--yellow);
-}
-
-.howPanel {
-  padding: 24px;
-  border-style: dashed;
-  border-color: #6c5d82;
-  background: #211b30;
-}
-
-.howTitle {
-  color: var(--yellow);
-  font-family: var(--hand);
-  font-size: 30px;
-  font-weight: 400;
-  line-height: 1.05;
-}
-
-.questionMark {
-  padding-right: 2px;
-  color: var(--pink);
-  font-family: var(--hand);
-  font-size: 74px;
-  line-height: 1;
-  transform: rotate(12deg);
-}
-
-.howSubtitle {
-  margin-top: 22px;
-  margin-bottom: 16px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.step {
-  display: inline-flex;
-  width: 26px;
-  height: 26px;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  border: 1px dashed var(--accent);
-  border-radius: 50%;
-  color: var(--accent);
-  font-family: var(--hand);
-  font-size: 18px;
-}
-
-.howPanel li p {
-  font-size: 12px;
-  line-height: 1.6;
-}
-
-.howPanel li strong {
-  font-weight: 500;
-}
-
-.howPanel li p > span {
-  color: var(--muted);
-}
-
 .footer {
   padding-block: 27px 30px;
   color: #b4a6c5;
@@ -574,66 +218,16 @@
   font-size: 19px;
 }
 
-.footer .icon {
+.footer svg {
   width: 16px;
   height: 16px;
   color: var(--pink);
-}
-
-.icon {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
 }
 
 @media (hover: hover) {
   .navItem:is(button):hover {
     background: #2b233b;
     color: var(--text);
-  }
-
-  .roomTabs button:hover {
-    background: #41464b;
-    color: var(--cyan);
-  }
-
-  .input:hover {
-    border-color: #b6a6c8;
-  }
-
-  .room:hover {
-    background: #30293d;
-  }
-
-  .secondary:hover,
-  .outline:hover {
-    border-color: #d4c2e6;
-    background: #423650;
-  }
-
-  .primary:hover {
-    border-color: #d4f6d8;
-    background: #d4f6d8;
-  }
-
-  .loginButton:hover {
-    border-color: #f8cff1;
-    background: #f8cff1;
-  }
-}
-
-.button:active {
-  transform: translateY(1px);
-}
-
-@media (max-width: 1279px) {
-  .loginPanel,
-  .howPanel {
-    padding-inline: 20px;
-  }
-
-  .loginTitle {
-    font-size: 27px;
   }
 }
 
@@ -650,7 +244,7 @@
     margin: 4px 0 0 5px;
   }
 
-  .brandSpark .icon {
+  .brandSpark svg {
     width: 18px;
     height: 18px;
   }
@@ -667,7 +261,7 @@
     font-size: 18px;
   }
 
-  .navItem .icon {
+  .navItem svg {
     width: 16px;
     height: 16px;
   }
@@ -676,73 +270,12 @@
     padding-top: 24px;
   }
 
-  .playPanel,
-  .loginPanel,
-  .howPanel {
-    padding: 20px;
-  }
-
   .panelTitle {
     font-size: 30px;
   }
 
-  .online {
-    gap: 6px;
-  }
-
-  .online > .icon {
-    display: none;
-  }
-
-  .input {
-    font-size: 16px;
-  }
-
-  .roomTabs {
-    width: 100%;
-    margin-top: 5px;
-  }
-
-  .roomTabs button {
-    font-size: 18px;
-  }
-
-  .roomScroll {
-    max-height: 337px;
-  }
-
-  .room {
-    min-height: 112px;
-    padding: 12px 15px;
-  }
-
-  .roomName {
-    margin-top: 5px;
-    font-size: 15px;
-  }
-
-  .roomCategory,
-  .occupancy {
-    font-size: 12px;
-  }
-
-  .playButton {
-    width: 100%;
-  }
-
-  .guestNote,
-  .howPanel li p {
-    font-size: 13px;
-  }
-
   .footer {
     padding-block: 24px;
-  }
-}
-
-@media (max-width: 639px) {
-  .secondaryActions > :last-child {
-    grid-column: 1 / -1;
   }
 }
 
@@ -752,9 +285,5 @@
   .home *::after {
     transition: none !important;
     animation: none !important;
-  }
-
-  .button:active {
-    transform: none;
   }
 }

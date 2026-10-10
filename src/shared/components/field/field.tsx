@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef } from "react";
 import type { IconName } from "@/shared/components/icons/types";
 import Icon from "@/shared/components/icons/icons";
-import styles from "@/modules/home/home.module.css";
+import "./field.css";
 
 export default function Field({
   label,
@@ -11,12 +11,12 @@ export default function Field({
 }: ComponentPropsWithoutRef<"input"> & { label: string; icon: IconName; id: string }) {
   return (
     <div className="min-w-0">
-      <label className={styles.fieldLabel} htmlFor={id}>
+      <label className="uiFieldLabel" htmlFor={id}>
         {label}
       </label>
-      <div className={styles.inputWrap}>
+      <div className="uiInputWrap">
         <Icon name={icon} />
-        <input {...props} id={id} className={styles.input} />
+        <input {...props} id={id} className="uiInput" />
       </div>
     </div>
   );
