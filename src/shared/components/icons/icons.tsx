@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { IconName } from "../../../modules/home/types";
+import type { IconName } from "./types";
 import styles from "../../../modules/home/home.module.css";
 
 export default function Icon({ name, className = "" }: { name: IconName; className?: string }) {

@@ -1,5 +1,5 @@
 import type { ComponentPropsWithoutRef } from "react";
-import type { IconName } from "@/modules/home/types";
+import type { IconName } from "@/shared/components/icons/types";
 import Icon from "@/shared/components/icons/icons";
 import styles from "@/modules/home/home.module.css";
 
