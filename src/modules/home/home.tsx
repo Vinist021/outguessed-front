@@ -1,69 +1,8 @@
 import Button from "@/shared/components/button/button";
 import Icon from "./components/icon";
+import Field from "@/shared/components/field/field";
 import styles from "./home.module.css";
-
-const rooms = [
-  { name: "Vale tudo", category: "Conhecimentos gerais", players: 5, color: "mint" },
-  { name: "Luzes, câmera…", category: "Cinema e séries", players: 3, color: "pink" },
-  { name: "Deu ciência", category: "Ciência e natureza", players: 6, color: "cyan" },
-  { name: "Na ponta da língua", category: "Palavras e expressões", players: 2, color: "yellow" },
-  { name: "Mundo afora", category: "Geografia", players: 4, color: "cyan" },
-  { name: "Só mais uma", category: "Conhecimentos gerais", players: 7, color: "mint" },
-  { name: "Aumenta o som", category: "Música", players: 8, color: "pink" },
-  { name: "Túnel do tempo", category: "História", players: 3, color: "yellow" },
-  { name: "Modo aventura", category: "Jogos e cultura pop", players: 6, color: "pink" },
-  { name: "Bicho curioso", category: "Animais e natureza", players: 2, color: "mint" },
-  { name: "Bateu a fome", category: "Comidas e sabores", players: 4, color: "yellow" },
-  { name: "Planeta bola", category: "Esportes", players: 8, color: "cyan" },
-  { name: "Mistura boa", category: "Conhecimentos gerais", players: 1, color: "mint" },
-  { name: "Fora da órbita", category: "Espaço e universo", players: 5, color: "cyan" },
-  { name: "Era uma vez", category: "Livros e histórias", players: 0, color: "yellow" },
-  { name: "Cena final", category: "Cinema e séries", players: 3, color: "pink" },
-] as const;
-
-function RoomList() {
-  return (
-    <>
-      <div
-        className={styles.roomScroll}
-        role="region"
-        aria-label="Lista de salas ilustrativas"
-        tabIndex={0}
-      >
-        <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
-          {rooms.map((room) => (
-            <li key={room.name} className={`${styles.room} ${styles[room.color]}`}>
-              <div className="flex items-center justify-between gap-2">
-                <span className={styles.roomCategoryDot} aria-hidden="true" />
-                <span
-                  className={`${styles.occupancy} ${room.players === 8 ? styles.full : ""}`}
-                  aria-label={`${room.players} de 8 jogadores${room.players === 8 ? ", sala cheia" : ""}`}
-                >
-                  <Icon name={room.players === 8 ? "lock" : "users"} />
-                  <span>
-                    {room.players}
-                    <span className={styles.capacity}>/8</span>
-                  </span>
-                </span>
-              </div>
-              <h3 className={styles.roomName}>{room.name}</h3>
-              <p className={styles.roomCategory}>{room.category}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div
-        className={`${styles.roomCaption} flex flex-wrap items-center justify-between gap-x-4 gap-y-1`}
-      >
-        <span className="inline-flex items-center gap-1.5">
-          <Icon name="info" />
-          Salas ilustrativas
-        </span>
-        <span>Até 8 jogadores por sala</span>
-      </div>
-    </>
-  );
-}
+import RoomList from "./components/roomList";
 
 function PlayPanel() {
   return (

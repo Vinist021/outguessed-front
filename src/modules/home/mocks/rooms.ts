@@ -1,0 +1,18 @@
+export const rooms = [
+  { name: "Vale tudo", category: "Conhecimentos gerais", players: 5, color: "mint" },
+  { name: "Luzes, câmera…", category: "Cinema e séries", players: 3, color: "pink" },
+  { name: "Deu ciência", category: "Ciência e natureza", players: 6, color: "cyan" },
+  { name: "Na ponta da língua", category: "Palavras e expressões", players: 2, color: "yellow" },
+  { name: "Mundo afora", category: "Geografia", players: 4, color: "cyan" },
+  { name: "Só mais uma", category: "Conhecimentos gerais", players: 7, color: "mint" },
+  { name: "Aumenta o som", category: "Música", players: 8, color: "pink" },
+  { name: "Túnel do tempo", category: "História", players: 3, color: "yellow" },
+  { name: "Modo aventura", category: "Jogos e cultura pop", players: 6, color: "pink" },
+  { name: "Bicho curioso", category: "Animais e natureza", players: 2, color: "mint" },
+  { name: "Bateu a fome", category: "Comidas e sabores", players: 4, color: "yellow" },
+  { name: "Planeta bola", category: "Esportes", players: 8, color: "cyan" },
+  { name: "Mistura boa", category: "Conhecimentos gerais", players: 1, color: "mint" },
+  { name: "Fora da órbita", category: "Espaço e universo", players: 5, color: "cyan" },
+  { name: "Era uma vez", category: "Livros e histórias", players: 0, color: "yellow" },
+  { name: "Cena final", category: "Cinema e séries", players: 3, color: "pink" },
+] as const;
