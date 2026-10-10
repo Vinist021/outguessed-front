@@ -1,8 +1,8 @@
-import Icon from "../../shared/components/icons/icons";
-import HowToPlay from "./components/howToPlay/howToPlay";
-import LoginPanel from "./components/loginPanel/loginPanel";
-import PlayPanel from "./components/playPanel";
-import styles from "./home.module.css";
+import Icon from "@/shared/components/icons/icons";
+import HowToPlay from "@/modules/home/components/howToPlay/howToPlay";
+import LoginPanel from "@/modules/home/components/loginPanel/loginPanel";
+import PlayPanel from "@/modules/home/components/playPanel/playPanel";
+import styles from "@/modules/home/home.module.css";
 
 function Home() {
   return (

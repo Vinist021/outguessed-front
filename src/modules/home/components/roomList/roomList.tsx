@@ -1,6 +1,6 @@
-import styles from "../home.module.css";
-import Icon from "../../../shared/components/icons/icons";
-import { rooms } from "../mocks/rooms";
+import styles from "@/modules/home/home.module.css";
+import Icon from "@/shared/components/icons/icons";
+import { rooms } from "@/modules/home/mocks/rooms";
 
 export default function RoomList() {
   return (

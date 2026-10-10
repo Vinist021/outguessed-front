@@ -1,8 +1,8 @@
 import Field from "@/shared/components/field/field";
 import Icon from "@/shared/components/icons/icons";
-import RoomList from "./roomList";
+import RoomList from "@/modules/home/components/roomList/roomList";
 import Button from "@/shared/components/button/button";
-import styles from "../home.module.css";
+import styles from "@/modules/home/home.module.css";
 
 export default function PlayPanel() {
   return (

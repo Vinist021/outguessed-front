@@ -1,4 +1,4 @@
-import styles from '../home.module.css';
+import styles from '@/modules/home/home.module.css';
 
 export default function HowToPlay() {
   return (
