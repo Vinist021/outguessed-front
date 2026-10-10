@@ -1,9 +1,9 @@
 ## Projeto
 
-Frontend de um jogo multijogador de perguntas e cartas, desenvolvido com React e TypeScript, com um backend separado.
-HTTP cuida das operações com recursos; WebSocket cuida do comportamento multijogador em tempo real.
-A arquitetura é organizada por funcionalidades, com custom hooks separando apresentação, comportamento e acesso a dados. O backend é a autoridade sobre a partida.
-O código e as configurações existentes, os contratos do backend e o `AGENTS.md` aplicável mais próximo são as fontes de referência.
+Frontend de um jogo multijogador de perguntas e cartas, desenvolvido com React, TypeScript e Vite, com um backend separado.
+O código atual apresenta a Home com componentes e salas ilustrativas. Ainda não há integração HTTP ou WebSocket, autenticação funcional, custom hooks de funcionalidade nem armazenamento centralizado de estado no frontend.
+A organização é por funcionalidades. Quando a integração com o backend for implementada, HTTP atenderá operações com recursos e WebSocket atenderá a partida em tempo real; o backend será a autoridade sobre a partida.
+O código e as configurações existentes, as regras de negócio, os contratos do backend quando existirem e o `AGENTS.md` aplicável mais próximo são as fontes de referência.
 
 ## Referências do projeto
 
@@ -24,64 +24,49 @@ Os caminhos abaixo são relativos à pasta que contém `outguessed-front/` e `ou
 ## Antes de alterar o código
 
 - Examine primeiro a funcionalidade afetada e implementações semelhantes.
-- Verifique `package.json`, dependências, scripts, aliases, roteador, estilos, gerenciamento de estado e infraestrutura HTTP e de tempo real existentes.
-- Classifique o estado afetado como estado local da interface, estado do servidor obtido por HTTP ou estado da partida em tempo real.
+- Verifique `package.json`, dependências, scripts, aliases, roteador e estilos; confirme se já existem gerenciamento de estado ou infraestrutura HTTP e de tempo real antes de usá-los.
+- Quando a tarefa envolver dados ou estado, classifique-os como estado local da interface, estado do servidor obtido por HTTP ou estado da partida em tempo real.
 - Reutilize as abstrações existentes antes de criar outras.
 - Prefira a menor alteração correta; evite refatorações ou reformulações que não tenham relação com a tarefa.
-- Preserve rotas, dados enviados e recebidos pela API, comportamento de autenticação e contratos WebSocket, exceto quando a tarefa pedir explicitamente sua alteração.
+- Preserve as rotas existentes e, quando implementados, dados enviados e recebidos pela API, comportamento de autenticação e contratos WebSocket, exceto quando a tarefa pedir explicitamente sua alteração.
 
 ## Arquitetura
 
-Composição da aplicação: `src/main.tsx → src/App.tsx → src/shared/routes/router.tsx → páginas dos módulos`.
-Fluxo de acesso a dados: `página → custom hook → API do módulo → cliente HTTP compartilhado`.
+Composição atual: `src/main.tsx → src/App.tsx → src/shared/routes/router.tsx → src/modules/home/home.tsx`.
 
-- `src/main.tsx` e `src/App.tsx`: inicialização e componente raiz.
-- `src/modules/`: unidade principal de organização por funcionalidade (`home`, `auth`, `decks`, `cards`, `match` etc.).
-  Use módulos planos: mantenha os arquivos diretamente em `src/modules/<módulo>/`, sem subpastas internas como `pages/`, `hooks/` ou `api/`.
-  A página usa o nome `<página>.tsx`; o hook fica ao lado, com o nome `use<Página>.ts`.
-  Quando necessários, use `<página>.api.ts` para acesso a dados independente do React e `<página>.types.ts` para tipos compartilhados dentro do módulo.
-  Exporte a página pelo `index.ts` do módulo. Não crie arquivos de exports vazios.
-- Páginas cuidam de JSX e composição visual, consumindo os dados e as ações dos hooks; não devem conter lógica de negócio, chamadas HTTP diretas ou registro de eventos de socket.
-- Custom hooks concentram estado da funcionalidade, efeitos, ações e coordenação dos dados; exponha dados, estados assíncronos e ações com tipos precisos.
-  Componha hooks menores quando houver responsabilidades distintas. Estado estritamente visual pode permanecer nos componentes.
-  Transformações e validações puras podem ficar em funções sem dependência do React; não precisam virar hooks.
-- `src/shared/`: infraestrutura e componentes de interface reutilizáveis e independentes do domínio, com a exceção explícita do roteador.
-  `src/shared/routes/router.tsx` é um ponto de composição autorizado a importar páginas pelas APIs públicas dos módulos.
-  As demais áreas de `shared` NÃO DEVEM importar módulos, o roteador, `App` ou `main.tsx`.
-  Módulos NÃO DEVEM importar o roteador, `App` ou `main.tsx`.
-  Mantenha juntos páginas, API, hooks, estado, lógica de tempo real, componentes e tipos específicos de cada módulo, em arquivos sem subpastas internas.
-  API, hooks e componentes não devem depender das páginas; a API do módulo não deve depender dos hooks.
-  Não reorganize código funcional apenas para atender a uma estrutura ideal de diretórios.
-  Evite dependências circulares entre módulos e importações internas profundas quando houver uma API pública.
-- Crie cada arquivo apenas quando houver necessidade concreta. A Home contém `home.tsx` e `index.ts`, exporta `HomePage` e retorna `null`; seu hook será criado quando houver lógica.
-- O roteamento fica centralizado em `src/shared/routes/router.tsx`, com um único `BrowserRouter` em `src/App.tsx`.
-  Use caminhos em inglês e interface em português. Exporte páginas pela API pública de cada módulo.
-  Atualmente `/` renderiza a Home vazia e URLs desconhecidas redirecionam para `/` com substituição do histórico.
+- `src/main.tsx` monta o React em `StrictMode` e importa os estilos globais; `src/App.tsx` mantém um único `BrowserRouter`.
+- O alias `@/` aponta para `src/`, conforme `vite.config.ts` e `tsconfig.app.json`.
+- `src/shared/routes/router.tsx` centraliza as rotas e importa `Home` diretamente do módulo. A rota `/` renderiza a Home; URLs desconhecidas redirecionam para `/` com substituição do histórico. Use caminhos em inglês e interface em português.
+- `src/modules/` organiza funcionalidades. `home` contém a página, seus componentes em `components/<componente>/` e dados ilustrativos em `mocks/`. `auth`, `boards`, `cards`, `decks` e `match` ainda são diretórios reservados, sem implementação.
+- `src/shared/` reúne ativos, estilos globais, roteamento e componentes de interface. `shared/http` e `shared/realtime` são apenas diretórios reservados. `shared/ui` também não contém implementação.
+- Páginas compõem a interface com componentes locais e compartilhados. Mantenha componentes e dados específicos junto da funcionalidade; reserve `shared/components/` para componentes independentes do domínio. Crie arquivos e APIs públicas de módulo apenas quando necessários; não exija `index.ts` nem uma estrutura plana.
+- O roteador pode importar páginas dos módulos. Evite dependências circulares; módulos não devem depender de `App`, `main.tsx` ou do roteador. Componentes compartilhados novos devem ser independentes dos módulos. Hoje `Button`, `Field` e `Icon` importam `home.module.css`; trate esse acoplamento como legado a remover quando cada componente for editado.
+
+Quando houver acesso a dados, mantenha JSX e composição nas páginas, coordenação de estado e efeitos em hooks quando forem úteis, e operações HTTP independentes do React na API da funcionalidade. Não crie hooks para transformações puras nem camadas ou arquivos sem necessidade concreta. API e componentes não devem depender da página; a API não deve depender dos hooks.
 
 ## Domínio e autoridade do servidor
 
 Use de forma consistente a terminologia do backend: `Deck`, `Card`, `Match`, `Player`, `Round`, `Board`, `Answer`, `Judge`.
 Cartas podem ter dados específicos de cada tipo; nunca presuma que todas possuem os mesmos campos.
 Um `Player` pode ser autenticado ou convidado; nunca presuma que `playerId === userId`.
-O backend determina a validade das ações, a correção das respostas, as pontuações, o movimento no tabuleiro, os turnos, o fim das rodadas, os vencedores e o fim da partida.
+O backend determina a validade das ações, a correção das respostas, o movimento no tabuleiro, os turnos, o fim das rodadas, os vencedores e o fim da partida. Não introduza pontuação numérica: siga `rules.md`.
 O frontend envia a intenção do usuário e exibe o estado confirmado pelo servidor.
 Restrições no cliente servem à experiência do usuário, não à autorização.
-Nunca calcule nem persista pontuação, vencedor, correção de resposta ou posição no tabuleiro como verdade definida pelo navegador.
+Nunca calcule nem persista vencedor, correção de resposta ou posição no tabuleiro como verdade definida pelo navegador.
 
 ## Estado
 
-- Estado local da interface: use o estado do React para necessidades temporárias dos componentes.
-- Estado do servidor obtido por HTTP: use a abstração de estado do servidor já adotada no repositório; não a duplique no estado global sem necessidade.
-- Estado da partida em tempo real: use a solução centralizada de tempo real e armazenamento de estado já adotada.
-  Não use indiscriminadamente um único mecanismo de estado para todas as categorias.
-  Não persista estado que possa ser derivado com segurança.
-  Use atualizações imutáveis e ações e seletores claros para o armazenamento de estado.
-  Seletores podem derivar estado para a interface, mas NÃO DEVEM recriar a autoridade do backend.
+A Home atual usa dados ilustrativos estáticos em `src/modules/home/mocks/rooms.ts`; ainda não há biblioteca de estado do servidor nem armazenamento de estado da partida.
+
+- Para estado temporário da interface, use o estado do React quando necessário.
+- Ao integrar HTTP, diferencie estado do servidor de estado local e evite duplicá-lo sem necessidade. Adote uma abstração de consultas somente quando a funcionalidade justificar.
+- Ao integrar a partida em tempo real, mantenha um caminho centralizado para sincronizar o estado confirmado pelo servidor. Use atualizações imutáveis e seletores claros se houver armazenamento compartilhado; seletores não devem recriar a autoridade do backend.
+- Não persista estado que possa ser derivado com segurança nem imponha uma única solução de estado para todas as categorias.
 
 ## HTTP e contratos
 
-O acesso a dados das páginas DEVE seguir o fluxo `página → custom hook → API do módulo → cliente HTTP compartilhado`.
-A API do módulo fica em arquivos ao lado da página e do hook, é independente do React e usa a infraestrutura de `shared/http`.
+Ainda não existem cliente HTTP implementado, endpoints consumidos nem contratos de transporte no frontend. Quando forem criados, siga o fluxo `página/componente → hook quando houver estado ou efeitos → API da funcionalidade → cliente HTTP compartilhado`.
+A API da funcionalidade deve ser independente do React e pode usar `shared/http` depois que essa infraestrutura existir.
 Não espalhe requisições HTTP diretas pelos componentes nem crie um `ApiService` enorme que reúna vários domínios.
 Os tipos de transporte devem corresponder aos contratos reais do backend.
 Reutilize contratos compartilhados ou gerados quando disponíveis; caso contrário, defina explicitamente os tipos nas fronteiras.
@@ -89,12 +74,12 @@ Não use `any` para esconder incertezas sobre os dados nem altere silenciosament
 
 ## Tempo real
 
-Use o fluxo `cliente de socket → adaptador de tempo real da funcionalidade → armazenamento/estado centralizado → custom hooks → páginas e componentes React`.
-Os hooks expõem o estado e as ações de tempo real sem criar uma conexão por consumidor.
+Ainda não há cliente WebSocket, eventos implementados ou armazenamento de tempo real no frontend. Ao implementá-los, use o fluxo `cliente de socket → lógica de tempo real da funcionalidade → estado sincronizado → hooks quando úteis → páginas e componentes React`.
+Os consumidores devem compartilhar a conexão pertinente, sem criar uma conexão por componente ou hook.
 Mantenha um único ciclo de vida da conexão, com responsável claro, por sessão ou partida relevante; não crie sockets por componente nem sockets separados para chat sem necessidade.
 Centralize o registro de eventos que se sobrepõem; nunca registre listeners durante a renderização.
 Sempre remova inscrições e listeners quando apropriado e trate conexão, desconexão, reconexão, autenticação e entrada e saída da partida.
-Siga exatamente os nomes e dados dos eventos do backend; nunca invente uma convenção paralela de eventos.
+Quando os contratos existirem, siga exatamente os nomes e dados dos eventos do backend; nunca invente uma convenção paralela de eventos.
 Prefira mapas tipados de eventos de cliente e servidor quando houver suporte.
 Cada evento do servidor deve ter um único caminho claro e determinístico para atualizar o estado.
 Não presuma que ações emitidas pelo cliente terão sucesso; trate falhas do protocolo.
@@ -103,6 +88,8 @@ Nunca apresente silenciosamente como atual um estado da partida que se sabe desa
 
 ## Interface da partida
 
+Quando a interface da partida for implementada, aplique as diretrizes abaixo.
+
 Componentes do tabuleiro, chat, julgamento, formulários de resposta e partida devem exibir o estado autoritativo e emitir intenções do usuário.
 Animações representam transições de estado; NÃO DEVEM determinar o estado do jogo.
 Use atualizações otimistas apenas quando houver reversão ou reconciliação definida; nunca invente resultados da partida de forma otimista.
@@ -110,11 +97,11 @@ Mantenha tabuleiro e chat em `match` enquanto estiverem fortemente ligados à pa
 
 ## Autenticação e segurança
 
-Preserve a estratégia existente de login, cadastro, logout, restauração de sessão, tokens/cookies, convidados e proteção de rotas.
-Não crie um segundo mecanismo de autenticação nem usuários convidados fictícios no cliente.
-As identidades fornecidas pelo backend continuam sendo a referência para convidados e reconexões.
+O painel de login e a menção a convidados na Home ainda são ilustrativos; não há login, cadastro, logout, restauração de sessão ou proteção de rotas implementados no frontend.
+Quando a autenticação for implementada, siga os contratos do backend para sessão, tokens/cookies, convidados e proteção de rotas. Não crie um mecanismo concorrente nem usuários convidados fictícios no cliente.
+As identidades fornecidas pelo backend devem ser a referência para convidados e reconexões.
 Nunca exponha nem registre senhas, tokens, chaves privadas de API, credenciais, segredos do backend ou segredos de assinatura e provedores.
-Variáveis de ambiente do frontend são públicas; siga as convenções de nomenclatura existentes e nunca armazene segredos nelas.
+Variáveis de ambiente expostas ao frontend são públicas; nunca armazene segredos nelas.
 Trate conteúdo de usuários e do backend como não confiável; evite `dangerouslySetInnerHTML` para conteúdo de usuários sem sanitização explícita.
 Chamadas a IA ou a provedores privados que exijam segredos devem passar pelo backend.
 
@@ -122,8 +109,10 @@ Chamadas a IA ou a provedores privados que exijam segredos devem passar pelo bac
 
 Mantenha os componentes focados; separe a renderização de chamadas à API, sockets, sincronização de estado e transformações complexas.
 Crie hooks apenas para comportamentos relevantes e reutilizáveis do React ou da funcionalidade.
-Reutilize formulários, validação, componentes básicos de interface, convenções do Tailwind, padrões visuais e padrões de responsividade e acessibilidade existentes.
-Não introduza um segundo roteador, biblioteca de estado, cliente HTTP, biblioteca de consultas, biblioteca de formulários, validador, cliente WebSocket, sistema de estilos ou framework de interface sem necessidade explícita.
+Reutilize componentes básicos de interface, padrões visuais, responsividade e acessibilidade existentes. Ao introduzir formulários ou validação funcional, verifique primeiro o que o projeto já oferece.
+O projeto usa Tailwind para utilitários de layout e estilos CSS para a aparência dos componentes. `src/shared/styles/index.css` contém estilos globais; a Home ainda concentra estilos em `home.module.css`, inclusive estilos usados por componentes em `shared`.
+Para cada componente novo que precise de estilos próprios, crie um arquivo `.css` comum na mesma pasta do componente e importe-o ali. Ao editar um componente existente, migre os estilos desse componente de `home.module.css` para seu próprio `.css`; não amplie a dependência de componentes compartilhados dos estilos da Home. Mantenha estilos globais apenas quando forem realmente globais e use nomes de classes que evitem colisões.
+Não introduza outro roteador, biblioteca de estado, cliente HTTP, biblioteca de consultas, biblioteca de formulários, validador, cliente WebSocket, sistema de estilos ou framework de interface sem necessidade concreta. No momento, somente o roteador e a combinação Tailwind/CSS estão implementados entre essas escolhas.
 Prefira HTML semântico, controles acessíveis por teclado e nomes acessíveis.
 Use tipos precisos em TypeScript; prefira `unknown` com refinamento de tipos a `any`.
 Evite asserções inseguras e NÃO use `@ts-ignore` para contornar erros de implementação.
@@ -138,8 +127,8 @@ Não use atrasos arbitrários para simular a conclusão de operações do backen
 
 ## Comandos e dependências
 
-Examine `package.json` antes de executar ou documentar comandos de instalação, desenvolvimento, build, teste, lint, verificação de tipos ou formatação.
-Use o gerenciador de pacotes e os scripts existentes no repositório; nunca invente comandos.
+O projeto usa Bun (`bun.lock`), Vite, React e TypeScript, com ESLint e Prettier. Os scripts disponíveis em `package.json` são `dev`, `build` (`tsc -b && vite build`), `lint`, `lint:fix`, `format`, `format:check` e `preview`; não há script de teste separado.
+Examine `package.json` antes de executar ou documentar comandos. Use Bun e os scripts existentes, por exemplo `bun run build` e `bun run lint`; não invente comandos nem afirme que uma verificação passou sem executá-la.
 Antes de adicionar uma dependência, verifique se as bibliotecas existentes ou APIs da plataforma podem resolver o problema de forma razoável.
 Nunca substitua dependências estabelecidas apenas por preferência.
 Só afirme que um comando ou uma verificação passou se ele tiver sido executado com sucesso.
