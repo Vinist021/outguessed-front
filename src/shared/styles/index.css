@@ -1,6 +1,16 @@
 @import "tailwindcss";
 
 :root {
+  --ground: #100c1d;
+  --panel: #292536;
+  --surface: #211d2e;
+  --line: #494255;
+  --text: #f7f2fc;
+  --muted: #beb5ce;
+  --cyan: #a3edf1;
+  --pink: #f3b5e8;
+  --yellow: #f5eea3;
+  --mint: #bce9c1;
   font-family: system-ui, "Segoe UI", Roboto, sans-serif;
   color-scheme: light;
   background: #fff;
