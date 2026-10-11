@@ -3,7 +3,7 @@ import Icon from "@/shared/components/icons/icons";
 import RoomList from "@/modules/home/components/roomList/roomList";
 import Button from "@/shared/components/button/button";
 import styles from "@/modules/home/home.module.css";
-import "./playPanel.css";
+import "./playPanel.module.css";
 
 export default function PlayPanel() {
   return (

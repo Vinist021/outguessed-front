@@ -1,5 +1,5 @@
 import styles from "@/modules/home/home.module.css";
-import "./howToPlay.css";
+import "./howToPlay.module.css";
 
 export default function HowToPlay() {
   return (

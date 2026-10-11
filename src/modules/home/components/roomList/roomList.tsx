@@ -1,7 +1,7 @@
 import styles from "@/modules/home/home.module.css";
 import Icon from "@/shared/components/icons/icons";
 import { rooms } from "@/modules/home/mocks/rooms";
-import "./roomList.css";
+import "./roomList.module.css";
 
 export default function RoomList() {
   return (
