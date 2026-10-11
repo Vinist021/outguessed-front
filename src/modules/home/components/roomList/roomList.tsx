@@ -1,6 +1,6 @@
-import styles from "@/modules/home/home.module.css";
 import Icon from "@/shared/components/icons/icons";
 import { rooms } from "@/modules/home/mocks/rooms";
+import "@/modules/home/home.css";
 import "./roomList.css";
 
 export default function RoomList() {
@@ -14,7 +14,7 @@ export default function RoomList() {
       >
         <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
           {rooms.map((room) => (
-            <li key={room.name} className={`homeRoom ${styles[room.color]}`}>
+            <li key={room.name} className={`homeRoom ${room.color}`}>
               <div className="flex items-center justify-between gap-2">
                 <span className="homeRoomCategoryDot" aria-hidden="true" />
                 <span

@@ -1,15 +1,15 @@
 import Field from "@/shared/components/field/field";
 import Icon from "@/shared/components/icons/icons";
-import styles from "@/modules/home/home.module.css";
 import Button from "@/shared/components/button/button";
+import "@/modules/home/home.css";
 import "./loginPanel.css";
 
 export default function LoginPanel() {
   return (
-    <section className={`${styles.panel} homeLoginPanel`} aria-labelledby="login-title">
-      <h2 id="login-title" className={`${styles.panelTitle} homeLoginTitle`}>
+    <section className="panel homeLoginPanel" aria-labelledby="login-title">
+      <h2 id="login-title" className="panelTitle homeLoginTitle">
         <Icon name="user" />
-        Seu cantinho<span className={`${styles.titleDot} homeLoginDot`}>.</span>
+        Seu cantinho<span className="titleDot homeLoginDot">.</span>
       </h2>
       <p className="homePanelDescription">Entre na sua conta e venha jogar.</p>
       <div className="mt-5 grid gap-4">
