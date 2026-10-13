@@ -1,13 +1,4 @@
-@font-face {
-  font-family: "Itim";
-  src: url("../../shared/assets/fonts/Itim-Regular.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
 .home {
-  --hand: "Itim", cursive;
   position: relative;
   isolation: isolate;
   min-height: 100svh;
@@ -33,12 +24,12 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.container {
+.homeContainer {
   width: min(100% - 80px, 1440px);
   margin-inline: auto;
 }
 
-.confetti {
+.homeConfetti {
   position: absolute;
   z-index: -1;
   inset: 0;
@@ -60,68 +51,68 @@
   background-size: 100% 1020px;
 }
 
-.brandArea {
+.homeBrandArea {
   padding-block: 28px 25px;
 }
 
-.wordmark {
+.homeWordmark {
   display: flex;
   align-items: center;
   width: fit-content;
   margin: 0;
-  font-family: var(--hand);
+  font-family: var(--font-hand);
   font-size: clamp(3.3rem, 6.3vw, 5.75rem);
   font-weight: 400;
   letter-spacing: -0.035em;
   line-height: 1.08;
 }
 
-.wordmark > span:nth-child(1) {
+.homeWordmark > span:nth-child(1) {
   color: var(--pink);
 }
 
-.wordmark > span:nth-child(2) {
+.homeWordmark > span:nth-child(2) {
   color: var(--cyan);
 }
 
-.wordmark > span:nth-child(3) {
+.homeWordmark > span:nth-child(3) {
   color: var(--yellow);
 }
 
-.brandSpark {
+.homeBrandSpark {
   align-self: start;
   margin: 8px 0 0 8px;
   color: var(--mint);
   transform: rotate(12deg);
 }
 
-.brandSpark svg {
+.homeBrandSpark svg {
   width: 24px;
   height: 24px;
 }
 
-.tagline {
+.homeTagline {
   display: flex;
   gap: 17px;
   margin-top: 8px;
   padding-left: 4px;
-  font-family: var(--hand);
+  font-family: var(--font-hand);
   font-size: 18px;
   color: var(--muted);
 }
 
-.tagline span {
+.homeTagline span {
   padding-bottom: 2px;
   border-bottom: 1px dashed var(--line);
 }
 
-.navbar {
+.homeNavbar {
   padding-block: 8px;
   border-block: 1px solid #30293f;
   background: #191424;
 }
 
-.navItem {
+.homeNavItem {
   display: inline-flex;
   min-height: 44px;
   align-items: center;
@@ -131,140 +122,92 @@
   border: 1px solid transparent;
   border-radius: 9px;
   color: var(--muted);
-  font-family: var(--hand);
+  font-family: var(--font-hand);
   font-size: 21px;
   transition:
     color 150ms ease-out,
     background-color 150ms ease-out;
 }
 
-.navItem svg {
+.homeNavItem svg {
   width: 18px;
   height: 18px;
 }
 
-.navActive {
+.homeNavActive {
   border-color: #44545b;
   background: #a3edf110;
   color: var(--cyan);
 }
 
-.main {
+.homeMain {
   padding-top: 32px;
 }
 
-.panel {
-  min-width: 0;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: var(--panel);
-}
-
-.panelTitle {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--hand);
-  font-size: 34px;
-  font-weight: 400;
-  line-height: 1.2;
-}
-
-.panelTitle > svg {
-  width: 25px;
-  height: 25px;
-  color: var(--mint);
-}
-
-.titleDot {
-  margin-left: -9px;
-  color: var(--mint);
-}
-
-.cyan {
-  --accent: var(--cyan);
-}
-
-.pink {
-  --accent: var(--pink);
-}
-
-.mint {
-  --accent: var(--mint);
-}
-
-.yellow {
-  --accent: var(--yellow);
-}
-
-.footer {
+.homeFooter {
   padding-block: 27px 30px;
   color: #b4a6c5;
   font-size: 12px;
 }
 
-.footer > span {
-  font-family: var(--hand);
+.homeFooter > span {
+  font-family: var(--font-hand);
   font-size: 19px;
 }
 
-.footer svg {
+.homeFooter svg {
   width: 16px;
   height: 16px;
   color: var(--pink);
 }
 
 @media (hover: hover) {
-  .navItem:is(button):hover {
+  .homeNavItem:is(button):hover {
     background: #2b233b;
     color: var(--text);
   }
 }
 
 @media (max-width: 767px) {
-  .container {
+  .homeContainer {
     width: calc(100% - 32px);
   }
 
-  .brandArea {
+  .homeBrandArea {
     padding-block: 25px 22px;
   }
 
-  .brandSpark {
+  .homeBrandSpark {
     margin: 4px 0 0 5px;
   }
 
-  .brandSpark svg {
+  .homeBrandSpark svg {
     width: 18px;
     height: 18px;
   }
 
-  .tagline {
+  .homeTagline {
     gap: 15px;
     margin-top: 10px;
     font-size: 16px;
   }
 
-  .navItem {
+  .homeNavItem {
     gap: 7px;
     padding-inline: 12px;
     font-size: 18px;
   }
 
-  .navItem svg {
+  .homeNavItem svg {
     width: 16px;
     height: 16px;
   }
 
-  .main {
+  .homeMain {
     padding-top: 24px;
   }
 
-  .panelTitle {
-    font-size: 30px;
-  }
-
-  .footer {
+  .homeFooter {
     padding-block: 24px;
   }
 }

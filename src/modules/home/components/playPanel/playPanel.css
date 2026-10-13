@@ -14,7 +14,7 @@ section.homePlayPanel {
 
 .homeOnlineCount {
   color: var(--mint);
-  font-family: var(--hand);
+  font-family: var(--font-hand);
   font-size: 30px;
 }
 
@@ -34,7 +34,7 @@ section.homePlayPanel {
   padding: 6px 12px;
   border-radius: 6px;
   color: var(--muted);
-  font-family: var(--hand);
+  font-family: var(--font-hand);
   font-size: 16px;
   line-height: 1.15;
   white-space: nowrap;

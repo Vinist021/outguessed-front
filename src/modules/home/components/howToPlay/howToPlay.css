@@ -7,7 +7,7 @@ section.homeHowPanel {
 
 .homeHowTitle {
   color: var(--yellow);
-  font-family: var(--hand);
+  font-family: var(--font-hand);
   font-size: 30px;
   font-weight: 400;
   line-height: 1.05;
@@ -16,7 +16,7 @@ section.homeHowPanel {
 .homeQuestionMark {
   padding-right: 2px;
   color: var(--pink);
-  font-family: var(--hand);
+  font-family: var(--font-hand);
   font-size: 74px;
   line-height: 1;
   transform: rotate(12deg);
@@ -40,8 +40,20 @@ section.homeHowPanel {
   border: 1px dashed var(--accent);
   border-radius: 50%;
   color: var(--accent);
-  font-family: var(--hand);
+  font-family: var(--font-hand);
   font-size: 18px;
+}
+
+.homeHowStep--cyan {
+  --accent: var(--cyan);
+}
+
+.homeHowStep--pink {
+  --accent: var(--pink);
+}
+
+.homeHowStep--yellow {
+  --accent: var(--yellow);
 }
 
 section.homeHowPanel li p {

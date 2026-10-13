@@ -2,16 +2,16 @@ import Field from "@/shared/components/field/field";
 import Icon from "@/shared/components/icons/icons";
 import RoomList from "@/modules/home/components/roomList/roomList";
 import Button from "@/shared/components/button/button";
-import "@/modules/home/home.css";
+import "../panel.css";
 import "./playPanel.css";
 
 export default function PlayPanel() {
   return (
-    <section className="panel homePlayPanel" aria-labelledby="play-title">
+    <section className="homePanel homePlayPanel" aria-labelledby="play-title">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-        <h2 id="play-title" className="panelTitle">
+        <h2 id="play-title" className="homePanelTitle">
           <Icon name="play" />
-          Jogue agora<span className="titleDot">.</span>
+          Jogue agora<span className="homeTitleDot">.</span>
         </h2>
         <div className="homeOnline flex items-center gap-2.5">
           <Icon name="users" />

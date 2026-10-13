@@ -19,6 +19,22 @@
   transition: background-color 150ms ease-out;
 }
 
+.homeRoom--cyan {
+  --accent: var(--cyan);
+}
+
+.homeRoom--pink {
+  --accent: var(--pink);
+}
+
+.homeRoom--mint {
+  --accent: var(--mint);
+}
+
+.homeRoom--yellow {
+  --accent: var(--yellow);
+}
+
 .homeRoomCategoryDot {
   width: 7px;
   height: 7px;

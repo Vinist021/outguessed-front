@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Itim";
+  src: url("../assets/fonts/Itim-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 @theme {
   --ground: #100c1d;
   --panel: #292536;
@@ -14,6 +22,7 @@
 }
 
 :root {
+  --font-hand: "Itim", cursive;
   font-family: system-ui, "Segoe UI", Roboto, sans-serif;
   color-scheme: light;
   background: #fff;
