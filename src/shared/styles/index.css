@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-:root {
+@theme {
   --ground: #100c1d;
   --panel: #292536;
   --surface: #211d2e;
@@ -11,6 +11,9 @@
   --pink: #f3b5e8;
   --yellow: #f5eea3;
   --mint: #bce9c1;
+}
+
+:root {
   font-family: system-ui, "Segoe UI", Roboto, sans-serif;
   color-scheme: light;
   background: #fff;
