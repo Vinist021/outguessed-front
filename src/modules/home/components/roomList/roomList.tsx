@@ -11,7 +11,7 @@ export default function RoomList() {
         aria-label="Lista de salas ilustrativas"
         tabIndex={0}
       >
-        <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+        <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
           {rooms.map((room) => (
             <li key={room.name} className={`homeRoom homeRoom--${room.color}`}>
               <div className="flex items-center justify-between gap-2">
