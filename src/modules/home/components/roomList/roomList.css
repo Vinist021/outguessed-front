@@ -1,12 +1,14 @@
 .homeRoomScroll {
+  --home-room-divider: #40384e;
+
   max-height: 353px;
   overflow-y: auto;
   overscroll-behavior-y: contain;
-  border: 1px solid #494255;
+  border: 1px solid var(--color-line);
   border-radius: 10px;
-  background: var(--surface);
+  background: var(--color-surface);
   scrollbar-width: thin;
-  scrollbar-color: #7c708c var(--surface);
+  scrollbar-color: #7c708c var(--color-surface);
   scrollbar-gutter: stable;
 }
 
@@ -14,9 +16,25 @@
   min-width: 0;
   min-height: 116px;
   padding: 15px 16px 16px;
-  border-right: 1px solid #40384e;
-  border-bottom: 1px solid #40384e;
-  transition: background-color 150ms ease-out;
+  border-right: 1px solid var(--home-room-divider);
+  border-bottom: 1px solid var(--home-room-divider);
+  transition: background-color var(--transition-interaction);
+}
+
+.homeRoom--cyan {
+  --accent: var(--color-cyan);
+}
+
+.homeRoom--pink {
+  --accent: var(--color-pink);
+}
+
+.homeRoom--mint {
+  --accent: var(--color-mint);
+}
+
+.homeRoom--yellow {
+  --accent: var(--color-yellow);
 }
 
 .homeRoomCategoryDot {
@@ -31,22 +49,22 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  color: var(--mint);
+  color: var(--color-mint);
   font-size: 12px;
   font-variant-numeric: tabular-nums;
 }
 
-.homeOccupancy svg {
+.homeOccupancy .uiIcon {
   width: 14px;
   height: 14px;
 }
 
 .homeCapacity {
-  color: var(--muted);
+  color: var(--color-muted);
 }
 
 .homeFull {
-  color: var(--pink);
+  color: var(--color-pink);
 }
 
 .homeRoomName {
@@ -59,18 +77,18 @@
 
 .homeRoomCategory {
   margin-top: 4px;
-  color: var(--muted);
+  color: var(--color-muted);
   font-size: 11px;
   line-height: 1.4;
 }
 
 .homeRoomCaption {
   margin-top: 10px;
-  color: var(--muted);
+  color: var(--color-muted);
   font-size: 11px;
 }
 
-.homeRoomCaption svg {
+.homeRoomCaption .uiIcon {
   width: 13px;
   height: 13px;
 }
