@@ -1,4 +1,12 @@
 .uiButton {
+  --ui-button-background: transparent;
+  --ui-button-border-color: transparent;
+  --ui-button-color: inherit;
+  --ui-button-icon-color: currentColor;
+  --ui-button-hover-background: var(--ui-button-background);
+  --ui-button-hover-border-color: var(--ui-button-border-color);
+  --ui-button-hover-color: var(--ui-button-color);
+
   display: inline-flex;
   min-height: 48px;
   min-width: 0;
@@ -6,8 +14,10 @@
   justify-content: center;
   gap: 8px;
   padding: 10px 14px;
-  border: 1px solid transparent;
+  border: 1px solid var(--ui-button-border-color);
   border-radius: var(--radius-control);
+  background: var(--ui-button-background);
+  color: var(--ui-button-color);
   font-family: var(--font-hand);
   font-size: 19px;
   line-height: 1.25;
@@ -18,40 +28,44 @@
     transform 120ms ease-out;
 }
 
+.uiButton .uiIcon {
+  color: var(--ui-button-icon-color);
+}
+
 .uiButtonSecondary {
-  border-color: #7a6c89;
-  background: #342d43;
-  color: #e5dcec;
+  --ui-button-background: #342d43;
+  --ui-button-border-color: #7a6c89;
+  --ui-button-color: #e5dcec;
+  --ui-button-icon-color: #c9b7db;
+  --ui-button-hover-background: #423650;
+  --ui-button-hover-border-color: #d4c2e6;
 }
 
 .uiButtonSecondary .uiIcon {
   width: 17px;
   height: 17px;
-  color: #c9b7db;
 }
 
 .uiButtonPrimary {
-  border-color: var(--color-mint);
-  background: var(--color-mint);
-  color: #192b21;
+  --ui-button-background: var(--color-mint);
+  --ui-button-border-color: var(--color-mint);
+  --ui-button-color: #192b21;
+  --ui-button-hover-background: #d4f6d8;
+  --ui-button-hover-border-color: #d4f6d8;
 }
 
 .uiButtonOutline {
-  border-color: #b2a0c2;
-  color: var(--color-pink);
-  background: transparent;
+  --ui-button-border-color: #b2a0c2;
+  --ui-button-color: var(--color-pink);
+  --ui-button-hover-background: #423650;
+  --ui-button-hover-border-color: #d4c2e6;
 }
 
 @media (hover: hover) {
-  .uiButtonSecondary:hover,
-  .uiButtonOutline:hover {
-    border-color: #d4c2e6;
-    background: #423650;
-  }
-
-  .uiButtonPrimary:hover {
-    border-color: #d4f6d8;
-    background: #d4f6d8;
+  .uiButton:hover {
+    border-color: var(--ui-button-hover-border-color);
+    background: var(--ui-button-hover-background);
+    color: var(--ui-button-hover-color);
   }
 }
 

@@ -1,14 +1,10 @@
-.homeLoginPanel {
-  padding: 25px 24px 20px;
-}
-
-.homePanelTitle.homeLoginTitle {
+.homeLoginTitle {
   gap: 9px;
   font-size: 30px;
 }
 
-.homePanelTitle.homeLoginTitle > .uiIcon,
-.homeTitleDot.homeLoginDot {
+.homeLoginTitle > .uiIcon,
+.homeLoginDot {
   color: var(--color-pink);
 }
 
@@ -18,10 +14,12 @@
   font-size: 13px;
 }
 
-.uiButtonPrimary.homeLoginButton {
-  border-color: var(--color-pink);
-  background: var(--color-pink);
-  color: #342036;
+.homeLoginButton {
+  --ui-button-background: var(--color-pink);
+  --ui-button-border-color: var(--color-pink);
+  --ui-button-color: #342036;
+  --ui-button-hover-background: #f8cff1;
+  --ui-button-hover-border-color: #f8cff1;
 }
 
 .homeLoginButton .uiIcon {
@@ -29,7 +27,7 @@
   height: 17px;
 }
 
-.uiButton.homeLoginAction {
+.homeLoginAction {
   padding-inline: 8px;
   font-size: 18px;
   white-space: nowrap;
@@ -53,29 +51,14 @@
   color: var(--color-yellow);
 }
 
-@media (hover: hover) {
-  .uiButtonPrimary.homeLoginButton:hover {
-    border-color: #f8cff1;
-    background: #f8cff1;
-  }
-}
-
 @media (max-width: 1279px) {
-  .homeLoginPanel {
-    padding-inline: 20px;
-  }
-
-  .homePanelTitle.homeLoginTitle {
+  .homeLoginTitle {
     font-size: 27px;
   }
 }
 
 @media (max-width: 767px) {
-  .homeLoginPanel {
-    padding: 20px;
-  }
-
-  .homePanelTitle.homeLoginTitle {
+  .homeLoginTitle {
     font-size: 30px;
   }
 

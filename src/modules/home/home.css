@@ -144,6 +144,33 @@
   padding-top: 32px;
 }
 
+.homePlayPanel,
+.homeLoginPanel,
+.homeHowPanel {
+  padding: 24px;
+}
+
+.homePanelTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-hand);
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.homePanelTitle > .uiIcon {
+  width: 25px;
+  height: 25px;
+  color: var(--color-mint);
+}
+
+.homeTitleDot {
+  margin-left: -9px;
+  color: var(--color-mint);
+}
+
 .homeFooter {
   padding-block: 27px 30px;
   color: #b4a6c5;
@@ -205,6 +232,16 @@
 
   .homeMain {
     padding-top: 24px;
+  }
+
+  .homePlayPanel,
+  .homeLoginPanel,
+  .homeHowPanel {
+    padding: 20px;
+  }
+
+  .homePanelTitle {
+    font-size: 30px;
   }
 
   .homeFooter {

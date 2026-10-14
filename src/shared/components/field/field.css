@@ -53,7 +53,7 @@
 }
 
 @media (hover: hover) {
-  .uiInput:hover {
+  .uiInput:hover:not(:focus) {
     border-color: #b6a6c8;
   }
 }

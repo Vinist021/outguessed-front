@@ -1,5 +1,4 @@
-.homePanel.homeHowPanel {
-  padding: 24px;
+.homeHowPanel {
   border-style: dashed;
   border-color: #6c5d82;
   background: #211b30;
@@ -69,17 +68,7 @@
   color: var(--color-muted);
 }
 
-@media (max-width: 1279px) {
-  .homePanel.homeHowPanel {
-    padding-inline: 20px;
-  }
-}
-
 @media (max-width: 767px) {
-  .homePanel.homeHowPanel {
-    padding: 20px;
-  }
-
   .homeHowStepText {
     font-size: 13px;
   }
