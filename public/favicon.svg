@@ -2,6 +2,7 @@
   <rect width="24" height="24" rx="4" fill="#100c1d" />
   <path
     d="m12 3 2.3 6.7L21 12l-6.7 2.3L12 21l-2.3-6.7L3 12l6.7-2.3Z"
+    transform="rotate(12 12 12)"
     stroke="#bce9c1"
     stroke-width="1.9"
     stroke-linecap="round"
