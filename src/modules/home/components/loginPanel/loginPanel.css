@@ -1,35 +1,35 @@
-section.homeLoginPanel {
+.homeLoginPanel {
   padding: 25px 24px 20px;
 }
 
-section.homeLoginPanel .homeLoginTitle {
+.homePanelTitle.homeLoginTitle {
   gap: 9px;
   font-size: 30px;
 }
 
-section.homeLoginPanel .homeLoginTitle > svg,
-section.homeLoginPanel .homeLoginTitle .homeLoginDot {
-  color: var(--pink);
+.homePanelTitle.homeLoginTitle > .uiIcon,
+.homeTitleDot.homeLoginDot {
+  color: var(--color-pink);
 }
 
 .homePanelDescription {
   margin-top: 8px;
-  color: var(--muted);
+  color: var(--color-muted);
   font-size: 13px;
 }
 
-section.homeLoginPanel .homeLoginButton {
-  border-color: var(--pink);
-  background: var(--pink);
+.uiButtonPrimary.homeLoginButton {
+  border-color: var(--color-pink);
+  background: var(--color-pink);
   color: #342036;
 }
 
-section.homeLoginPanel .homeLoginButton svg {
+.homeLoginButton .uiIcon {
   width: 17px;
   height: 17px;
 }
 
-section.homeLoginPanel .homeLoginAction {
+.uiButton.homeLoginAction {
   padding-inline: 8px;
   font-size: 18px;
   white-space: nowrap;
@@ -41,41 +41,41 @@ section.homeLoginPanel .homeLoginAction {
   justify-content: center;
   gap: 6px;
   margin-top: 18px;
-  color: var(--muted);
+  color: var(--color-muted);
   font-size: 11px;
   line-height: 1.6;
 }
 
-.homeGuestNote svg {
+.homeGuestNote .uiIcon {
   width: 14px;
   height: 14px;
   margin-top: 2px;
-  color: var(--yellow);
+  color: var(--color-yellow);
 }
 
 @media (hover: hover) {
-  section.homeLoginPanel .homeLoginButton:hover {
+  .uiButtonPrimary.homeLoginButton:hover {
     border-color: #f8cff1;
     background: #f8cff1;
   }
 }
 
 @media (max-width: 1279px) {
-  section.homeLoginPanel {
+  .homeLoginPanel {
     padding-inline: 20px;
   }
 
-  section.homeLoginPanel .homeLoginTitle {
+  .homePanelTitle.homeLoginTitle {
     font-size: 27px;
   }
 }
 
 @media (max-width: 767px) {
-  section.homeLoginPanel {
+  .homeLoginPanel {
     padding: 20px;
   }
 
-  section.homeLoginPanel .homeLoginTitle {
+  .homePanelTitle.homeLoginTitle {
     font-size: 30px;
   }
 

@@ -18,26 +18,26 @@ export default function HowToPlay() {
       <ol className="grid gap-4">
         <li className="flex items-start gap-3">
           <span className="homeHowStep homeHowStep--cyan">1</span>
-          <p>
-            <strong>Encontre sua sala.</strong>
+          <p className="homeHowStepText">
+            <strong className="homeHowStepLead">Encontre sua sala.</strong>
             <br />
-            <span>Escolha um tema e junte a turma.</span>
+            <span className="homeHowStepDescription">Escolha um tema e junte a turma.</span>
           </p>
         </li>
         <li className="flex items-start gap-3">
           <span className="homeHowStep homeHowStep--pink">2</span>
-          <p>
-            <strong>Solte seus palpites.</strong>
+          <p className="homeHowStepText">
+            <strong className="homeHowStepLead">Solte seus palpites.</strong>
             <br />
-            <span>Leia a pergunta e use as dicas.</span>
+            <span className="homeHowStepDescription">Leia a pergunta e use as dicas.</span>
           </p>
         </li>
         <li className="flex items-start gap-3">
           <span className="homeHowStep homeHowStep--yellow">3</span>
-          <p>
-            <strong>Avance no tabuleiro.</strong>
+          <p className="homeHowStepText">
+            <strong className="homeHowStepLead">Avance no tabuleiro.</strong>
             <br />
-            <span>Acerte e chegue ao final!</span>
+            <span className="homeHowStepDescription">Acerte e chegue ao final!</span>
           </p>
         </li>
       </ol>

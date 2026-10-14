@@ -7,14 +7,14 @@
   gap: 8px;
   padding: 10px 14px;
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: var(--radius-control);
   font-family: var(--font-hand);
   font-size: 19px;
   line-height: 1.25;
   transition:
-    background-color 150ms ease-out,
-    border-color 150ms ease-out,
-    color 150ms ease-out,
+    background-color var(--transition-interaction),
+    border-color var(--transition-interaction),
+    color var(--transition-interaction),
     transform 120ms ease-out;
 }
 
@@ -24,21 +24,21 @@
   color: #e5dcec;
 }
 
-.uiButtonSecondary svg {
+.uiButtonSecondary .uiIcon {
   width: 17px;
   height: 17px;
   color: #c9b7db;
 }
 
 .uiButtonPrimary {
-  border-color: var(--mint);
-  background: var(--mint);
+  border-color: var(--color-mint);
+  background: var(--color-mint);
   color: #192b21;
 }
 
 .uiButtonOutline {
   border-color: #b2a0c2;
-  color: var(--pink);
+  color: var(--color-pink);
   background: transparent;
 }
 

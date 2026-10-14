@@ -9,20 +9,22 @@
 }
 
 @theme {
-  --ground: #100c1d;
-  --panel: #292536;
-  --surface: #211d2e;
-  --line: #494255;
-  --text: #f7f2fc;
-  --muted: #beb5ce;
-  --cyan: #a3edf1;
-  --pink: #f3b5e8;
-  --yellow: #f5eea3;
-  --mint: #bce9c1;
+  --color-ground: #100c1d;
+  --color-panel: #292536;
+  --color-surface: #211d2e;
+  --color-line: #494255;
+  --color-text: #f7f2fc;
+  --color-muted: #beb5ce;
+  --color-cyan: #a3edf1;
+  --color-pink: #f3b5e8;
+  --color-yellow: #f5eea3;
+  --color-mint: #bce9c1;
 }
 
 :root {
   --font-hand: "Itim", cursive;
+  --radius-control: 8px;
+  --transition-interaction: 150ms ease-out;
   font-family: system-ui, "Segoe UI", Roboto, sans-serif;
   color-scheme: light;
   background: #fff;

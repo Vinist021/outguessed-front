@@ -3,20 +3,20 @@
   isolation: isolate;
   min-height: 100svh;
   overflow: clip;
-  background: var(--ground);
-  color: var(--text);
+  background: var(--color-ground);
+  color: var(--color-text);
   color-scheme: dark;
   font-size: 14px;
   line-height: 1.5;
 }
 
 .home ::selection {
-  background: var(--cyan);
-  color: var(--ground);
+  background: var(--color-cyan);
+  color: var(--color-ground);
 }
 
 .home :is(button, input, [tabindex]):focus-visible {
-  outline: 2px solid var(--cyan);
+  outline: 2px solid var(--color-cyan);
   outline-offset: 4px;
 }
 
@@ -67,26 +67,26 @@
   line-height: 1.08;
 }
 
-.homeWordmark > span:nth-child(1) {
-  color: var(--pink);
+.homeWordmarkOut {
+  color: var(--color-pink);
 }
 
-.homeWordmark > span:nth-child(2) {
-  color: var(--cyan);
+.homeWordmarkGuess {
+  color: var(--color-cyan);
 }
 
-.homeWordmark > span:nth-child(3) {
-  color: var(--yellow);
+.homeWordmarkEd {
+  color: var(--color-yellow);
 }
 
 .homeBrandSpark {
   align-self: start;
   margin: 8px 0 0 8px;
-  color: var(--mint);
+  color: var(--color-mint);
   transform: rotate(12deg);
 }
 
-.homeBrandSpark svg {
+.homeBrandSpark .uiIcon {
   width: 24px;
   height: 24px;
 }
@@ -98,12 +98,12 @@
   padding-left: 4px;
   font-family: var(--font-hand);
   font-size: 18px;
-  color: var(--muted);
+  color: var(--color-muted);
 }
 
-.homeTagline span {
+.homeTaglinePart {
   padding-bottom: 2px;
-  border-bottom: 1px dashed var(--line);
+  border-bottom: 1px dashed var(--color-line);
 }
 
 .homeNavbar {
@@ -121,15 +121,15 @@
   padding: 7px 18px;
   border: 1px solid transparent;
   border-radius: 9px;
-  color: var(--muted);
+  color: var(--color-muted);
   font-family: var(--font-hand);
   font-size: 21px;
   transition:
-    color 150ms ease-out,
-    background-color 150ms ease-out;
+    color var(--transition-interaction),
+    background-color var(--transition-interaction);
 }
 
-.homeNavItem svg {
+.homeNavItem .uiIcon {
   width: 18px;
   height: 18px;
 }
@@ -137,7 +137,7 @@
 .homeNavActive {
   border-color: #44545b;
   background: #a3edf110;
-  color: var(--cyan);
+  color: var(--color-cyan);
 }
 
 .homeMain {
@@ -150,21 +150,21 @@
   font-size: 12px;
 }
 
-.homeFooter > span {
+.homeFooterBrand {
   font-family: var(--font-hand);
   font-size: 19px;
 }
 
-.homeFooter svg {
+.homeFooter .uiIcon {
   width: 16px;
   height: 16px;
-  color: var(--pink);
+  color: var(--color-pink);
 }
 
 @media (hover: hover) {
-  .homeNavItem:is(button):hover {
+  .homeNavButton:hover {
     background: #2b233b;
-    color: var(--text);
+    color: var(--color-text);
   }
 }
 
@@ -181,7 +181,7 @@
     margin: 4px 0 0 5px;
   }
 
-  .homeBrandSpark svg {
+  .homeBrandSpark .uiIcon {
     width: 18px;
     height: 18px;
   }
@@ -198,7 +198,7 @@
     font-size: 18px;
   }
 
-  .homeNavItem svg {
+  .homeNavItem .uiIcon {
     width: 16px;
     height: 16px;
   }

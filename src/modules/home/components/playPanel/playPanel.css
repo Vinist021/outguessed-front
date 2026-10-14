@@ -1,19 +1,19 @@
-section.homePlayPanel {
+.homePanel.homePlayPanel {
   padding: 26px;
 }
 
 .homeOnline {
-  color: var(--muted);
+  color: var(--color-muted);
   font-size: 11px;
   line-height: 1.3;
 }
 
-.homeOnline > svg {
-  color: var(--mint);
+.homeOnline > .uiIcon {
+  color: var(--color-mint);
 }
 
 .homeOnlineCount {
-  color: var(--mint);
+  color: var(--color-mint);
   font-family: var(--font-hand);
   font-size: 30px;
 }
@@ -25,30 +25,30 @@ section.homePlayPanel {
   gap: 2px;
   border: 1px solid #5e536d;
   border-radius: 9px;
-  background: #211d2e;
+  background: var(--color-surface);
 }
 
-.homeRoomTabs button {
+.homeRoomTab {
   min-height: 44px;
   flex: 1;
   padding: 6px 12px;
   border-radius: 6px;
-  color: var(--muted);
+  color: var(--color-muted);
   font-family: var(--font-hand);
   font-size: 16px;
   line-height: 1.15;
   white-space: nowrap;
   transition:
-    background-color 150ms ease-out,
-    color 150ms ease-out;
+    background-color var(--transition-interaction),
+    color var(--transition-interaction);
 }
 
-.homeRoomTabs .homeActiveTab {
+.homeRoomTab.homeActiveTab {
   background: #41464b;
-  color: var(--cyan);
+  color: var(--color-cyan);
 }
 
-.homePlayPanel .homePlayButton {
+.uiButton.homePlayButton {
   min-width: 186px;
   min-height: 52px;
   justify-content: space-between;
@@ -57,23 +57,23 @@ section.homePlayPanel {
   font-size: 27px;
 }
 
-.homePlayPanel .homeCreateRoom {
-  color: var(--cyan);
+.uiButton.homeCreateRoom {
+  color: var(--color-cyan);
 }
 
-.homePlayPanel .homeCreateRoom svg {
-  color: var(--cyan);
+.homeCreateRoom .uiIcon {
+  color: var(--color-cyan);
 }
 
 @media (hover: hover) {
-  .homeRoomTabs button:hover {
+  .homeRoomTab:hover {
     background: #41464b;
-    color: var(--cyan);
+    color: var(--color-cyan);
   }
 }
 
 @media (max-width: 767px) {
-  section.homePlayPanel {
+  .homePanel.homePlayPanel {
     padding: 20px;
   }
 
@@ -81,7 +81,7 @@ section.homePlayPanel {
     gap: 6px;
   }
 
-  .homeOnline > svg {
+  .homeOnline > .uiIcon {
     display: none;
   }
 
@@ -90,11 +90,11 @@ section.homePlayPanel {
     margin-top: 5px;
   }
 
-  .homeRoomTabs button {
+  .homeRoomTab {
     font-size: 18px;
   }
 
-  .homePlayPanel .homePlayButton {
+  .uiButton.homePlayButton {
     width: 100%;
   }
 }

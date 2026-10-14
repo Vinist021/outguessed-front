@@ -47,10 +47,10 @@ export default function PlayPanel() {
           role="group"
           aria-label="Tipos de sala (ilustrativo)"
         >
-          <button type="button" aria-disabled="true" className="homeActiveTab">
+          <button type="button" aria-disabled="true" className="homeRoomTab homeActiveTab">
             Salas padrão
           </button>
-          <button type="button" aria-disabled="true">
+          <button type="button" aria-disabled="true" className="homeRoomTab">
             Salas criadas
           </button>
         </div>

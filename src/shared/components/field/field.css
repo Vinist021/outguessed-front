@@ -8,10 +8,10 @@
 
 .uiInputWrap {
   position: relative;
-  color: var(--muted);
+  color: var(--color-muted);
 }
 
-.uiInputWrap > svg {
+.uiInputWrap > .uiIcon {
   position: absolute;
   top: 50%;
   left: 13px;
@@ -27,14 +27,14 @@
   min-width: 0;
   padding: 10px 12px 10px 40px;
   border: 1px solid #766c86;
-  border-radius: 8px;
-  background: var(--surface);
-  color: var(--text);
-  caret-color: var(--cyan);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  color: var(--color-text);
+  caret-color: var(--color-cyan);
   font-size: 14px;
   transition:
-    border-color 150ms ease-out,
-    background-color 150ms ease-out;
+    border-color var(--transition-interaction),
+    background-color var(--transition-interaction);
 }
 
 .uiInput::placeholder {
@@ -43,13 +43,13 @@
 }
 
 .uiInput:focus {
-  border-color: var(--cyan);
+  border-color: var(--color-cyan);
   background: #191623;
 }
 
 .uiInput:-webkit-autofill {
-  -webkit-text-fill-color: var(--text);
-  box-shadow: 0 0 0 100px var(--surface) inset;
+  -webkit-text-fill-color: var(--color-text);
+  box-shadow: 0 0 0 100px var(--color-surface) inset;
 }
 
 @media (hover: hover) {

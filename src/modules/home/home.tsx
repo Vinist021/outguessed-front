@@ -11,17 +11,17 @@ function Home() {
       <header className="relative">
         <div className="homeContainer homeBrandArea">
           <h1 className="homeWordmark" aria-label="Outguessed">
-            <span>Out</span>
-            <span>guess</span>
-            <span>ed</span>
+            <span className="homeWordmarkOut">Out</span>
+            <span className="homeWordmarkGuess">guess</span>
+            <span className="homeWordmarkEd">ed</span>
             <span className="homeBrandSpark" aria-hidden="true">
               <Icon name="spark" />
             </span>
           </h1>
           <p className="homeTagline">
-            <span>Pense.</span>
-            <span>Arrisque.</span>
-            <span>Surpreenda.</span>
+            <span className="homeTaglinePart">Pense.</span>
+            <span className="homeTaglinePart">Arrisque.</span>
+            <span className="homeTaglinePart">Surpreenda.</span>
           </p>
         </div>
         <nav className="homeNavbar" aria-label="Navegação principal">
@@ -30,15 +30,15 @@ function Home() {
               <Icon name="play" />
               Início
             </span>
-            <button type="button" aria-disabled="true" className="homeNavItem">
+            <button type="button" aria-disabled="true" className="homeNavItem homeNavButton">
               <Icon name="book" />
               Baralhos
             </button>
-            <button type="button" aria-disabled="true" className="homeNavItem">
+            <button type="button" aria-disabled="true" className="homeNavItem homeNavButton">
               <Icon name="bulb" />
               Como jogar
             </button>
-            <button type="button" aria-disabled="true" className="homeNavItem">
+            <button type="button" aria-disabled="true" className="homeNavItem homeNavButton">
               <Icon name="info" />
               Sobre
             </button>
@@ -55,7 +55,7 @@ function Home() {
       </main>
 
       <footer className="homeContainer homeFooter relative flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
-        <span className="inline-flex items-center gap-2">
+        <span className="homeFooterBrand inline-flex items-center gap-2">
           <Icon name="spark" />
           Outguessed
         </span>
