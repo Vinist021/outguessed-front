@@ -1,12 +1,12 @@
 import Field from "@/shared/components/field/field";
 import Icon from "@/shared/components/icons/icons";
 import Button from "@/shared/components/button/button";
-import "../panel.css";
+import Panel from "../panel/panel";
 import "./loginPanel.css";
 
 export default function LoginPanel() {
   return (
-    <section className="homePanel homeLoginPanel" aria-labelledby="login-title">
+    <Panel className="homeLoginPanel" aria-labelledby="login-title">
       <h2 id="login-title" className="homePanelTitle homeLoginTitle">
         <Icon name="user" />
         Seu cantinho<span className="homeTitleDot homeLoginDot">.</span>
@@ -43,6 +43,6 @@ export default function LoginPanel() {
         <Icon name="spark" />
         Você também pode jogar como convidado.
       </p>
-    </section>
+    </Panel>
   );
 }

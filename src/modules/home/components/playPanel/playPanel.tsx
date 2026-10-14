@@ -2,12 +2,12 @@ import Field from "@/shared/components/field/field";
 import Icon from "@/shared/components/icons/icons";
 import RoomList from "@/modules/home/components/roomList/roomList";
 import Button from "@/shared/components/button/button";
-import "../panel.css";
+import Panel from "../panel/panel";
 import "./playPanel.css";
 
 export default function PlayPanel() {
   return (
-    <section className="homePanel homePlayPanel" aria-labelledby="play-title">
+    <Panel className="homePlayPanel" aria-labelledby="play-title">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <h2 id="play-title" className="homePanelTitle">
           <Icon name="play" />
@@ -78,6 +78,6 @@ export default function PlayPanel() {
           <Icon name="arrow" />
         </Button>
       </div>
-    </section>
+    </Panel>
   );
 }

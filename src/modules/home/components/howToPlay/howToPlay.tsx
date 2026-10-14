@@ -1,9 +1,9 @@
-import "../panel.css";
+import Panel from "../panel/panel";
 import "./howToPlay.css";
 
 export default function HowToPlay() {
   return (
-    <section className="homePanel homeHowPanel" aria-labelledby="how-title">
+    <Panel className="homeHowPanel" aria-labelledby="how-title">
       <div className="flex items-center justify-between gap-3">
         <h2 id="how-title" className="homeHowTitle">
           Um bom palpite
@@ -41,6 +41,6 @@ export default function HowToPlay() {
           </p>
         </li>
       </ol>
-    </section>
+    </Panel>
   );
 }
