@@ -1,0 +1,6 @@
+.uiIcon {
+  width: var(--ui-icon-size, 20px);
+  height: var(--ui-icon-size, 20px);
+  flex-shrink: 0;
+  color: var(--ui-icon-color, currentColor);
+}

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: "Itim";
+  font-family: Itim;
   src: url("../assets/fonts/Itim-Regular.ttf") format("truetype");
   font-style: normal;
   font-weight: 400;
@@ -22,14 +22,49 @@
 }
 
 :root {
+  --color-surface-page: var(--color-ground);
+  --color-surface-panel: var(--color-panel);
+  --color-surface-control: var(--color-surface);
+  --color-surface-control-focus: #191623;
+  --color-text-primary: var(--color-text);
+  --color-text-secondary: var(--color-muted);
+  --color-text-label: #d8d0e3;
+  --color-text-placeholder: #b4a9c4;
+  --color-border-default: var(--color-line);
+  --color-border-control: #766c86;
+  --color-border-control-hover: #b6a6c8;
+  --color-focus-ring: var(--color-cyan);
+  --color-selection-background: var(--color-cyan);
+  --color-selection-foreground: var(--color-ground);
+  --color-action-primary-background: var(--color-mint);
+  --color-action-primary-border: var(--color-mint);
+  --color-action-primary-foreground: #192b21;
+  --color-action-primary-hover-background: #d4f6d8;
+  --color-action-primary-hover-border: #d4f6d8;
+  --color-action-secondary-background: #342d43;
+  --color-action-secondary-border: #7a6c89;
+  --color-action-secondary-foreground: #e5dcec;
+  --color-action-secondary-icon: #c9b7db;
+  --color-action-secondary-hover-background: #423650;
+  --color-action-secondary-hover-border: #d4c2e6;
+  --color-action-outline-border: #b2a0c2;
+  --color-action-outline-foreground: var(--color-pink);
+  --color-action-outline-hover-background: #423650;
+  --color-action-outline-hover-border: #d4c2e6;
+  --color-action-accent-background: var(--color-pink);
+  --color-action-accent-border: var(--color-pink);
+  --color-action-accent-foreground: #342036;
+  --color-action-accent-hover-background: #f8cff1;
+  --color-action-accent-hover-border: #f8cff1;
   --font-hand: "Itim", cursive;
   --radius-control: 8px;
   --transition-interaction: 150ms ease-out;
+
   font-family: system-ui, "Segoe UI", Roboto, sans-serif;
   color-scheme: light;
   background: #fff;
   font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

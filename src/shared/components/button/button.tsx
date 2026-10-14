@@ -1,11 +1,11 @@
 import type { ComponentPropsWithoutRef } from "react";
 
-import "./button.css";
+import styles from "./button.module.css";
 
 const variantClasses = {
-  primary: "uiButtonPrimary",
-  secondary: "uiButtonSecondary",
-  outline: "uiButtonOutline",
+  primary: styles.uiButtonPrimary,
+  secondary: styles.uiButtonSecondary,
+  outline: styles.uiButtonOutline,
 };
 
 export default function Button({
@@ -19,7 +19,7 @@ export default function Button({
       {...props}
       type="button"
       aria-disabled="true"
-      className={`uiButton ${variantClasses[variant]} ${className}`}
+      className={[styles.uiButton, variantClasses[variant], className].filter(Boolean).join(" ")}
     >
       {children}
     </button>

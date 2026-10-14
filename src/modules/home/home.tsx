@@ -2,43 +2,57 @@ import Icon from "@/shared/components/icons/icons";
 import HowToPlay from "@/modules/home/components/howToPlay/howToPlay";
 import LoginPanel from "@/modules/home/components/loginPanel/loginPanel";
 import PlayPanel from "@/modules/home/components/playPanel/playPanel";
-import "./home.css";
+import styles from "./home.module.css";
 
 function Home() {
   return (
-    <div className="home">
-      <div className="homeConfetti" aria-hidden="true" />
+    <div className={styles.home}>
+      <div className={styles.homeConfetti} aria-hidden="true" />
       <header className="relative">
-        <div className="homeContainer homeBrandArea">
-          <h1 className="homeWordmark" aria-label="Outguessed">
-            <span className="homeWordmarkOut">Out</span>
-            <span className="homeWordmarkGuess">guess</span>
-            <span className="homeWordmarkEd">ed</span>
-            <span className="homeBrandSpark" aria-hidden="true">
+        <div className={`${styles.homeContainer} ${styles.homeBrandArea}`}>
+          <h1 className={styles.homeWordmark} aria-label="Outguessed">
+            <span className={styles.homeWordmarkOut}>Out</span>
+            <span className={styles.homeWordmarkGuess}>guess</span>
+            <span className={styles.homeWordmarkEd}>ed</span>
+            <span className={styles.homeBrandSpark} aria-hidden="true">
               <Icon name="spark" />
             </span>
           </h1>
-          <p className="homeTagline">
-            <span className="homeTaglinePart">Pense.</span>
-            <span className="homeTaglinePart">Arrisque.</span>
-            <span className="homeTaglinePart">Surpreenda.</span>
+          <p className={styles.homeTagline}>
+            <span className={styles.homeTaglinePart}>Pense.</span>
+            <span className={styles.homeTaglinePart}>Arrisque.</span>
+            <span className={styles.homeTaglinePart}>Surpreenda.</span>
           </p>
         </div>
-        <nav className="homeNavbar" aria-label="Navegação principal">
-          <div className="homeContainer flex flex-wrap items-center gap-x-2 gap-y-1 sm:gap-x-4">
-            <span className="homeNavItem homeNavActive" aria-current="page">
+        <nav className={styles.homeNavbar} aria-label="Navegação principal">
+          <div
+            className={`${styles.homeContainer} flex flex-wrap items-center gap-x-2 gap-y-1 sm:gap-x-4`}
+          >
+            <span className={`${styles.homeNavItem} ${styles.homeNavActive}`} aria-current="page">
               <Icon name="play" />
               Início
             </span>
-            <button type="button" aria-disabled="true" className="homeNavItem homeNavButton">
+            <button
+              type="button"
+              aria-disabled="true"
+              className={`${styles.homeNavItem} ${styles.homeNavButton}`}
+            >
               <Icon name="book" />
               Baralhos
             </button>
-            <button type="button" aria-disabled="true" className="homeNavItem homeNavButton">
+            <button
+              type="button"
+              aria-disabled="true"
+              className={`${styles.homeNavItem} ${styles.homeNavButton}`}
+            >
               <Icon name="bulb" />
               Como jogar
             </button>
-            <button type="button" aria-disabled="true" className="homeNavItem homeNavButton">
+            <button
+              type="button"
+              aria-disabled="true"
+              className={`${styles.homeNavItem} ${styles.homeNavButton}`}
+            >
               <Icon name="info" />
               Sobre
             </button>
@@ -46,7 +60,9 @@ function Home() {
         </nav>
       </header>
 
-      <main className="homeContainer homeMain relative grid items-start gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,3fr)]">
+      <main
+        className={`${styles.homeContainer} ${styles.homeMain} relative grid items-start gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,3fr)]`}
+      >
         <PlayPanel />
         <aside className="grid min-w-0 gap-6" aria-label="Sua conta e como jogar">
           <LoginPanel />
@@ -54,8 +70,10 @@ function Home() {
         </aside>
       </main>
 
-      <footer className="homeContainer homeFooter relative flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
-        <span className="homeFooterBrand inline-flex items-center gap-2">
+      <footer
+        className={`${styles.homeContainer} ${styles.homeFooter} relative flex flex-wrap items-center justify-between gap-x-6 gap-y-2`}
+      >
+        <span className={`${styles.homeFooterBrand} inline-flex items-center gap-2`}>
           <Icon name="spark" />
           Outguessed
         </span>

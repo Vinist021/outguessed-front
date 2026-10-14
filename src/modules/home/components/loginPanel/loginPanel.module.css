@@ -1,0 +1,65 @@
+.homeLoginTitle {
+  --ui-icon-color: var(--color-pink);
+
+  gap: 9px;
+  font-size: 30px;
+}
+
+.homeLoginDot {
+  color: var(--color-pink);
+}
+
+.homePanelDescription {
+  margin-top: 8px;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+
+.homeLoginButton {
+  --ui-button-background: var(--color-action-accent-background);
+  --ui-button-border-color: var(--color-action-accent-border);
+  --ui-button-color: var(--color-action-accent-foreground);
+  --ui-button-hover-background: var(--color-action-accent-hover-background);
+  --ui-button-hover-border-color: var(--color-action-accent-hover-border);
+  --ui-icon-size: 17px;
+}
+
+.homeLoginAction {
+  padding-inline: 8px;
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.homeGuestNote {
+  --ui-icon-color: var(--color-yellow);
+  --ui-icon-size: 14px;
+
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 18px;
+  color: var(--color-text-secondary);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.homeGuestIcon {
+  margin-top: 2px;
+}
+
+@media (width <= 1279px) {
+  .homeLoginTitle {
+    font-size: 27px;
+  }
+}
+
+@media (width <= 767px) {
+  .homeLoginTitle {
+    font-size: 30px;
+  }
+
+  .homeGuestNote {
+    font-size: 13px;
+  }
+}
