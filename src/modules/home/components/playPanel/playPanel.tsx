@@ -2,7 +2,7 @@ import Field from "@/shared/components/field/field";
 import Icon from "@/shared/components/icons/icons";
 import RoomList from "@/modules/home/components/roomList/roomList";
 import Button from "@/shared/components/button/button";
-import Panel from "../panel/panel";
+import Panel from "@/shared/components/panel/panel";
 import "./playPanel.css";
 
 export default function PlayPanel() {

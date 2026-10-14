@@ -1,4 +1,4 @@
-import Panel from "../panel/panel";
+import Panel from "@/shared/components/panel/panel";
 import "./howToPlay.css";
 
 export default function HowToPlay() {

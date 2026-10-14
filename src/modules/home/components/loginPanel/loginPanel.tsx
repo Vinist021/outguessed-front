@@ -1,7 +1,7 @@
 import Field from "@/shared/components/field/field";
 import Icon from "@/shared/components/icons/icons";
 import Button from "@/shared/components/button/button";
-import Panel from "../panel/panel";
+import Panel from "@/shared/components/panel/panel";
 import "./loginPanel.css";
 
 export default function LoginPanel() {
