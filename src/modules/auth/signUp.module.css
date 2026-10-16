@@ -97,6 +97,28 @@
   }
 }
 
+@media (width >= 768px) {
+  .authMain {
+    max-width: 560px;
+    padding: 52px 24px;
+  }
+
+  .authPanel {
+    padding: 40px 48px;
+  }
+}
+
+@media (width >= 1280px) {
+  .authMain {
+    max-width: 640px;
+    padding-block: 64px;
+  }
+
+  .authPanel {
+    padding: 32px 40px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .authPage *,
   .authPage *::before,
