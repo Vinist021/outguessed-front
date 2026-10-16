@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import Field from "@/shared/components/field/field";
 import Icon from "@/shared/components/icons/icons";
 import Button from "@/shared/components/button/button";
@@ -6,6 +7,7 @@ import homeStyles from "@/modules/home/home.module.css";
 import styles from "./loginPanel.module.css";
 
 export default function LoginPanel() {
+  const navigate = useNavigate();
   return (
     <Panel className={homeStyles.homeLoginPanel} aria-labelledby="login-title">
       <h2 id="login-title" className={`${homeStyles.homePanelTitle} ${styles.homeLoginTitle}`}>
@@ -33,11 +35,19 @@ export default function LoginPanel() {
         />
       </div>
       <div className="mt-6 grid grid-cols-2 gap-3">
-        <Button variant="primary" className={`${styles.homeLoginAction} ${styles.homeLoginButton}`}>
+        <Button
+          aria-disabled="true"
+          variant="primary"
+          className={`${styles.homeLoginAction} ${styles.homeLoginButton}`}
+        >
           Entrar
           <Icon name="arrow" />
         </Button>
-        <Button variant="outline" className={styles.homeLoginAction}>
+        <Button
+          variant="outline"
+          className={styles.homeLoginAction}
+          onClick={() => void navigate("/signup")}
+        >
           Criar conta
         </Button>
       </div>

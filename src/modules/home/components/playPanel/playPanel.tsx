@@ -65,20 +65,20 @@ export default function PlayPanel() {
 
       <div className="mt-6 flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
         <div className={`${styles.homeSecondaryActions} grid grid-cols-2 gap-2 sm:grid-cols-3`}>
-          <Button>
+          <Button aria-disabled="true">
             <Icon name="info" />
             Info da sala
           </Button>
-          <Button>
+          <Button aria-disabled="true">
             <Icon name="bulb" />
             Praticar
           </Button>
-          <Button className={styles.homeCreateRoom}>
+          <Button aria-disabled="true" className={styles.homeCreateRoom}>
             <Icon name="plus" />
             Criar sala
           </Button>
         </div>
-        <Button variant="primary" className={styles.homePlayButton}>
+        <Button aria-disabled="true" variant="primary" className={styles.homePlayButton}>
           <span>Jogar</span>
           <Icon name="arrow" />
         </Button>

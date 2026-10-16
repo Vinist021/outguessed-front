@@ -55,39 +55,6 @@
   padding-block: 28px 25px;
 }
 
-.homeWordmark {
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  margin: 0;
-  font-family: var(--font-hand);
-  font-size: clamp(3.3rem, 6.3vw, 5.75rem);
-  font-weight: 400;
-  letter-spacing: -0.035em;
-  line-height: 1.08;
-}
-
-.homeWordmarkOut {
-  color: var(--color-pink);
-}
-
-.homeWordmarkGuess {
-  color: var(--color-cyan);
-}
-
-.homeWordmarkEd {
-  color: var(--color-yellow);
-}
-
-.homeBrandSpark {
-  --ui-icon-color: var(--color-mint);
-  --ui-icon-size: 24px;
-
-  align-self: start;
-  margin: 8px 0 0 8px;
-  transform: rotate(12deg);
-}
-
 .homeTagline {
   display: flex;
   gap: 17px;
@@ -190,12 +157,6 @@
 
   .homeBrandArea {
     padding-block: 25px 22px;
-  }
-
-  .homeBrandSpark {
-    --ui-icon-size: 18px;
-
-    margin: 4px 0 0 5px;
   }
 
   .homeTagline {

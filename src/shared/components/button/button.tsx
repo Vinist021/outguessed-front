@@ -12,13 +12,13 @@ export default function Button({
   children,
   variant = "secondary",
   className = "",
+  type = "button",
   ...props
 }: ComponentPropsWithoutRef<"button"> & { variant?: "primary" | "secondary" | "outline" }) {
   return (
     <button
       {...props}
-      type="button"
-      aria-disabled="true"
+      type={type}
       className={[styles.uiButton, variantClasses[variant], className].filter(Boolean).join(" ")}
     >
       {children}

@@ -54,15 +54,22 @@
   --ui-button-hover-border-color: var(--color-action-outline-hover-border);
 }
 
+.uiButton:disabled {
+  border-color: var(--color-border-default);
+  background: var(--color-surface-control);
+  color: var(--color-text-secondary);
+  cursor: not-allowed;
+}
+
 @media (hover: hover) {
-  .uiButton:hover {
+  .uiButton:hover:not(:disabled) {
     border-color: var(--ui-button-hover-border-color);
     background: var(--ui-button-hover-background);
     color: var(--ui-button-hover-color);
   }
 }
 
-.uiButton:active {
+.uiButton:active:not(:disabled) {
   transform: translateY(1px);
 }
 

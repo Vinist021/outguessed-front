@@ -1,0 +1,101 @@
+.authPage {
+  background: var(--color-surface-page);
+  color: var(--color-text-primary);
+  color-scheme: dark;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.authPage ::selection {
+  background: var(--color-selection-background);
+  color: var(--color-selection-foreground);
+}
+
+.authPage :is(a, button, input):focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 4px;
+}
+
+.authHeader {
+  padding: 28px 16px 0;
+}
+
+.authBrandLink {
+  border-radius: var(--radius-control);
+  text-decoration: none;
+}
+
+.authMain {
+  max-width: 392px;
+  margin-inline: auto;
+  padding: 40px 16px;
+}
+
+.authPanel {
+  padding: 28px 24px;
+}
+
+.authTitle {
+  --ui-icon-color: var(--color-pink);
+  --ui-icon-size: 25px;
+
+  font-family: var(--font-hand);
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.authNotice {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  text-align: center;
+}
+
+.authLink,
+.authPasswordToggle {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: var(--color-pink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.authPasswordToggle {
+  padding-inline: 2px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.authSignIn,
+.authFooter {
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.authFooter {
+  padding: 0 16px 24px;
+  font-size: 12px;
+}
+
+@media (hover: hover) {
+  .authLink:hover,
+  .authPasswordToggle:hover {
+    color: var(--color-text-primary);
+  }
+}
+
+@media (width <= 767px) {
+  .authPanel {
+    padding: 24px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .authPage *,
+  .authPage *::before,
+  .authPage *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

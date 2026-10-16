@@ -1,4 +1,5 @@
 import Icon from "@/shared/components/icons/icons";
+import Brand from "@/shared/components/brand/brand";
 import HowToPlay from "@/modules/home/components/howToPlay/howToPlay";
 import LoginPanel from "@/modules/home/components/loginPanel/loginPanel";
 import PlayPanel from "@/modules/home/components/playPanel/playPanel";
@@ -10,14 +11,7 @@ function Home() {
       <div className={styles.homeConfetti} aria-hidden="true" />
       <header className="relative">
         <div className={`${styles.homeContainer} ${styles.homeBrandArea}`}>
-          <h1 className={styles.homeWordmark} aria-label="Outguessed">
-            <span className={styles.homeWordmarkOut}>Out</span>
-            <span className={styles.homeWordmarkGuess}>guess</span>
-            <span className={styles.homeWordmarkEd}>ed</span>
-            <span className={styles.homeBrandSpark} aria-hidden="true">
-              <Icon name="spark" />
-            </span>
-          </h1>
+          <Brand as="h1" />
           <p className={styles.homeTagline}>
             <span className={styles.homeTaglinePart}>Pense.</span>
             <span className={styles.homeTaglinePart}>Arrisque.</span>
