@@ -28,7 +28,7 @@
 .authMain {
   max-width: 392px;
   margin-inline: auto;
-  padding: 40px 16px;
+  padding: 16px 16px 40px;
 }
 
 .authPanel {
@@ -100,7 +100,7 @@
 @media (width >= 768px) {
   .authMain {
     max-width: 560px;
-    padding: 52px 24px;
+    padding: 20px 24px 52px;
   }
 
   .authPanel {
@@ -111,7 +111,7 @@
 @media (width >= 1280px) {
   .authMain {
     max-width: 640px;
-    padding-block: 64px;
+    padding-block: 24px 64px;
   }
 
   .authPanel {

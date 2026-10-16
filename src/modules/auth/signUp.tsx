@@ -12,7 +12,7 @@ export default function SignUp() {
 
   return (
     <div className={`${styles.authPage} flex min-h-svh flex-col`}>
-      <header className={`${styles.authHeader} flex flex-col items-center gap-2`}>
+      <header className={`${styles.authHeader} mt-auto flex flex-col items-center gap-2`}>
         <Link to="/" className={styles.authBrandLink} aria-label="Outguessed — início">
           <Brand />
         </Link>
@@ -21,7 +21,7 @@ export default function SignUp() {
         </Link>
       </header>
 
-      <main className={`${styles.authMain} grid w-full flex-1 content-center gap-6`}>
+      <main className={`${styles.authMain} grid w-full gap-6`}>
         <Panel className={styles.authPanel} aria-labelledby="signup-title">
           <h1
             id="signup-title"
@@ -92,7 +92,9 @@ export default function SignUp() {
         </p>
       </main>
 
-      <footer className={styles.authFooter}>Perguntas, palpites e boas partidas.</footer>
+      <footer className={`${styles.authFooter} mt-auto`}>
+        Perguntas, palpites e boas partidas.
+      </footer>
     </div>
   );
 }
