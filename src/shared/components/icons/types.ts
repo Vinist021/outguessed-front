@@ -1,5 +1,6 @@
 export type IconName =
   | "arrow"
+  | "arrowUturnLeft"
   | "book"
   | "bulb"
   | "eye"

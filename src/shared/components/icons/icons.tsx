@@ -5,6 +5,7 @@ import styles from "./icons.module.css";
 export default function Icon({ name, className = "" }: { name: IconName; className?: string }) {
   const paths: Record<IconName, ReactNode> = {
     arrow: <path d="M5 12h14m-6-6 6 6-6 6" />,
+    arrowUturnLeft: <path d="M9 14 4 9l5-5M4 9h10.5a5.5 5.5 0 0 1 0 11H11" />,
     book: (
       <>
         <path d="M12 5v15M3 4.5c3.5-1 6.5-.5 9 1.5 2.5-2 5.5-2.5 9-1.5V19c-3.5-1-6.5-.5-9 1.5C9.5 18.5 6.5 18 3 19Z" />

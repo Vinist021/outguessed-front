@@ -12,24 +12,30 @@ export default function SignUp() {
 
   return (
     <div className={`${styles.authPage} flex min-h-svh flex-col`}>
-      <header className={`${styles.authHeader} mt-auto flex flex-col items-center gap-2`}>
+      <header className={`${styles.authHeader} mt-auto flex flex-col items-center`}>
         <Link to="/" className={styles.authBrandLink} aria-label="Outguessed — início">
           <Brand />
-        </Link>
-        <Link to="/" className={styles.authLink}>
-          Voltar ao início
         </Link>
       </header>
 
       <main className={`${styles.authMain} grid w-full gap-6`}>
         <Panel className={styles.authPanel} aria-labelledby="signup-title">
-          <h1
-            id="signup-title"
-            className={`${styles.authTitle} flex items-center justify-center gap-2`}
-          >
-            <Icon name="user" />
-            Criar conta
-          </h1>
+          <div className="grid grid-cols-1 items-center sm:grid-cols-[44px_minmax(0,1fr)_44px]">
+            <Link
+              to="/"
+              className={`${styles.authBackLink} col-start-1 row-start-1`}
+              aria-label="Voltar ao início"
+            >
+              <Icon name="arrowUturnLeft" />
+            </Link>
+            <h1
+              id="signup-title"
+              className={`${styles.authTitle} col-start-1 row-start-2 mt-2 flex items-center justify-center gap-2 sm:col-start-2 sm:row-start-1 sm:mt-0`}
+            >
+              <Icon name="user" />
+              Criar conta
+            </h1>
+          </div>
           <form
             className="mt-6 grid gap-5"
             aria-labelledby="signup-title"
