@@ -51,8 +51,7 @@
   text-align: center;
 }
 
-.authLink,
-.authPasswordToggle {
+.authLink {
   display: inline-flex;
   min-height: 44px;
   align-items: center;
@@ -62,8 +61,12 @@
 }
 
 .authPasswordToggle {
-  padding-inline: 2px;
-  font-size: 13px;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: var(--radius-control);
+  color: var(--color-text-secondary);
   cursor: pointer;
 }
 
@@ -79,9 +82,12 @@
 }
 
 @media (hover: hover) {
-  .authLink:hover,
-  .authPasswordToggle:hover {
+  .authLink:hover {
     color: var(--color-text-primary);
+  }
+
+  .authPasswordToggle:hover {
+    color: var(--color-pink);
   }
 }
 

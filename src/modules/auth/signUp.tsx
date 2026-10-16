@@ -48,26 +48,27 @@ export default function SignUp() {
               spellCheck={false}
               required
             />
-            <div>
-              <Field
-                id="signup-password"
-                name="password"
-                label="Senha"
-                icon="lock"
-                type={passwordVisible ? "text" : "password"}
-                placeholder="Sua senha"
-                autoComplete="new-password"
-                required
-              />
-              <button
-                type="button"
-                className={`${styles.authPasswordToggle} mt-1`}
-                aria-controls="signup-password"
-                onClick={() => setPasswordVisible((visible) => !visible)}
-              >
-                {passwordVisible ? "Ocultar senha" : "Mostrar senha"}
-              </button>
-            </div>
+            <Field
+              id="signup-password"
+              name="password"
+              label="Senha"
+              icon="lock"
+              type={passwordVisible ? "text" : "password"}
+              placeholder="Sua senha"
+              autoComplete="new-password"
+              required
+              endAction={
+                <button
+                  type="button"
+                  className={styles.authPasswordToggle}
+                  aria-label={passwordVisible ? "Ocultar senha" : "Mostrar senha"}
+                  aria-controls="signup-password"
+                  onClick={() => setPasswordVisible((visible) => !visible)}
+                >
+                  <Icon name={passwordVisible ? "eye" : "eyeOff"} />
+                </button>
+              }
+            />
             <div className="grid gap-3">
               <p id="signup-unavailable" className={styles.authNotice}>
                 O cadastro ainda não está disponível.
