@@ -1,5 +1,6 @@
 import Icon from "@/shared/components/icons/icons";
 import Brand from "@/shared/components/brand/brand";
+import HomeConfetti from "@/modules/home/components/homeConfetti/homeConfetti";
 import HowToPlay from "@/modules/home/components/howToPlay/howToPlay";
 import LoginPanel from "@/modules/home/components/loginPanel/loginPanel";
 import PlayPanel from "@/modules/home/components/playPanel/playPanel";
@@ -8,7 +9,7 @@ import styles from "./home.module.css";
 function Home() {
   return (
     <div className={styles.home}>
-      <div className={styles.homeConfetti} aria-hidden="true" />
+      <HomeConfetti />
       <header className="relative">
         <div className={`${styles.homeContainer} ${styles.homeBrandArea}`}>
           <Brand as="h1" />

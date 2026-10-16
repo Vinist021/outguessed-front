@@ -29,28 +29,6 @@
   margin-inline: auto;
 }
 
-.homeConfetti {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    radial-gradient(circle at 4% 8%, #f3b5e844 0 2px, transparent 3px),
-    radial-gradient(circle at 39% 4%, #a3edf13d 0 2px, transparent 3px),
-    radial-gradient(circle at 69% 12%, #f5eea360 0 3px, transparent 4px),
-    radial-gradient(circle at 86% 5%, #f3b5e840 0 3px, transparent 4px),
-    radial-gradient(circle at 95% 19%, #a3edf152 0 2px, transparent 3px),
-    radial-gradient(circle at 53% 15%, #bce9c133 0 3px, transparent 4px),
-    radial-gradient(circle at 80% 22%, #f3b5e83d 0 2px, transparent 3px),
-    radial-gradient(circle at 2% 41%, #bce9c140 0 2px, transparent 3px),
-    radial-gradient(circle at 98% 56%, #f3b5e855 0 3px, transparent 4px),
-    radial-gradient(circle at 1% 72%, #f5eea355 0 2px, transparent 3px),
-    radial-gradient(circle at 33% 92%, #a3edf133 0 2px, transparent 3px),
-    radial-gradient(circle at 93% 88%, #f5eea333 0 3px, transparent 4px),
-    radial-gradient(circle at 62% 96%, #f3b5e840 0 2px, transparent 3px);
-  background-size: 100% 1020px;
-}
-
 .homeBrandArea {
   padding-block: 28px 25px;
 }
