@@ -1,0 +1,180 @@
+.home {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  overflow: clip;
+  background: var(--color-surface-page);
+  color: var(--color-text-primary);
+  color-scheme: dark;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.home ::selection {
+  background: var(--color-selection-background);
+  color: var(--color-selection-foreground);
+}
+
+.home :is(button, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 4px;
+}
+
+.home button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.homeContainer {
+  width: min(100% - 80px, 1440px);
+  margin-inline: auto;
+}
+
+.homeBrandArea {
+  padding-block: 28px 25px;
+}
+
+.homeTagline {
+  display: flex;
+  gap: 17px;
+  margin-top: 8px;
+  padding-left: 4px;
+  font-family: var(--font-hand);
+  font-size: 18px;
+  color: var(--color-text-secondary);
+}
+
+.homeTaglinePart {
+  padding-bottom: 2px;
+  border-bottom: 1px dashed var(--color-border-default);
+}
+
+.homeNavbar {
+  padding-block: 8px;
+  border-block: 1px solid #30293f;
+  background: #191424;
+}
+
+.homeNavItem {
+  --ui-icon-size: 18px;
+
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 7px 18px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  color: var(--color-text-secondary);
+  font-family: var(--font-hand);
+  font-size: 21px;
+  transition:
+    color var(--transition-interaction),
+    background-color var(--transition-interaction);
+}
+
+.homeNavActive {
+  border-color: #44545b;
+  background: #a3edf110;
+  color: var(--color-cyan);
+}
+
+.homeMain {
+  padding-top: 32px;
+}
+
+.homePlayPanel,
+.homeLoginPanel,
+.homeHowPanel {
+  padding: 24px;
+}
+
+.homePanelTitle {
+  --ui-icon-color: var(--color-mint);
+  --ui-icon-size: 25px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-hand);
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.homeTitleDot {
+  margin-left: -9px;
+  color: var(--color-mint);
+}
+
+.homeFooter {
+  --ui-icon-color: var(--color-pink);
+  --ui-icon-size: 16px;
+
+  padding-block: 27px 30px;
+  color: #b4a6c5;
+  font-size: 12px;
+}
+
+.homeFooterBrand {
+  font-family: var(--font-hand);
+  font-size: 19px;
+}
+
+@media (hover: hover) {
+  .homeNavButton:hover {
+    background: #2b233b;
+    color: var(--color-text-primary);
+  }
+}
+
+@media (width <= 767px) {
+  .homeContainer {
+    width: calc(100% - 32px);
+  }
+
+  .homeBrandArea {
+    padding-block: 25px 22px;
+  }
+
+  .homeTagline {
+    gap: 15px;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+
+  .homeNavItem {
+    --ui-icon-size: 16px;
+
+    gap: 7px;
+    padding-inline: 12px;
+    font-size: 18px;
+  }
+
+  .homeMain {
+    padding-top: 24px;
+  }
+
+  .homePlayPanel,
+  .homeLoginPanel,
+  .homeHowPanel {
+    padding: 20px;
+  }
+
+  .homePanelTitle {
+    font-size: 30px;
+  }
+
+  .homeFooter {
+    padding-block: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home *,
+  .home *::before,
+  .home *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

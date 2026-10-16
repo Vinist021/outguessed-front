@@ -1,17 +1,21 @@
+import { useNavigate } from "react-router";
 import Field from "@/shared/components/field/field";
 import Icon from "@/shared/components/icons/icons";
 import Button from "@/shared/components/button/button";
 import Panel from "@/shared/components/panel/panel";
-import "./loginPanel.css";
+import homeStyles from "@/modules/home/home.module.css";
+import styles from "./loginPanel.module.css";
 
 export default function LoginPanel() {
+  const navigate = useNavigate();
   return (
-    <Panel className="homeLoginPanel" aria-labelledby="login-title">
-      <h2 id="login-title" className="homePanelTitle homeLoginTitle">
+    <Panel className={homeStyles.homeLoginPanel} aria-labelledby="login-title">
+      <h2 id="login-title" className={`${homeStyles.homePanelTitle} ${styles.homeLoginTitle}`}>
         <Icon name="user" />
-        Seu cantinho<span className="homeTitleDot homeLoginDot">.</span>
+        Seu cantinho
+        <span className={`${homeStyles.homeTitleDot} ${styles.homeLoginDot}`}>.</span>
       </h2>
-      <p className="homePanelDescription">Entre na sua conta e venha jogar.</p>
+      <p className={styles.homePanelDescription}>Entre na sua conta e venha jogar.</p>
       <div className="mt-5 grid gap-4">
         <Field
           id="email"
@@ -31,16 +35,24 @@ export default function LoginPanel() {
         />
       </div>
       <div className="mt-6 grid grid-cols-2 gap-3">
-        <Button variant="primary" className="homeLoginAction homeLoginButton">
+        <Button
+          aria-disabled="true"
+          variant="primary"
+          className={`${styles.homeLoginAction} ${styles.homeLoginButton}`}
+        >
           Entrar
           <Icon name="arrow" />
         </Button>
-        <Button variant="outline" className="homeLoginAction">
+        <Button
+          variant="outline"
+          className={styles.homeLoginAction}
+          onClick={() => void navigate("/signup")}
+        >
           Criar conta
         </Button>
       </div>
-      <p className="homeGuestNote">
-        <Icon name="spark" />
+      <p className={styles.homeGuestNote}>
+        <Icon name="spark" className={styles.homeGuestIcon} />
         Você também pode jogar como convidado.
       </p>
     </Panel>

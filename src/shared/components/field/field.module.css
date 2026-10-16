@@ -1,17 +1,17 @@
 .uiFieldLabel {
   display: block;
   margin-bottom: 8px;
-  color: #d8d0e3;
+  color: var(--color-text-label);
   font-size: 12px;
   font-weight: 500;
 }
 
 .uiInputWrap {
   position: relative;
-  color: var(--color-muted);
+  color: var(--color-text-secondary);
 }
 
-.uiInputWrap > .uiIcon {
+.uiInputIcon {
   position: absolute;
   top: 50%;
   left: 13px;
@@ -26,10 +26,10 @@
   height: 46px;
   min-width: 0;
   padding: 10px 12px 10px 40px;
-  border: 1px solid #766c86;
+  border: 1px solid var(--color-border-control);
   border-radius: var(--radius-control);
-  background: var(--color-surface);
-  color: var(--color-text);
+  background: var(--color-surface-control);
+  color: var(--color-text-primary);
   caret-color: var(--color-cyan);
   font-size: 14px;
   transition:
@@ -37,28 +37,42 @@
     background-color var(--transition-interaction);
 }
 
+.uiInputWithAction {
+  padding-right: 52px;
+}
+
+.uiInputAction {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+}
+
 .uiInput::placeholder {
-  color: #b4a9c4;
+  color: var(--color-text-placeholder);
   opacity: 1;
 }
 
 .uiInput:focus {
-  border-color: var(--color-cyan);
-  background: #191623;
+  border-color: var(--color-focus-ring);
+  background: var(--color-surface-control-focus);
 }
 
 .uiInput:-webkit-autofill {
-  -webkit-text-fill-color: var(--color-text);
-  box-shadow: 0 0 0 100px var(--color-surface) inset;
+  -webkit-text-fill-color: var(--color-text-primary);
+  box-shadow: 0 0 0 100px var(--color-surface-control) inset;
 }
 
 @media (hover: hover) {
   .uiInput:hover:not(:focus) {
-    border-color: #b6a6c8;
+    border-color: var(--color-border-control-hover);
   }
 }
 
-@media (max-width: 767px) {
+@media (width <= 767px) {
   .uiInput {
     font-size: 16px;
   }

@@ -1,0 +1,80 @@
+.uiButton {
+  --ui-button-background: transparent;
+  --ui-button-border-color: transparent;
+  --ui-button-color: inherit;
+  --ui-button-icon-color: currentcolor;
+  --ui-button-hover-background: var(--ui-button-background);
+  --ui-button-hover-border-color: var(--ui-button-border-color);
+  --ui-button-hover-color: var(--ui-button-color);
+  --ui-icon-color: var(--ui-button-icon-color);
+
+  display: inline-flex;
+  min-height: 48px;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid var(--ui-button-border-color);
+  border-radius: var(--radius-control);
+  background: var(--ui-button-background);
+  color: var(--ui-button-color);
+  font-family: var(--font-hand);
+  font-size: 19px;
+  line-height: 1.25;
+  transition:
+    background-color var(--transition-interaction),
+    border-color var(--transition-interaction),
+    color var(--transition-interaction),
+    transform 120ms ease-out;
+}
+
+.uiButtonSecondary {
+  --ui-button-background: var(--color-action-secondary-background);
+  --ui-button-border-color: var(--color-action-secondary-border);
+  --ui-button-color: var(--color-action-secondary-foreground);
+  --ui-button-icon-color: var(--color-action-secondary-icon);
+  --ui-button-hover-background: var(--color-action-secondary-hover-background);
+  --ui-button-hover-border-color: var(--color-action-secondary-hover-border);
+  --ui-icon-size: 17px;
+}
+
+.uiButtonPrimary {
+  --ui-button-background: var(--color-action-primary-background);
+  --ui-button-border-color: var(--color-action-primary-border);
+  --ui-button-color: var(--color-action-primary-foreground);
+  --ui-button-hover-background: var(--color-action-primary-hover-background);
+  --ui-button-hover-border-color: var(--color-action-primary-hover-border);
+}
+
+.uiButtonOutline {
+  --ui-button-border-color: var(--color-action-outline-border);
+  --ui-button-color: var(--color-action-outline-foreground);
+  --ui-button-hover-background: var(--color-action-outline-hover-background);
+  --ui-button-hover-border-color: var(--color-action-outline-hover-border);
+}
+
+.uiButton:disabled {
+  border-color: var(--color-border-default);
+  background: var(--color-surface-control);
+  color: var(--color-text-secondary);
+  cursor: not-allowed;
+}
+
+@media (hover: hover) {
+  .uiButton:hover:not(:disabled) {
+    border-color: var(--ui-button-hover-border-color);
+    background: var(--ui-button-hover-background);
+    color: var(--ui-button-hover-color);
+  }
+}
+
+.uiButton:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .uiButton:active {
+    transform: none;
+  }
+}

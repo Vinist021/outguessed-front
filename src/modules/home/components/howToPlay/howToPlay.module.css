@@ -24,7 +24,7 @@
 .homeHowSubtitle {
   margin-top: 22px;
   margin-bottom: 16px;
-  color: var(--color-muted);
+  color: var(--color-text-secondary);
   font-size: 12px;
   font-weight: 500;
 }
@@ -43,15 +43,15 @@
   font-size: 18px;
 }
 
-.homeHowStep--cyan {
+.homeHowStepCyan {
   --accent: var(--color-cyan);
 }
 
-.homeHowStep--pink {
+.homeHowStepPink {
   --accent: var(--color-pink);
 }
 
-.homeHowStep--yellow {
+.homeHowStepYellow {
   --accent: var(--color-yellow);
 }
 
@@ -65,10 +65,10 @@
 }
 
 .homeHowStepDescription {
-  color: var(--color-muted);
+  color: var(--color-text-secondary);
 }
 
-@media (max-width: 767px) {
+@media (width <= 767px) {
   .homeHowStepText {
     font-size: 13px;
   }

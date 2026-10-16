@@ -1,10 +1,11 @@
 import type { ReactNode } from "react";
 import type { IconName } from "./types";
-import "./icons.css";
+import styles from "./icons.module.css";
 
 export default function Icon({ name, className = "" }: { name: IconName; className?: string }) {
   const paths: Record<IconName, ReactNode> = {
     arrow: <path d="M5 12h14m-6-6 6 6-6 6" />,
+    arrowUturnLeft: <path d="M9 14 4 9l5-5M4 9h10.5a5.5 5.5 0 0 1 0 11H11" />,
     book: (
       <>
         <path d="M12 5v15M3 4.5c3.5-1 6.5-.5 9 1.5 2.5-2 5.5-2.5 9-1.5V19c-3.5-1-6.5-.5-9 1.5C9.5 18.5 6.5 18 3 19Z" />
@@ -14,6 +15,18 @@ export default function Icon({ name, className = "" }: { name: IconName; classNa
       <>
         <path d="M9 18h6m-5 3h4M8 14a6 6 0 1 1 8 0c-1 .9-1 2-1 2H9s0-1.1-1-2Z" />
         <path d="M12 2V1M3.5 5.5l-1-1m18 1 1-1" />
+      </>
+    ),
+    eye: (
+      <>
+        <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" />
+        <circle cx="12" cy="12" r="3" />
+      </>
+    ),
+    eyeOff: (
+      <>
+        <path d="M3 3l18 18M10.6 6.1A10.5 10.5 0 0 1 12 6c6.5 0 10 6 10 6a16 16 0 0 1-3.1 3.6M6.1 6.1C3.4 8 2 12 2 12s3.5 6 10 6c1.5 0 2.9-.3 4.2-.8" />
+        <path d="M10 10a3 3 0 0 0 4 4" />
       </>
     ),
     info: (
@@ -63,7 +76,7 @@ export default function Icon({ name, className = "" }: { name: IconName; classNa
 
   return (
     <svg
-      className={`uiIcon ${className}`}
+      className={[styles.uiIcon, className].filter(Boolean).join(" ")}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
