@@ -31,7 +31,7 @@ export default function SignUp() {
             Criar conta
           </h1>
           <form
-            className="mt-6 grid gap-5"
+            className="my-1 grid gap-5"
             aria-labelledby="signup-title"
             aria-describedby="signup-unavailable"
             onSubmit={(event) => event.preventDefault()}
@@ -83,13 +83,14 @@ export default function SignUp() {
               </Button>
             </div>
           </form>
+
+          <p className={styles.authSignIn}>
+            Já tem uma conta?{" "}
+            <Link to="/" className={styles.authLink}>
+              Entrar
+            </Link>
+          </p>
         </Panel>
-        <p className={styles.authSignIn}>
-          Já tem uma conta?{" "}
-          <Link to="/" className={styles.authLink}>
-            Entrar
-          </Link>
-        </p>
       </main>
 
       <footer className={`${styles.authFooter} mt-auto`}>
