@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
-import styles from "./homeConfetti.module.css";
+import styles from "./confetti.module.css";
 
 const TILE_HEIGHT = 1020;
-// Normalized positions, base radii and alpha values for each background tile.
+
 const PARTICLE_SEEDS = [
   [0.04, 0.08, 2, "--color-pink", 0x44 / 255],
   [0.39, 0.04, 2, "--color-cyan", 0x3d / 255],
@@ -33,7 +33,7 @@ type Particle = {
   velocityY: number;
 };
 
-function HomeConfetti() {
+function Confetti() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -67,7 +67,6 @@ function HomeConfetti() {
       particle.velocityY = -(Math.random() * 8 + 2);
       particle.fade = 0;
 
-      // Weight entry edges by incoming speed to keep the distribution even.
       const bottomWeight = width * Math.abs(particle.velocityY);
       const sideWeight = height * Math.abs(particle.velocityX);
       if (Math.random() * (bottomWeight + sideWeight) < bottomWeight) {
@@ -179,7 +178,7 @@ function HomeConfetti() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className={styles.homeConfetti} aria-hidden="true" />;
+  return <canvas ref={canvasRef} className={styles.uiConfetti} aria-hidden="true" />;
 }
 
-export default HomeConfetti;
+export default Confetti;
