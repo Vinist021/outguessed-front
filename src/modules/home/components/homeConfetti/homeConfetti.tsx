@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import styles from "./homeConfetti.module.css";
 
 const TILE_HEIGHT = 1020;
-// Positions, radii and alpha values from the original background gradients.
+// Normalized positions, base radii and alpha values for each background tile.
 const PARTICLE_SEEDS = [
   [0.04, 0.08, 2, "--color-pink", 0x44 / 255],
   [0.39, 0.04, 2, "--color-cyan", 0x3d / 255],
@@ -11,9 +11,12 @@ const PARTICLE_SEEDS = [
   [0.95, 0.19, 2, "--color-cyan", 0x52 / 255],
   [0.53, 0.15, 3, "--color-mint", 0x33 / 255],
   [0.8, 0.22, 2, "--color-pink", 0x3d / 255],
+  [0.14, 0.32, 2, "--color-cyan", 0x40 / 255],
   [0.02, 0.41, 2, "--color-mint", 0x40 / 255],
   [0.98, 0.56, 3, "--color-pink", 0x55 / 255],
+  [0.88, 0.64, 3, "--color-mint", 0x40 / 255],
   [0.01, 0.72, 2, "--color-yellow", 0x55 / 255],
+  [0.2, 0.81, 2, "--color-pink", 0x44 / 255],
   [0.33, 0.92, 2, "--color-cyan", 0x33 / 255],
   [0.93, 0.88, 3, "--color-yellow", 0x33 / 255],
   [0.62, 0.96, 2, "--color-pink", 0x40 / 255],
@@ -138,7 +141,7 @@ function HomeConfetti() {
               : {
                   x: x * width,
                   y: initialY,
-                  radius,
+                  radius: radius * 1.25,
                   color: palette.getPropertyValue(color).trim(),
                   opacity,
                   fade: 1,
