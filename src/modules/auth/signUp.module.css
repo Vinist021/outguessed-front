@@ -1,4 +1,7 @@
 .authPage {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
   background: var(--color-surface-page);
   color: var(--color-text-primary);
   color-scheme: dark;

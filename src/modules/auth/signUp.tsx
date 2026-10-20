@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router";
 import Brand from "@/shared/components/brand/brand";
 import Button from "@/shared/components/button/button";
+import Confetti from "@/shared/components/confetti/confetti";
 import Field from "@/shared/components/field/field";
 import Icon from "@/shared/components/icons/icons";
 import Panel from "@/shared/components/panel/panel";
@@ -12,6 +13,7 @@ export default function SignUp() {
 
   return (
     <div className={`${styles.authPage} flex min-h-svh flex-col`}>
+      <Confetti />
       <header className={`${styles.authHeader} mt-auto flex flex-col items-center`}>
         <Link to="/" className={styles.authBrandLink} aria-label="Outguessed — início">
           <Brand />
