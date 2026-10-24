@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import Brand from "@/shared/components/brand/brand";
 import Button from "@/shared/components/button/button";
@@ -7,22 +6,23 @@ import Field from "@/shared/components/field/field";
 import Icon from "@/shared/components/icons/icons";
 import Panel from "@/shared/components/panel/panel";
 import styles from "./signUp.module.css";
+import useSignUp from "./useSignUp";
 
 export default function SignUp() {
-  const [step, setStep] = useState<1 | 2>(1);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const formRef = useRef<HTMLFormElement>(null);
-  const previousStep = useRef(step);
-
-  useEffect(() => {
-    if (previousStep.current !== step) {
-      formRef.current?.querySelector<HTMLInputElement>("input")?.focus();
-      previousStep.current = step;
-    }
-  }, [step]);
+  const {
+    step,
+    email,
+    password,
+    nickname,
+    passwordVisible,
+    formRef,
+    handleSubmit,
+    handleEmailChange,
+    handlePasswordChange,
+    handleNicknameChange,
+    togglePasswordVisible,
+    goToFirstStep,
+  } = useSignUp();
 
   return (
     <div className={`${styles.authPage} flex min-h-svh flex-col`}>
@@ -44,7 +44,7 @@ export default function SignUp() {
               type="button"
               className={styles.authBackLink}
               aria-label="Voltar para E-mail e Senha"
-              onClick={() => setStep(1)}
+              onClick={goToFirstStep}
             >
               <Icon name="arrowUturnLeft" />
             </button>
@@ -61,10 +61,7 @@ export default function SignUp() {
             className="my-1 grid gap-5"
             aria-labelledby="signup-title"
             aria-describedby={step === 2 ? "signup-unavailable" : undefined}
-            onSubmit={(event) => {
-              event.preventDefault();
-              if (step === 1) setStep(2);
-            }}
+            onSubmit={handleSubmit}
           >
             {step === 1 ? (
               <>
@@ -79,7 +76,7 @@ export default function SignUp() {
                   autoCapitalize="none"
                   spellCheck={false}
                   value={email}
-                  onChange={(event) => setEmail(event.target.value)}
+                  onChange={handleEmailChange}
                   required
                 />
                 <Field
@@ -91,7 +88,7 @@ export default function SignUp() {
                   placeholder="Sua senha"
                   autoComplete="new-password"
                   value={password}
-                  onChange={(event) => setPassword(event.target.value)}
+                  onChange={handlePasswordChange}
                   required
                   endAction={
                     <button
@@ -99,7 +96,7 @@ export default function SignUp() {
                       className={styles.authPasswordToggle}
                       aria-label={passwordVisible ? "Ocultar senha" : "Mostrar senha"}
                       aria-controls="signup-password"
-                      onClick={() => setPasswordVisible((visible) => !visible)}
+                      onClick={togglePasswordVisible}
                     >
                       <Icon name={passwordVisible ? "eye" : "eyeOff"} />
                     </button>
@@ -120,7 +117,7 @@ export default function SignUp() {
                   placeholder="Como te chamam?"
                   autoComplete="nickname"
                   value={nickname}
-                  onChange={(event) => setNickname(event.target.value)}
+                  onChange={handleNicknameChange}
                   required
                 />
                 <div className="grid gap-3">
