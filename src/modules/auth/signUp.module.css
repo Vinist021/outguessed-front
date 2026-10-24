@@ -61,9 +61,17 @@
   place-items: center;
   border-radius: var(--radius-control);
   color: var(--color-pink);
+  cursor: pointer;
   transition:
     background-color var(--transition-interaction),
     color var(--transition-interaction);
+}
+
+.authStep {
+  margin: 6px 0 14px;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  text-align: center;
 }
 
 .authNotice {
