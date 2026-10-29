@@ -43,17 +43,23 @@ export default function useSignUp() {
   }
 
   return {
-    step,
-    email,
-    password,
-    nickname,
-    passwordVisible,
-    formRef,
-    handleSubmit,
-    handleEmailChange,
-    handlePasswordChange,
-    handleNicknameChange,
-    togglePasswordVisible,
-    goToFirstStep,
+    state: {
+      step,
+      email,
+      password,
+      nickname,
+      passwordVisible,
+    },
+    methods: {
+      handleSubmit,
+      handleEmailChange,
+      handlePasswordChange,
+      handleNicknameChange,
+      togglePasswordVisible,
+      goToFirstStep,
+    },
+    refs: {
+      formRef,
+    },
   };
 }

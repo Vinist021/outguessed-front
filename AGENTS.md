@@ -1,7 +1,7 @@
 ## Projeto
 
 Frontend de um jogo multijogador de perguntas e cartas, desenvolvido com React, TypeScript e Vite, com um backend separado.
-O código atual apresenta a Home com componentes e salas ilustrativas. Ainda não há integração HTTP ou WebSocket, autenticação funcional, custom hooks de funcionalidade nem armazenamento centralizado de estado no frontend.
+O código atual apresenta a Home com componentes e salas ilustrativas e a tela de cadastro em duas etapas, coordenada pelo hook `useSignUp`. Ainda não há integração HTTP ou WebSocket, autenticação funcional nem armazenamento centralizado de estado no frontend.
 A organização é por funcionalidades. Quando a integração com o backend for implementada, HTTP atenderá operações com recursos e WebSocket atenderá a partida em tempo real; o backend será a autoridade sobre a partida.
 O código e as configurações existentes, as regras de negócio, os contratos do backend quando existirem e o `AGENTS.md` aplicável mais próximo são as fontes de referência.
 
@@ -32,12 +32,12 @@ Os caminhos abaixo são relativos à pasta que contém `outguessed-front/` e `ou
 
 ## Arquitetura
 
-Composição atual: `src/main.tsx → src/App.tsx → src/shared/routes/router.tsx → src/modules/home/home.tsx`.
+Composição atual: `src/main.tsx → src/App.tsx → src/shared/routes/router.tsx → páginas dos módulos home e auth`.
 
 - `src/main.tsx` monta o React em `StrictMode` e importa os estilos globais; `src/App.tsx` mantém um único `BrowserRouter`.
 - O alias `@/` aponta para `src/`, conforme `vite.config.ts` e `tsconfig.app.json`.
-- `src/shared/routes/router.tsx` centraliza as rotas e importa `Home` diretamente do módulo. A rota `/` renderiza a Home; URLs desconhecidas redirecionam para `/` com substituição do histórico. Use caminhos em inglês e interface em português.
-- `src/modules/` organiza funcionalidades. `home` contém a página, seus componentes em `components/<componente>/` e dados ilustrativos em `mocks/`. `auth`, `boards`, `cards`, `decks` e `match` ainda são diretórios reservados, sem implementação.
+- `src/shared/routes/router.tsx` centraliza as rotas e importa `Home` e `SignUp` diretamente dos módulos. A rota `/` renderiza a Home e `/signup` renderiza o cadastro; URLs desconhecidas redirecionam para `/` com substituição do histórico. Use caminhos em inglês e interface em português.
+- `src/modules/` organiza funcionalidades. `home` contém a página, seus componentes em `components/<componente>/` e dados ilustrativos em `mocks/`. `auth` contém a página de cadastro, seus estilos e o hook `useSignUp`. `boards`, `cards`, `decks` e `match` ainda são diretórios reservados, sem implementação.
 - `src/shared/` reúne ativos, estilos globais, roteamento e componentes de interface. `shared/http` e `shared/realtime` são apenas diretórios reservados. `shared/ui` também não contém implementação.
 - Páginas compõem a interface com componentes locais e compartilhados. Mantenha componentes e dados específicos junto da funcionalidade; reserve `shared/components/` para componentes independentes do domínio. Crie arquivos e APIs públicas de módulo apenas quando necessários; não exija `index.ts` nem uma estrutura plana.
 - O roteador pode importar páginas dos módulos. Evite dependências circulares; módulos não devem depender de `App`, `main.tsx` ou do roteador. Componentes compartilhados novos devem ser independentes dos módulos, inclusive de seus estilos.
@@ -45,6 +45,12 @@ Composição atual: `src/main.tsx → src/App.tsx → src/shared/routes/router.t
 ## Hooks personalizados
 
 Páginas e componentes apresentam a interface, recebem interações do usuário e consomem estado e ações expostos pelos hooks da funcionalidade. Use hooks personalizados como lugar padrão para coordenar estado, efeitos, manipulação de dados e operações da funcionalidade, mesmo quando um hook atender apenas a um componente. Mantenha esses hooks junto da funcionalidade; coloque em `shared/hooks` apenas comportamentos React independentes do domínio que sejam compartilhados.
+
+Os hooks próprios, tanto de funcionalidades quanto de `shared/hooks`, devem retornar um objeto com membros agrupados por responsabilidade: `state` para estados e valores derivados, `methods` para funções e ações, e `refs` para referências expostas ao consumidor. Inclua somente os grupos necessários, sem objetos vazios, e mantenha detalhes internos privados. Não exponha esses membros diretamente na raiz do retorno. Essa convenção não altera os hooks do React ou de bibliotecas.
+
+Nos componentes, desestruture somente os grupos, preservando-os no uso: `const { state, methods, refs } = useSignUp()`, com acessos como `state.email`, `methods.handleSubmit` e `refs.formRef`. Não desestruture os membros internos para recriar um consumo plano. O `useSignUp` é a referência atual desse padrão.
+
+Ao associar uma referência agrupada ao JSX, use `ref={refs?.formRef}`. Na configuração atual do projeto, `ref={refs.formRef}` gera um falso positivo de `react-hooks/refs`; preserve o agrupamento sem desativar a regra.
 
 Estado visual simples e restrito a um componente, como mostrar ou ocultar uma senha, pode permanecer nele. Extraia transformações puras para funções comuns, sem criar hooks para elas. Mantenha operações HTTP e serviços de tempo real em módulos da funcionalidade independentes do React; os hooks podem consumi-los, mas esses módulos não devem depender dos hooks, páginas ou componentes. A API e os componentes não devem depender da página. Não crie camadas ou arquivos sem necessidade concreta.
 
@@ -101,7 +107,7 @@ Mantenha tabuleiro e chat em `match` enquanto estiverem fortemente ligados à pa
 
 ## Autenticação e segurança
 
-O painel de login e a menção a convidados na Home ainda são ilustrativos; não há login, cadastro, logout, restauração de sessão ou proteção de rotas implementados no frontend.
+O painel de login e a menção a convidados na Home ainda são ilustrativos. A rota `/signup` apresenta um formulário em duas etapas (e-mail e senha, depois apelido), com estado local coordenado pelo hook `useSignUp`; a conclusão do cadastro permanece desabilitada, sem integração com o backend. Ainda não há login, cadastro funcional, logout, restauração de sessão ou proteção de rotas implementados no frontend.
 Quando a autenticação for implementada, siga os contratos do backend para sessão, tokens/cookies, convidados e proteção de rotas. Não crie um mecanismo concorrente nem usuários convidados fictícios no cliente.
 As identidades fornecidas pelo backend devem ser a referência para convidados e reconexões.
 Nunca exponha nem registre senhas, tokens, chaves privadas de API, credenciais, segredos do backend ou segredos de assinatura e provedores.

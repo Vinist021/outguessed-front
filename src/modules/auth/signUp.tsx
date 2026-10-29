@@ -9,20 +9,7 @@ import styles from "./signUp.module.css";
 import useSignUp from "./useSignUp";
 
 export default function SignUp() {
-  const {
-    step,
-    email,
-    password,
-    nickname,
-    passwordVisible,
-    formRef,
-    handleSubmit,
-    handleEmailChange,
-    handlePasswordChange,
-    handleNicknameChange,
-    togglePasswordVisible,
-    goToFirstStep,
-  } = useSignUp();
+  const { state, methods, refs } = useSignUp();
 
   return (
     <div className={`${styles.authPage} flex min-h-svh flex-col`}>
@@ -35,7 +22,7 @@ export default function SignUp() {
 
       <main className={`${styles.authMain} grid w-full gap-6`}>
         <Panel className={styles.authPanel} aria-labelledby="signup-title">
-          {step === 1 ? (
+          {state.step === 1 ? (
             <Link to="/" className={styles.authBackLink} aria-label="Voltar ao início">
               <Icon name="arrowUturnLeft" />
             </Link>
@@ -44,7 +31,7 @@ export default function SignUp() {
               type="button"
               className={styles.authBackLink}
               aria-label="Voltar para E-mail e Senha"
-              onClick={goToFirstStep}
+              onClick={methods.goToFirstStep}
             >
               <Icon name="arrowUturnLeft" />
             </button>
@@ -57,13 +44,13 @@ export default function SignUp() {
             Criar conta
           </h1>
           <form
-            ref={formRef}
+            ref={refs?.formRef}
             className="my-1 grid gap-5"
             aria-labelledby="signup-title"
-            aria-describedby={step === 2 ? "signup-unavailable" : undefined}
-            onSubmit={handleSubmit}
+            aria-describedby={state.step === 2 ? "signup-unavailable" : undefined}
+            onSubmit={methods.handleSubmit}
           >
-            {step === 1 ? (
+            {state.step === 1 ? (
               <>
                 <Field
                   id="signup-email"
@@ -75,8 +62,8 @@ export default function SignUp() {
                   autoComplete="email"
                   autoCapitalize="none"
                   spellCheck={false}
-                  value={email}
-                  onChange={handleEmailChange}
+                  value={state.email}
+                  onChange={methods.handleEmailChange}
                   required
                 />
                 <Field
@@ -84,21 +71,21 @@ export default function SignUp() {
                   name="password"
                   label="Senha"
                   icon="lock"
-                  type={passwordVisible ? "text" : "password"}
+                  type={state.passwordVisible ? "text" : "password"}
                   placeholder="Sua senha"
                   autoComplete="new-password"
-                  value={password}
-                  onChange={handlePasswordChange}
+                  value={state.password}
+                  onChange={methods.handlePasswordChange}
                   required
                   endAction={
                     <button
                       type="button"
                       className={styles.authPasswordToggle}
-                      aria-label={passwordVisible ? "Ocultar senha" : "Mostrar senha"}
+                      aria-label={state.passwordVisible ? "Ocultar senha" : "Mostrar senha"}
                       aria-controls="signup-password"
-                      onClick={togglePasswordVisible}
+                      onClick={methods.togglePasswordVisible}
                     >
-                      <Icon name={passwordVisible ? "eye" : "eyeOff"} />
+                      <Icon name={state.passwordVisible ? "eye" : "eyeOff"} />
                     </button>
                   }
                 />
@@ -116,8 +103,8 @@ export default function SignUp() {
                   type="text"
                   placeholder="Como te chamam?"
                   autoComplete="nickname"
-                  value={nickname}
-                  onChange={handleNicknameChange}
+                  value={state.nickname}
+                  onChange={methods.handleNicknameChange}
                   required
                 />
                 <div className="grid gap-3">
