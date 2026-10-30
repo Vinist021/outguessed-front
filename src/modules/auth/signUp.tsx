@@ -90,7 +90,7 @@ export default function SignUp() {
                     </button>
                   }
                 />
-                <Button type="submit" variant="primary">
+                <Button type="submit" variant="primary" className={styles.authNextButton}>
                   Avançar
                 </Button>
               </>
