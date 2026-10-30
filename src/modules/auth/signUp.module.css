@@ -1,4 +1,7 @@
 .authPage {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
   background: var(--color-surface-page);
   color: var(--color-text-primary);
   color-scheme: dark;
@@ -58,15 +61,38 @@
   place-items: center;
   border-radius: var(--radius-control);
   color: var(--color-pink);
+  cursor: pointer;
   transition:
     background-color var(--transition-interaction),
     color var(--transition-interaction);
+}
+
+.authNextButton {
+  --ui-button-background: var(--color-action-accent-background);
+  --ui-button-border-color: var(--color-action-accent-border);
+  --ui-button-color: var(--color-action-accent-foreground);
+  --ui-button-hover-background: var(--color-action-accent-hover-background);
+  --ui-button-hover-border-color: var(--color-action-accent-hover-border);
+}
+
+.authStep {
+  margin: 6px 0 14px;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  text-align: center;
 }
 
 .authNotice {
   color: var(--color-text-secondary);
   font-size: 13px;
   text-align: center;
+}
+
+.authProfilePhoto {
+  width: 80px;
+  height: 80px;
+  border: 2px solid var(--color-border-default);
+  border-radius: 50%;
 }
 
 .authLink {

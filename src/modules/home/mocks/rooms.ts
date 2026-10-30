@@ -4,7 +4,6 @@ export const rooms = [
   { name: "Deu ciência", category: "Ciência e natureza", players: 6, color: "cyan" },
   { name: "Na ponta da língua", category: "Palavras e expressões", players: 2, color: "yellow" },
   { name: "Mundo afora", category: "Geografia", players: 4, color: "cyan" },
-  { name: "Só mais uma", category: "Conhecimentos gerais", players: 7, color: "mint" },
   { name: "Aumenta o som", category: "Música", players: 8, color: "pink" },
   { name: "Túnel do tempo", category: "História", players: 3, color: "yellow" },
   { name: "Modo aventura", category: "Jogos e cultura pop", players: 6, color: "pink" },

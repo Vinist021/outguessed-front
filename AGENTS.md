@@ -1,7 +1,7 @@
 ## Projeto
 
 Frontend de um jogo multijogador de perguntas e cartas, desenvolvido com React, TypeScript e Vite, com um backend separado.
-O código atual apresenta a Home com componentes e salas ilustrativas. Ainda não há integração HTTP ou WebSocket, autenticação funcional, custom hooks de funcionalidade nem armazenamento centralizado de estado no frontend.
+O código atual apresenta a Home com componentes e salas ilustrativas e a tela de cadastro em duas etapas, coordenada pelo hook `useSignUp`. Ainda não há integração HTTP ou WebSocket, autenticação funcional nem armazenamento centralizado de estado no frontend.
 A organização é por funcionalidades. Quando a integração com o backend for implementada, HTTP atenderá operações com recursos e WebSocket atenderá a partida em tempo real; o backend será a autoridade sobre a partida.
 O código e as configurações existentes, as regras de negócio, os contratos do backend quando existirem e o `AGENTS.md` aplicável mais próximo são as fontes de referência.
 
@@ -32,17 +32,27 @@ Os caminhos abaixo são relativos à pasta que contém `outguessed-front/` e `ou
 
 ## Arquitetura
 
-Composição atual: `src/main.tsx → src/App.tsx → src/shared/routes/router.tsx → src/modules/home/home.tsx`.
+Composição atual: `src/main.tsx → src/App.tsx → src/shared/routes/router.tsx → páginas dos módulos home e auth`.
 
 - `src/main.tsx` monta o React em `StrictMode` e importa os estilos globais; `src/App.tsx` mantém um único `BrowserRouter`.
 - O alias `@/` aponta para `src/`, conforme `vite.config.ts` e `tsconfig.app.json`.
-- `src/shared/routes/router.tsx` centraliza as rotas e importa `Home` diretamente do módulo. A rota `/` renderiza a Home; URLs desconhecidas redirecionam para `/` com substituição do histórico. Use caminhos em inglês e interface em português.
-- `src/modules/` organiza funcionalidades. `home` contém a página, seus componentes em `components/<componente>/` e dados ilustrativos em `mocks/`. `auth`, `boards`, `cards`, `decks` e `match` ainda são diretórios reservados, sem implementação.
+- `src/shared/routes/router.tsx` centraliza as rotas e importa `Home` e `SignUp` diretamente dos módulos. A rota `/` renderiza a Home e `/signup` renderiza o cadastro; URLs desconhecidas redirecionam para `/` com substituição do histórico. Use caminhos em inglês e interface em português.
+- `src/modules/` organiza funcionalidades. `home` contém a página, seus componentes em `components/<componente>/` e dados ilustrativos em `mocks/`. `auth` contém a página de cadastro, seus estilos e o hook `useSignUp`. `boards`, `cards`, `decks` e `match` ainda são diretórios reservados, sem implementação.
 - `src/shared/` reúne ativos, estilos globais, roteamento e componentes de interface. `shared/http` e `shared/realtime` são apenas diretórios reservados. `shared/ui` também não contém implementação.
 - Páginas compõem a interface com componentes locais e compartilhados. Mantenha componentes e dados específicos junto da funcionalidade; reserve `shared/components/` para componentes independentes do domínio. Crie arquivos e APIs públicas de módulo apenas quando necessários; não exija `index.ts` nem uma estrutura plana.
 - O roteador pode importar páginas dos módulos. Evite dependências circulares; módulos não devem depender de `App`, `main.tsx` ou do roteador. Componentes compartilhados novos devem ser independentes dos módulos, inclusive de seus estilos.
 
-Quando houver acesso a dados, mantenha JSX e composição nas páginas, coordenação de estado e efeitos em hooks quando forem úteis, e operações HTTP independentes do React na API da funcionalidade. Não crie hooks para transformações puras nem camadas ou arquivos sem necessidade concreta. API e componentes não devem depender da página; a API não deve depender dos hooks.
+## Hooks personalizados
+
+Páginas e componentes apresentam a interface, recebem interações do usuário e consomem estado e ações expostos pelos hooks da funcionalidade. Use hooks personalizados como lugar padrão para coordenar estado, efeitos, manipulação de dados e operações da funcionalidade, mesmo quando um hook atender apenas a um componente. Mantenha esses hooks junto da funcionalidade; coloque em `shared/hooks` apenas comportamentos React independentes do domínio que sejam compartilhados.
+
+Os hooks próprios, tanto de funcionalidades quanto de `shared/hooks`, devem retornar um objeto com membros agrupados por responsabilidade: `state` para estados e valores derivados, `methods` para funções e ações, e `refs` para referências expostas ao consumidor. Inclua somente os grupos necessários, sem objetos vazios, e mantenha detalhes internos privados. Não exponha esses membros diretamente na raiz do retorno. Essa convenção não altera os hooks do React ou de bibliotecas.
+
+Nos componentes, desestruture somente os grupos, preservando-os no uso: `const { state, methods, refs } = useSignUp()`, com acessos como `state.email`, `methods.handleSubmit` e `refs.formRef`. Não desestruture os membros internos para recriar um consumo plano. O `useSignUp` é a referência atual desse padrão.
+
+Ao associar uma referência agrupada ao JSX, use `ref={refs?.formRef}`. Na configuração atual do projeto, `ref={refs.formRef}` gera um falso positivo de `react-hooks/refs`; preserve o agrupamento sem desativar a regra.
+
+Estado visual simples e restrito a um componente, como mostrar ou ocultar uma senha, pode permanecer nele. Extraia transformações puras para funções comuns, sem criar hooks para elas. Mantenha operações HTTP e serviços de tempo real em módulos da funcionalidade independentes do React; os hooks podem consumi-los, mas esses módulos não devem depender dos hooks, páginas ou componentes. A API e os componentes não devem depender da página. Não crie camadas ou arquivos sem necessidade concreta.
 
 ## Domínio e autoridade do servidor
 
@@ -58,14 +68,14 @@ Nunca calcule nem persista vencedor, correção de resposta ou posição no tabu
 
 A Home atual usa dados ilustrativos estáticos em `src/modules/home/mocks/rooms.ts`; ainda não há biblioteca de estado do servidor nem armazenamento de estado da partida.
 
-- Para estado temporário da interface, use o estado do React quando necessário.
+- Para estado temporário da interface, use o estado do React no componente ou no hook conforme a responsabilidade descrita acima.
 - Ao integrar HTTP, diferencie estado do servidor de estado local e evite duplicá-lo sem necessidade. Adote uma abstração de consultas somente quando a funcionalidade justificar.
 - Ao integrar a partida em tempo real, mantenha um caminho centralizado para sincronizar o estado confirmado pelo servidor. Use atualizações imutáveis e seletores claros se houver armazenamento compartilhado; seletores não devem recriar a autoridade do backend.
 - Não persista estado que possa ser derivado com segurança nem imponha uma única solução de estado para todas as categorias.
 
 ## HTTP e contratos
 
-Ainda não existem cliente HTTP implementado, endpoints consumidos nem contratos de transporte no frontend. Quando forem criados, siga o fluxo `página/componente → hook quando houver estado ou efeitos → API da funcionalidade → cliente HTTP compartilhado`.
+Ainda não existem cliente HTTP implementado, endpoints consumidos nem contratos de transporte no frontend. Quando forem criados, siga o fluxo `página/componente → hook da funcionalidade → API da funcionalidade → cliente HTTP compartilhado` para operações que envolvam dados da funcionalidade.
 A API da funcionalidade deve ser independente do React e pode usar `shared/http` depois que essa infraestrutura existir.
 Não espalhe requisições HTTP diretas pelos componentes nem crie um `ApiService` enorme que reúna vários domínios.
 Os tipos de transporte devem corresponder aos contratos reais do backend.
@@ -74,7 +84,7 @@ Não use `any` para esconder incertezas sobre os dados nem altere silenciosament
 
 ## Tempo real
 
-Ainda não há cliente WebSocket, eventos implementados ou armazenamento de tempo real no frontend. Ao implementá-los, use o fluxo `cliente de socket → lógica de tempo real da funcionalidade → estado sincronizado → hooks quando úteis → páginas e componentes React`.
+Ainda não há cliente WebSocket, eventos implementados ou armazenamento de tempo real no frontend. Ao implementá-los, use o fluxo `cliente de socket → lógica de tempo real da funcionalidade → estado sincronizado → hooks da funcionalidade → páginas e componentes React`.
 Os consumidores devem compartilhar a conexão pertinente, sem criar uma conexão por componente ou hook.
 Mantenha um único ciclo de vida da conexão, com responsável claro, por sessão ou partida relevante; não crie sockets por componente nem sockets separados para chat sem necessidade.
 Centralize o registro de eventos que se sobrepõem; nunca registre listeners durante a renderização.
@@ -97,7 +107,7 @@ Mantenha tabuleiro e chat em `match` enquanto estiverem fortemente ligados à pa
 
 ## Autenticação e segurança
 
-O painel de login e a menção a convidados na Home ainda são ilustrativos; não há login, cadastro, logout, restauração de sessão ou proteção de rotas implementados no frontend.
+O painel de login e a menção a convidados na Home ainda são ilustrativos. A rota `/signup` apresenta um formulário em duas etapas (e-mail e senha, depois apelido), com estado local coordenado pelo hook `useSignUp`; a conclusão do cadastro permanece desabilitada, sem integração com o backend. Ainda não há login, cadastro funcional, logout, restauração de sessão ou proteção de rotas implementados no frontend.
 Quando a autenticação for implementada, siga os contratos do backend para sessão, tokens/cookies, convidados e proteção de rotas. Não crie um mecanismo concorrente nem usuários convidados fictícios no cliente.
 As identidades fornecidas pelo backend devem ser a referência para convidados e reconexões.
 Nunca exponha nem registre senhas, tokens, chaves privadas de API, credenciais, segredos do backend ou segredos de assinatura e provedores.
@@ -107,8 +117,7 @@ Chamadas a IA ou a provedores privados que exijam segredos devem passar pelo bac
 
 ## React, interface e TypeScript
 
-Mantenha os componentes focados; separe a renderização de chamadas à API, sockets, sincronização de estado e transformações complexas.
-Crie hooks apenas para comportamentos relevantes e reutilizáveis do React ou da funcionalidade.
+Mantenha os componentes focados na apresentação e na interação com o usuário; separe da renderização as chamadas à API, os sockets, a sincronização de estado e as transformações complexas. Um hook não precisa ser reutilizado por vários componentes para encapsular a coordenação de uma funcionalidade.
 Reutilize componentes básicos de interface, padrões visuais, responsividade e acessibilidade existentes. Ao introduzir formulários ou validação funcional, verifique primeiro o que o projeto já oferece.
 O projeto usa Tailwind para layout, grid, flex, espaçamento estrutural e responsividade da composição; use CSS Modules para aparência, estados e transições. `src/shared/styles/index.css` é o único CSS global e contém apenas a importação do Tailwind, fontes, tokens e regras realmente globais. Páginas e componentes mantêm seus estilos específicos em arquivos `*.module.css` colocalizados e os importam como `styles`.
 Defina cores de paleta usadas como utilitários Tailwind em `@theme` com nomes `--color-*` e aliases semânticos compartilhados em `:root`. Para superfícies, textos, bordas e estados interativos, consuma tokens semânticos em vez de repetir hexadecimais. Preserve os prefixos camelCase `ui*` nos componentes compartilhados e o prefixo da funcionalidade, como `home*`, nos módulos. Mantenha os breakpoints das media queries equivalentes aos do Tailwind ou centralize-os antes de criar novos valores.
