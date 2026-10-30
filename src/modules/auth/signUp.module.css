@@ -80,6 +80,13 @@
   text-align: center;
 }
 
+.authProfilePhoto {
+  width: 80px;
+  height: 80px;
+  border: 2px solid var(--color-border-default);
+  border-radius: 50%;
+}
+
 .authLink {
   display: inline-flex;
   min-height: 44px;

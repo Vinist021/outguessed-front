@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import type { ChangeEvent, FormEvent } from "react";
+import type { ChangeEvent, FormEvent, MouseEvent } from "react";
+import { defaultProfilePhoto, profilePhotos } from "./mocks/profilePhotos";
+import type { ProfilePhotoId } from "./mocks/profilePhotos";
 
 export default function useSignUp() {
   const [step, setStep] = useState<1 | 2>(1);
@@ -7,7 +9,13 @@ export default function useSignUp() {
   const [password, setPassword] = useState("");
   const [nickname, setNickname] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [profilePhotoId, setProfilePhotoId] = useState<ProfilePhotoId | null>(null);
+  const [isPhotoPickerOpen, setIsPhotoPickerOpen] = useState(false);
+  const selectedProfilePhoto =
+    profilePhotos.find((photo) => photo.id === profilePhotoId) ?? defaultProfilePhoto;
   const formRef = useRef<HTMLFormElement>(null);
+  const photoDialogRef = useRef<HTMLDialogElement>(null);
+  const photoButtonRef = useRef<HTMLButtonElement>(null);
   const previousStep = useRef(step);
 
   useEffect(() => {
@@ -16,6 +24,20 @@ export default function useSignUp() {
       previousStep.current = step;
     }
   }, [step]);
+
+  useEffect(() => {
+    const dialog = photoDialogRef.current;
+    const button = photoButtonRef.current;
+    if (!isPhotoPickerOpen || !dialog) return;
+
+    dialog.showModal();
+    dialog.querySelector<HTMLButtonElement>('[aria-pressed="true"]')?.focus();
+
+    return () => {
+      dialog.close();
+      if (button?.isConnected) button.focus();
+    };
+  }, [isPhotoPickerOpen]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -39,7 +61,22 @@ export default function useSignUp() {
   }
 
   function goToFirstStep() {
+    setIsPhotoPickerOpen(false);
     setStep(1);
+  }
+
+  function openPhotoPicker(event: MouseEvent<HTMLButtonElement>) {
+    photoButtonRef.current = event.currentTarget;
+    setIsPhotoPickerOpen(true);
+  }
+
+  function closePhotoPicker() {
+    setIsPhotoPickerOpen(false);
+  }
+
+  function selectProfilePhoto(id: ProfilePhotoId) {
+    setProfilePhotoId(id);
+    closePhotoPicker();
   }
 
   return {
@@ -49,6 +86,9 @@ export default function useSignUp() {
       password,
       nickname,
       passwordVisible,
+      selectedProfilePhoto,
+      hasSelectedProfilePhoto: profilePhotoId !== null,
+      isPhotoPickerOpen,
     },
     methods: {
       handleSubmit,
@@ -57,9 +97,13 @@ export default function useSignUp() {
       handleNicknameChange,
       togglePasswordVisible,
       goToFirstStep,
+      openPhotoPicker,
+      closePhotoPicker,
+      selectProfilePhoto,
     },
     refs: {
       formRef,
+      photoDialogRef,
     },
   };
 }

@@ -1,0 +1,82 @@
+.authPhotoDialog {
+  width: min(440px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 24px;
+  overflow-y: auto;
+  border: 1px solid var(--color-border-default);
+  border-radius: 16px;
+  background: var(--color-surface-panel);
+  color: var(--color-text-primary);
+  color-scheme: dark;
+  scrollbar-color: var(--color-border-control) var(--color-surface-panel);
+}
+
+.authPhotoDialog::backdrop {
+  background: color-mix(in srgb, var(--color-surface-page) 80%, transparent);
+}
+
+.authPhotoDialog button:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 4px;
+}
+
+.authPhotoTitle {
+  font-family: var(--font-hand);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.authPhotoDescription {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.authPhotoOption {
+  min-width: 0;
+  padding: 12px 4px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-control);
+  color: var(--color-text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-interaction),
+    border-color var(--transition-interaction);
+}
+
+.authPhotoOption img {
+  width: min(100%, 72px);
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.authPhotoOption[aria-pressed="true"] {
+  border-color: var(--color-pink);
+  background: var(--color-surface-control);
+}
+
+.authPhotoSelection {
+  color: var(--color-text-secondary);
+  font-size: 11px;
+}
+
+.authPhotoOption[aria-pressed="true"] .authPhotoSelection {
+  color: var(--color-pink);
+}
+
+@media (hover: hover) {
+  .authPhotoOption:hover {
+    background: var(--color-action-outline-hover-background);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .authPhotoOption {
+    transition: none;
+  }
+}

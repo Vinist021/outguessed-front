@@ -5,6 +5,7 @@ import Confetti from "@/shared/components/confetti/confetti";
 import Field from "@/shared/components/field/field";
 import Icon from "@/shared/components/icons/icons";
 import Panel from "@/shared/components/panel/panel";
+import ProfilePhotoModal from "./components/profilePhotoModal/profilePhotoModal";
 import styles from "./signUp.module.css";
 import useSignUp from "./useSignUp";
 
@@ -95,6 +96,26 @@ export default function SignUp() {
               </>
             ) : (
               <>
+                <div className="grid justify-items-center gap-3">
+                  <img
+                    className={styles.authProfilePhoto}
+                    src={state.selectedProfilePhoto.src}
+                    alt={`Foto de perfil: ${state.selectedProfilePhoto.name}`}
+                    width={80}
+                    height={80}
+                  />
+                  <Button
+                    variant="outline"
+                    aria-haspopup="dialog"
+                    aria-controls="signup-profile-photo-dialog"
+                    aria-expanded={state.isPhotoPickerOpen}
+                    onClick={methods.openPhotoPicker}
+                  >
+                    {state.hasSelectedProfilePhoto
+                      ? "Alterar foto de perfil"
+                      : "Escolher foto de perfil"}
+                  </Button>
+                </div>
                 <Field
                   id="signup-nickname"
                   name="nickname"
@@ -123,6 +144,15 @@ export default function SignUp() {
               </>
             )}
           </form>
+
+          {state.step === 2 && (
+            <ProfilePhotoModal
+              ref={refs?.photoDialogRef}
+              selectedPhotoId={state.selectedProfilePhoto.id}
+              onSelect={methods.selectProfilePhoto}
+              onClose={methods.closePhotoPicker}
+            />
+          )}
 
           <p className={styles.authSignIn}>
             Já tem uma conta?{" "}
