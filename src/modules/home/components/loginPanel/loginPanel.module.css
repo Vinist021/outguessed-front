@@ -43,6 +43,27 @@
   margin-top: 2px;
 }
 
+.homeLoginError {
+  color: var(--color-text-primary);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.homeUserAvatar {
+  width: 80px;
+  height: 80px;
+  border: 2px solid var(--color-border-default);
+  border-radius: 50%;
+}
+
+.homeUserName {
+  color: var(--color-text-primary);
+  font-family: var(--font-hand);
+  font-size: 28px;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
 @media (width <= 1279px) {
   .homeLoginTitle {
     font-size: 27px;
