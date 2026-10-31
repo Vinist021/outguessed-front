@@ -1,10 +1,13 @@
 import { BrowserRouter } from "react-router";
+import Providers from "@/shared/contexts/providers";
 import AppRouter from "./shared/routes/router";
 
 function App() {
   return (
     <BrowserRouter>
-      <AppRouter />
+      <Providers>
+        <AppRouter />
+      </Providers>
     </BrowserRouter>
   );
 }

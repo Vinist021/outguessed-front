@@ -69,16 +69,12 @@ export default function PlayPanel() {
             <Icon name="info" />
             Info da sala
           </Button>
-          <Button aria-disabled="true">
-            <Icon name="bulb" />
-            Praticar
-          </Button>
           <Button aria-disabled="true" className={styles.homeCreateRoom}>
             <Icon name="plus" />
             Criar sala
           </Button>
         </div>
-        <Button aria-disabled="true" variant="primary" className={styles.homePlayButton}>
+        <Button aria-disabled="true" variant="secondary" className={styles.homePlayButton}>
           <span>Jogar</span>
           <Icon name="arrow" />
         </Button>

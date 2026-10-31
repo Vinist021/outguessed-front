@@ -67,14 +67,6 @@
     color var(--transition-interaction);
 }
 
-.authNextButton {
-  --ui-button-background: var(--color-action-accent-background);
-  --ui-button-border-color: var(--color-action-accent-border);
-  --ui-button-color: var(--color-action-accent-foreground);
-  --ui-button-hover-background: var(--color-action-accent-hover-background);
-  --ui-button-hover-border-color: var(--color-action-accent-hover-border);
-}
-
 .authStep {
   margin: 6px 0 14px;
   color: var(--color-text-secondary);
@@ -82,10 +74,13 @@
   text-align: center;
 }
 
-.authNotice {
-  color: var(--color-text-secondary);
-  font-size: 13px;
-  text-align: center;
+.authProfilePhotoButton {
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
 }
 
 .authProfilePhoto {
