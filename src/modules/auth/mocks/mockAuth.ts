@@ -1,4 +1,4 @@
-import type { AuthUser, LoginCredentials } from "../authContext";
+import type { AuthUser, LoginCredentials } from "../auth.types";
 
 // Dados públicos de demonstração, usados somente no login simulado do frontend.
 const demoCredentials: LoginCredentials = {

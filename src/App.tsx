@@ -1,13 +1,13 @@
 import { BrowserRouter } from "react-router";
-import AuthProvider from "@/modules/auth/authProvider";
+import Providers from "@/shared/contexts/providers";
 import AppRouter from "./shared/routes/router";
 
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
+      <Providers>
         <AppRouter />
-      </AuthProvider>
+      </Providers>
     </BrowserRouter>
   );
 }

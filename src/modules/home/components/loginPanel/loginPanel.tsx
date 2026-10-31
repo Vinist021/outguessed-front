@@ -1,10 +1,10 @@
-import useLogin from "@/modules/auth/useLogin";
 import Field from "@/shared/components/field/field";
 import Icon from "@/shared/components/icons/icons";
 import Button from "@/shared/components/button/button";
 import Panel from "@/shared/components/panel/panel";
 import homeStyles from "@/modules/home/home.module.css";
 import styles from "./loginPanel.module.css";
+import useLogin from "./useLogin";
 
 export default function LoginPanel() {
   const { state, methods } = useLogin();

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import type { ReactNode } from "react";
 import { AuthContext } from "./authContext";
-import type { AuthUser, LoginCredentials } from "./authContext";
-import { authenticateMockUser } from "./mocks/user";
+import type { AuthUser, LoginCredentials } from "../auth.types";
+import { authenticateMockUser } from "../mocks/mockAuth";
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);

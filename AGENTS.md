@@ -1,7 +1,7 @@
 ## Projeto
 
 Frontend de um jogo multijogador de perguntas e cartas, desenvolvido com React, TypeScript e Vite, com um backend separado.
-O código atual apresenta a Home com componentes e salas ilustrativas e a tela de cadastro em duas etapas, coordenada pelo hook `useSignUp`. Ainda não há integração HTTP ou WebSocket, autenticação funcional nem armazenamento centralizado de estado no frontend.
+O código atual apresenta a Home com componentes e salas ilustrativas, login simulado com sessão compartilhada em memória e a tela de cadastro em duas etapas, coordenada pelo hook `useSignUp`. Ainda não há integração HTTP ou WebSocket nem autenticação real com o backend.
 A organização é por funcionalidades. Quando a integração com o backend for implementada, HTTP atenderá operações com recursos e WebSocket atenderá a partida em tempo real; o backend será a autoridade sobre a partida.
 O código e as configurações existentes, as regras de negócio, os contratos do backend quando existirem e o `AGENTS.md` aplicável mais próximo são as fontes de referência.
 
@@ -32,13 +32,14 @@ Os caminhos abaixo são relativos à pasta que contém `outguessed-front/` e `ou
 
 ## Arquitetura
 
-Composição atual: `src/main.tsx → src/App.tsx → src/shared/routes/router.tsx → páginas dos módulos home e auth`.
+Composição atual: `src/main.tsx → src/App.tsx (BrowserRouter) → src/shared/contexts/providers.tsx → src/shared/routes/router.tsx → páginas dos módulos home e auth`.
 
 - `src/main.tsx` monta o React em `StrictMode` e importa os estilos globais; `src/App.tsx` mantém um único `BrowserRouter`.
+- `src/shared/contexts/providers.tsx` centraliza a composição dos providers e monta atualmente `AuthProvider`. Os contextos de uma funcionalidade permanecem no módulo responsável; os módulos importam seus contextos diretamente e não dependem do agregador `Providers`. Reserve contextos em `shared/contexts` para comportamentos transversais e independentes do domínio.
 - O alias `@/` aponta para `src/`, conforme `vite.config.ts` e `tsconfig.app.json`.
 - `src/shared/routes/router.tsx` centraliza as rotas e importa `Home` e `SignUp` diretamente dos módulos. A rota `/` renderiza a Home e `/signup` renderiza o cadastro; URLs desconhecidas redirecionam para `/` com substituição do histórico. Use caminhos em inglês e interface em português.
-- `src/modules/` organiza funcionalidades. `home` contém a página, seus componentes em `components/<componente>/` e dados ilustrativos em `mocks/`. `auth` contém a página de cadastro, seus estilos e o hook `useSignUp`. `boards`, `cards`, `decks` e `match` ainda são diretórios reservados, sem implementação.
-- `src/shared/` reúne ativos, estilos globais, roteamento e componentes de interface. `shared/http` e `shared/realtime` são apenas diretórios reservados. `shared/ui` também não contém implementação.
+- `src/modules/` organiza funcionalidades. `home` contém a página, seus componentes em `components/<componente>/`, o hook `useLogin` junto de `components/loginPanel/` e dados ilustrativos em `mocks/`. `auth` contém a página de cadastro, seus estilos, o hook `useSignUp`, a sessão em `context/`, os tipos de autenticação em `auth.types.ts` e a autenticação simulada em `mocks/mockAuth.ts`. `boards`, `cards`, `decks` e `match` ainda são diretórios reservados, sem implementação.
+- `src/shared/` reúne ativos, estilos globais, roteamento, composição de providers e componentes de interface. `shared/http` e `shared/realtime` são apenas diretórios reservados. `shared/ui` também não contém implementação.
 - Páginas compõem a interface com componentes locais e compartilhados. Mantenha componentes e dados específicos junto da funcionalidade; reserve `shared/components/` para componentes independentes do domínio. Crie arquivos e APIs públicas de módulo apenas quando necessários; não exija `index.ts` nem uma estrutura plana.
 - O roteador pode importar páginas dos módulos. Evite dependências circulares; módulos não devem depender de `App`, `main.tsx` ou do roteador. Componentes compartilhados novos devem ser independentes dos módulos, inclusive de seus estilos.
 
@@ -67,6 +68,8 @@ Nunca calcule nem persista vencedor, correção de resposta ou posição no tabu
 ## Estado
 
 A Home atual usa dados ilustrativos estáticos em `src/modules/home/mocks/rooms.ts`; ainda não há biblioteca de estado do servidor nem armazenamento de estado da partida.
+
+A sessão de demonstração é estado temporário do frontend, mantido por `AuthProvider` acima das rotas. `useAuth` expõe `state.user` e `methods.login`; somente o perfil autenticado entra no estado compartilhado. A sessão sobrevive à navegação interna e termina ao recarregar a página, sem persistência ou armazenamento da senha no contexto. O estado dos campos e do erro de login permanece local em `useLogin`, junto do painel.
 
 - Para estado temporário da interface, use o estado do React no componente ou no hook conforme a responsabilidade descrita acima.
 - Ao integrar HTTP, diferencie estado do servidor de estado local e evite duplicá-lo sem necessidade. Adote uma abstração de consultas somente quando a funcionalidade justificar.
@@ -107,8 +110,8 @@ Mantenha tabuleiro e chat em `match` enquanto estiverem fortemente ligados à pa
 
 ## Autenticação e segurança
 
-O painel de login e a menção a convidados na Home ainda são ilustrativos. A rota `/signup` apresenta um formulário em duas etapas (e-mail e senha, depois apelido), com estado local coordenado pelo hook `useSignUp`; a conclusão do cadastro permanece desabilitada, sem integração com o backend. Ainda não há login, cadastro funcional, logout, restauração de sessão ou proteção de rotas implementados no frontend.
-Quando a autenticação for implementada, siga os contratos do backend para sessão, tokens/cookies, convidados e proteção de rotas. Não crie um mecanismo concorrente nem usuários convidados fictícios no cliente.
+O painel de login da Home autentica somente o usuário público de demonstração definido em `src/modules/auth/mocks/mockAuth.ts`, sem chamadas ao backend ou atrasos artificiais. Após o sucesso, exibe o avatar e o nome do usuário no lugar do formulário e da menção a convidados. A rota `/signup` continua acessível e apresenta um formulário ilustrativo em duas etapas (e-mail e senha, depois apelido), com estado local coordenado pelo hook `useSignUp`, sem criação de conta no backend. Ainda não há autenticação real, logout, restauração de sessão, convidados funcionais ou proteção de rotas implementados no frontend.
+Quando a autenticação real for integrada, substitua a simulação e siga os contratos do backend para sessão, tokens/cookies, convidados e proteção de rotas. Não crie um mecanismo concorrente nem usuários convidados fictícios no cliente.
 As identidades fornecidas pelo backend devem ser a referência para convidados e reconexões.
 Nunca exponha nem registre senhas, tokens, chaves privadas de API, credenciais, segredos do backend ou segredos de assinatura e provedores.
 Variáveis de ambiente expostas ao frontend são públicas; nunca armazene segredos nelas.
