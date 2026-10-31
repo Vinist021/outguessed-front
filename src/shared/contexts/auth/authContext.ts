@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import type { AuthUser, LoginCredentials } from "../auth.types";
+import type { AuthUser, LoginCredentials } from "./auth.types";
 
 type AuthContextValue = {
   state: { user: AuthUser | null };

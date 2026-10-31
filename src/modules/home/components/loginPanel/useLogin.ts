@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { ChangeEvent, SubmitEvent } from "react";
 import { useNavigate } from "react-router";
-import useAuth from "@/modules/auth/context/useAuth";
+import useAuth from "@/shared/contexts/auth/useAuth";
 
 export default function useLogin() {
   const { state, methods } = useAuth();
