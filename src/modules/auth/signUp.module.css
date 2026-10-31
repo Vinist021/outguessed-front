@@ -82,12 +82,6 @@
   text-align: center;
 }
 
-.authNotice {
-  color: var(--color-text-secondary);
-  font-size: 13px;
-  text-align: center;
-}
-
 .authProfilePhoto {
   width: 80px;
   height: 80px;

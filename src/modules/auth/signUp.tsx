@@ -48,7 +48,6 @@ export default function SignUp() {
             ref={refs?.formRef}
             className="my-1 grid gap-5"
             aria-labelledby="signup-title"
-            aria-describedby={state.step === 2 ? "signup-unavailable" : undefined}
             onSubmit={methods.handleSubmit}
           >
             {state.step === 1 ? (
@@ -128,19 +127,9 @@ export default function SignUp() {
                   onChange={methods.handleNicknameChange}
                   required
                 />
-                <div className="grid gap-3">
-                  <p id="signup-unavailable" className={styles.authNotice}>
-                    O cadastro ainda não está disponível.
-                  </p>
-                  <Button
-                    type="submit"
-                    variant="primary"
-                    disabled
-                    aria-describedby="signup-unavailable"
-                  >
-                    Criar conta
-                  </Button>
-                </div>
+                <Button type="submit" variant="primary" disabled={!state.canSubmit}>
+                  Criar conta
+                </Button>
               </>
             )}
           </form>

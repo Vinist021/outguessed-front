@@ -85,6 +85,7 @@ export default function useSignUp() {
       email,
       password,
       nickname,
+      canSubmit: nickname.trim().length > 0,
       passwordVisible,
       selectedProfilePhoto,
       hasSelectedProfilePhoto: profilePhotoId !== null,
