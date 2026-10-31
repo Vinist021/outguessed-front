@@ -22,6 +22,13 @@ export default function useLogin() {
     setError(null);
   }
 
+  function handleLogout() {
+    methods.logout();
+    setEmail("");
+    setPassword("");
+    setError(null);
+  }
+
   function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
     setEmail(event.target.value);
     setError(null);
@@ -38,6 +45,6 @@ export default function useLogin() {
 
   return {
     state: { email, password, error, user: state.user },
-    methods: { handleSubmit, handleEmailChange, handlePasswordChange, goToSignUp },
+    methods: { handleSubmit, handleLogout, handleEmailChange, handlePasswordChange, goToSignUp },
   };
 }

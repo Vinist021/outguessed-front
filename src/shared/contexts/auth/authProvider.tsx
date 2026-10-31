@@ -15,5 +15,9 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     return true;
   }
 
-  return <AuthContext value={{ state: { user }, methods: { login } }}>{children}</AuthContext>;
+  function logout() {
+    setUser(null);
+  }
+
+  return <AuthContext value={{ state: { user }, methods: { login, logout } }}>{children}</AuthContext>;
 }

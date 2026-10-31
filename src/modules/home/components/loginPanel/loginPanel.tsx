@@ -30,6 +30,21 @@ export default function LoginPanel() {
           </div>
         )}
       </div>
+      {state.user && (
+        <div className="mt-6 grid grid-cols-2 gap-3">
+          <Button type="button" variant="primary" className={styles.homeLoginAction}>
+            Perfil
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            className={styles.homeLoginAction}
+            onClick={methods.handleLogout}
+          >
+            Deslogar
+          </Button>
+        </div>
+      )}
       {!state.user && (
         <>
           <p className={styles.homePanelDescription}>Entre na sua conta e venha jogar.</p>
