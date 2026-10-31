@@ -16,11 +16,6 @@
 }
 
 .homeLoginButton {
-  --ui-button-background: var(--color-action-accent-background);
-  --ui-button-border-color: var(--color-action-accent-border);
-  --ui-button-color: var(--color-action-accent-foreground);
-  --ui-button-hover-background: var(--color-action-accent-hover-background);
-  --ui-button-hover-border-color: var(--color-action-accent-hover-border);
   --ui-icon-size: 17px;
 }
 

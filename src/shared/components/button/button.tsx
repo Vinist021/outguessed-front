@@ -5,16 +5,19 @@ import styles from "./button.module.css";
 const variantClasses = {
   primary: styles.uiButtonPrimary,
   secondary: styles.uiButtonSecondary,
+  tertiary: styles.uiButtonTertiary,
   outline: styles.uiButtonOutline,
 };
 
 export default function Button({
   children,
-  variant = "secondary",
+  variant = "tertiary",
   className = "",
   type = "button",
   ...props
-}: ComponentPropsWithoutRef<"button"> & { variant?: "primary" | "secondary" | "outline" }) {
+}: ComponentPropsWithoutRef<"button"> & {
+  variant?: "primary" | "secondary" | "tertiary" | "outline";
+}) {
   return (
     <button
       {...props}

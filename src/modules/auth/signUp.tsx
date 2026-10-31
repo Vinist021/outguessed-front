@@ -89,7 +89,7 @@ export default function SignUp() {
                     </button>
                   }
                 />
-                <Button type="submit" variant="primary" className={styles.authNextButton}>
+                <Button type="submit" variant="primary">
                   Avançar
                 </Button>
               </>
@@ -127,7 +127,7 @@ export default function SignUp() {
                   onChange={methods.handleNicknameChange}
                   required
                 />
-                <Button type="submit" variant="primary" disabled={!state.canSubmit}>
+                <Button type="submit" variant="secondary" disabled={!state.canSubmit}>
                   Criar conta
                 </Button>
               </>

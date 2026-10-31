@@ -78,7 +78,7 @@ export default function PlayPanel() {
             Criar sala
           </Button>
         </div>
-        <Button aria-disabled="true" variant="primary" className={styles.homePlayButton}>
+        <Button aria-disabled="true" variant="secondary" className={styles.homePlayButton}>
           <span>Jogar</span>
           <Icon name="arrow" />
         </Button>
