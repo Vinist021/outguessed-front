@@ -96,13 +96,27 @@ export default function SignUp() {
             ) : (
               <>
                 <div className="grid justify-items-center gap-3">
-                  <img
-                    className={styles.authProfilePhoto}
-                    src={state.selectedProfilePhoto.src}
-                    alt={`Foto de perfil: ${state.selectedProfilePhoto.name}`}
-                    width={80}
-                    height={80}
-                  />
+                  <button
+                    type="button"
+                    className={styles.authProfilePhotoButton}
+                    aria-label={
+                      state.hasSelectedProfilePhoto
+                        ? "Alterar foto de perfil"
+                        : "Escolher foto de perfil"
+                    }
+                    aria-haspopup="dialog"
+                    aria-controls="signup-profile-photo-dialog"
+                    aria-expanded={state.isPhotoPickerOpen}
+                    onClick={methods.openPhotoPicker}
+                  >
+                    <img
+                      className={styles.authProfilePhoto}
+                      src={state.selectedProfilePhoto.src}
+                      alt={`Foto de perfil: ${state.selectedProfilePhoto.name}`}
+                      width={80}
+                      height={80}
+                    />
+                  </button>
                   <Button
                     variant="outline"
                     aria-haspopup="dialog"

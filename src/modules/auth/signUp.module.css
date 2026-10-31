@@ -74,6 +74,15 @@
   text-align: center;
 }
 
+.authProfilePhotoButton {
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
 .authProfilePhoto {
   width: 80px;
   height: 80px;
