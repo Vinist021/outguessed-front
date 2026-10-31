@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import type { ChangeEvent, FormEvent, MouseEvent } from "react";
+import type { ChangeEvent, MouseEvent, SubmitEvent } from "react";
+import { useNavigate } from "react-router";
 import { defaultProfilePhoto, profilePhotos } from "./mocks/profilePhotos";
 import type { ProfilePhotoId } from "./mocks/profilePhotos";
 
 export default function useSignUp() {
+  const navigate = useNavigate();
   const [step, setStep] = useState<1 | 2>(1);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,9 +41,16 @@ export default function useSignUp() {
     };
   }, [isPhotoPickerOpen]);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (step === 1) setStep(2);
+    if (step === 1) {
+      setStep(2);
+      return;
+    }
+
+    if (nickname.trim().length === 0) return;
+
+    void navigate("/", { replace: true });
   }
 
   function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
