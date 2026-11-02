@@ -48,11 +48,10 @@ export default function LoginPanel() {
       {!state.user && (
         <>
           <p className={styles.homePanelDescription}>Entre na sua conta e venha jogar.</p>
-          <form aria-labelledby="login-title" onSubmit={methods.handleSubmit}>
+          <form aria-labelledby="login-title" onSubmit={methods.handleSubmit} noValidate>
             <div className="mt-5 grid gap-4">
               <Field
                 id="email"
-                name="email"
                 label="E-mail"
                 icon="mail"
                 type="email"
@@ -60,30 +59,29 @@ export default function LoginPanel() {
                 autoComplete="email"
                 autoCapitalize="none"
                 spellCheck={false}
-                value={state.email}
-                onChange={methods.handleEmailChange}
-                aria-invalid={state.error ? true : undefined}
-                aria-describedby={state.error ? "login-error" : undefined}
+                {...methods.register("email")}
+                error={state.errors.email?.message}
+                aria-invalid={state.errors.root?.credentials ? true : undefined}
+                aria-describedby={state.errors.root?.credentials ? "login-error" : undefined}
                 required
               />
               <Field
                 id="password"
-                name="password"
                 label="Senha"
                 icon="lock"
                 type="password"
                 placeholder="Sua senha"
                 autoComplete="current-password"
-                value={state.password}
-                onChange={methods.handlePasswordChange}
-                aria-invalid={state.error ? true : undefined}
-                aria-describedby={state.error ? "login-error" : undefined}
+                {...methods.register("password")}
+                error={state.errors.password?.message}
+                aria-invalid={state.errors.root?.credentials ? true : undefined}
+                aria-describedby={state.errors.root?.credentials ? "login-error" : undefined}
                 required
               />
             </div>
-            {state.error && (
+            {state.errors.root?.credentials && (
               <p id="login-error" role="alert" className={`${styles.homeLoginError} mt-4`}>
-                {state.error}
+                {state.errors.root.credentials.message}
               </p>
             )}
             <div className="mt-6 grid grid-cols-2 gap-3">
@@ -91,6 +89,7 @@ export default function LoginPanel() {
                 type="submit"
                 variant="primary"
                 className={`${styles.homeLoginAction} ${styles.homeLoginButton}`}
+                disabled={state.isSubmitting}
               >
                 Entrar
                 <Icon name="arrow" />

@@ -44,7 +44,7 @@
 }
 
 .homeLoginError {
-  color: var(--color-text-primary);
+  color: var(--color-feedback-error);
   font-size: 14px;
   line-height: 1.5;
 }
