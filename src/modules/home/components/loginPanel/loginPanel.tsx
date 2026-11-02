@@ -18,7 +18,6 @@ export default function LoginPanel() {
             Seu cantinho
             <span className={`${homeStyles.homeTitleDot} ${styles.homeLoginDot}`}>.</span>
           </h2>
-          <span className={styles.homePlayerDecoration} aria-hidden="true" />
         </div>
         <div className={`${styles.homePlayerBody} relative`}>
           <div role="status" className="grid min-w-0 justify-items-start gap-2">
