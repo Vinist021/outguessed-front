@@ -66,8 +66,20 @@
   box-shadow: 0 0 0 100px var(--color-surface-control) inset;
 }
 
+.uiInput[aria-invalid="true"] {
+  border-color: var(--color-feedback-error);
+}
+
+.uiFieldError {
+  margin-top: 8px;
+  color: var(--color-feedback-error);
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
 @media (hover: hover) {
-  .uiInput:hover:not(:focus) {
+  .uiInput:hover:not(:focus, [aria-invalid="true"]) {
     border-color: var(--color-border-control-hover);
   }
 }
