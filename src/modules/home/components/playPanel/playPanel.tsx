@@ -4,9 +4,12 @@ import RoomList from "@/modules/home/components/roomList/roomList";
 import Button from "@/shared/components/button/button";
 import Panel from "@/shared/components/panel/panel";
 import homeStyles from "@/modules/home/home.module.css";
+import usePlayPanel from "./usePlayPanel";
 import styles from "./playPanel.module.css";
 
 export default function PlayPanel() {
+  const { state, methods } = usePlayPanel();
+
   return (
     <Panel className={homeStyles.homePlayPanel} aria-labelledby="play-title">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
@@ -34,6 +37,9 @@ export default function PlayPanel() {
           icon="user"
           placeholder="Como te chamam?"
           autoComplete="nickname"
+          value={state.nickname}
+          onChange={methods.handleNicknameChange}
+          readOnly={state.isNicknameReadOnly}
         />
         <Field
           id="room-search"
