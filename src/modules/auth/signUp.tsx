@@ -49,12 +49,12 @@ export default function SignUp() {
             className="my-1 grid gap-5"
             aria-labelledby="signup-title"
             onSubmit={methods.handleSubmit}
+            noValidate
           >
             {state.step === 1 ? (
               <>
                 <Field
                   id="signup-email"
-                  name="email"
                   label="E-mail"
                   icon="mail"
                   type="email"
@@ -62,20 +62,19 @@ export default function SignUp() {
                   autoComplete="email"
                   autoCapitalize="none"
                   spellCheck={false}
-                  value={state.email}
-                  onChange={methods.handleEmailChange}
+                  {...methods.register("email")}
+                  error={state.errors.email?.message}
                   required
                 />
                 <Field
                   id="signup-password"
-                  name="password"
                   label="Senha"
                   icon="lock"
                   type={state.passwordVisible ? "text" : "password"}
                   placeholder="Sua senha"
                   autoComplete="new-password"
-                  value={state.password}
-                  onChange={methods.handlePasswordChange}
+                  {...methods.register("password")}
+                  error={state.errors.password?.message}
                   required
                   endAction={
                     <button
@@ -89,7 +88,7 @@ export default function SignUp() {
                     </button>
                   }
                 />
-                <Button type="submit" variant="primary">
+                <Button type="submit" variant="primary" disabled={state.isSubmitting}>
                   Avançar
                 </Button>
               </>
@@ -131,17 +130,16 @@ export default function SignUp() {
                 </div>
                 <Field
                   id="signup-nickname"
-                  name="nickname"
                   label="Apelido"
                   icon="user"
                   type="text"
                   placeholder="Como te chamam?"
                   autoComplete="nickname"
-                  value={state.nickname}
-                  onChange={methods.handleNicknameChange}
+                  {...methods.register("nickname")}
+                  error={state.errors.nickname?.message}
                   required
                 />
-                <Button type="submit" variant="primary" disabled={!state.canSubmit}>
+                <Button type="submit" variant="primary" disabled={state.isSubmitting}>
                   Criar conta
                 </Button>
               </>

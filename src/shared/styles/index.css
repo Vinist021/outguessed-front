@@ -34,6 +34,7 @@
   --color-border-control: #766c86;
   --color-border-control-hover: #b6a6c8;
   --color-focus-ring: var(--color-cyan);
+  --color-feedback-error: #f38b8b;
   --color-selection-background: var(--color-cyan);
   --color-selection-foreground: var(--color-ground);
   --color-action-primary-background: var(--color-pink);

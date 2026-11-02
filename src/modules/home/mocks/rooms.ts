@@ -15,3 +15,5 @@ export const rooms = [
   { name: "Era uma vez", category: "Livros e histórias", players: 0, color: "yellow" },
   { name: "Cena final", category: "Cinema e séries", players: 3, color: "pink" },
 ] as const;
+
+export type RoomName = (typeof rooms)[number]["name"];

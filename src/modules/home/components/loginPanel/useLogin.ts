@@ -1,42 +1,48 @@
-import { useState } from "react";
-import type { ChangeEvent, SubmitEvent } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import type { SubmitEvent } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import useAuth from "@/shared/contexts/auth/useAuth";
+import { loginSchema } from "./login.schema";
+import type { LoginFormValues } from "./login.schema";
 
 export default function useLogin() {
   const { state, methods } = useAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const { register, handleSubmit, formState, setError, clearErrors, reset, resetField } =
+    useForm<LoginFormValues>({
+      resolver: zodResolver(loginSchema),
+      defaultValues: { email: "", password: "" },
+      mode: "onSubmit",
+      reValidateMode: "onChange",
+    });
 
-  function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    if (!methods.login({ email, password })) {
-      setError("E-mail ou senha inválidos.");
+  function onValidSubmit(values: LoginFormValues) {
+    if (!methods.login(values)) {
+      setError("root.credentials", {
+        type: "credentials",
+        message: "E-mail ou senha inválidos.",
+      });
       return;
     }
 
-    setPassword("");
-    setError(null);
+    resetField("password");
+    clearErrors();
+  }
+
+  function handleFormSubmit(event: SubmitEvent<HTMLFormElement>) {
+    void handleSubmit(onValidSubmit)(event);
+  }
+
+  function registerField(name: keyof LoginFormValues) {
+    return register(name, {
+      onChange: () => clearErrors("root.credentials"),
+    });
   }
 
   function handleLogout() {
     methods.logout();
-    setEmail("");
-    setPassword("");
-    setError(null);
-  }
-
-  function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
-    setEmail(event.target.value);
-    setError(null);
-  }
-
-  function handlePasswordChange(event: ChangeEvent<HTMLInputElement>) {
-    setPassword(event.target.value);
-    setError(null);
+    reset();
   }
 
   function goToSignUp() {
@@ -44,7 +50,16 @@ export default function useLogin() {
   }
 
   return {
-    state: { email, password, error, user: state.user },
-    methods: { handleSubmit, handleLogout, handleEmailChange, handlePasswordChange, goToSignUp },
+    state: {
+      errors: formState.errors,
+      isSubmitting: formState.isSubmitting,
+      user: state.user,
+    },
+    methods: {
+      register: registerField,
+      handleSubmit: handleFormSubmit,
+      handleLogout,
+      goToSignUp,
+    },
   };
 }
