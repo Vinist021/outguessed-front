@@ -67,7 +67,7 @@ export default function PlayPanel() {
         </div>
       </div>
 
-      <RoomList />
+      <RoomList selectedRoomName={state.selectedRoomName} onSelectRoom={methods.handleSelectRoom} />
 
       <div className="mt-6 flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
         <div className={`${styles.homeSecondaryActions} grid grid-cols-2 gap-2 sm:grid-cols-3`}>

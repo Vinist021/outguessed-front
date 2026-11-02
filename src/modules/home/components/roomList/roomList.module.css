@@ -13,13 +13,28 @@
 }
 
 .homeRoom {
+  display: block;
+  width: 100%;
+  height: 100%;
   min-width: 0;
   min-height: 116px;
   padding: 15px 16px 16px;
   border-right: 1px solid var(--home-room-divider);
   border-bottom: 1px solid var(--home-room-divider);
+  background: transparent;
+  text-align: left;
   cursor: pointer;
   transition: background-color var(--transition-interaction);
+}
+
+.homeRoom[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--color-cyan) 12%, var(--color-surface-control));
+  box-shadow: inset 0 0 0 2px var(--color-cyan);
+}
+
+.homeRoomScroll .homeRoom:focus-visible {
+  outline: 2px dashed var(--color-focus-ring);
+  outline-offset: -6px;
 }
 
 .homeRoomCyan {
@@ -66,6 +81,7 @@
 }
 
 .homeRoomName {
+  display: block;
   margin-top: 11px;
   overflow-wrap: anywhere;
   font-size: 14px;
@@ -74,6 +90,7 @@
 }
 
 .homeRoomCategory {
+  display: block;
   margin-top: 4px;
   color: var(--color-text-secondary);
   font-size: 11px;
@@ -89,7 +106,7 @@
 }
 
 @media (hover: hover) {
-  .homeRoom:hover {
+  .homeRoom:hover:not([aria-pressed="true"]) {
     background: #30293d;
   }
 }
