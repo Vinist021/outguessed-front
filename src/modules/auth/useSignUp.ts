@@ -1,15 +1,23 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useRef, useState } from "react";
-import type { ChangeEvent, MouseEvent, SubmitEvent } from "react";
+import type { MouseEvent, SubmitEvent } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { defaultProfilePhoto, profilePhotos } from "./mocks/profilePhotos";
 import type { ProfilePhotoId } from "./mocks/profilePhotos";
+import { signUpCredentialsStepSchema, signUpSchema } from "./signUp.schema";
+import type { SignUpFormValues } from "./signUp.schema";
 
 export default function useSignUp() {
   const navigate = useNavigate();
   const [step, setStep] = useState<1 | 2>(1);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [nickname, setNickname] = useState("");
+  const { register, handleSubmit, formState, reset, getValues } = useForm<SignUpFormValues>({
+    resolver: zodResolver(step === 1 ? signUpCredentialsStepSchema : signUpSchema),
+    defaultValues: { email: "", password: "", nickname: "" },
+    mode: "onSubmit",
+    reValidateMode: "onChange",
+    shouldUnregister: false,
+  });
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [profilePhotoId, setProfilePhotoId] = useState<ProfilePhotoId | null>(null);
   const [isPhotoPickerOpen, setIsPhotoPickerOpen] = useState(false);
@@ -41,28 +49,25 @@ export default function useSignUp() {
     };
   }, [isPhotoPickerOpen]);
 
-  function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function validateAndSubmit(event: SubmitEvent<HTMLFormElement>) {
+    let isValid = false;
+    await handleSubmit(() => {
+      isValid = true;
+    })(event);
+
+    if (!isValid) return;
+
     if (step === 1) {
+      reset(getValues());
       setStep(2);
       return;
     }
 
-    if (nickname.trim().length === 0) return;
-
     void navigate("/", { replace: true });
   }
 
-  function handleEmailChange(event: ChangeEvent<HTMLInputElement>) {
-    setEmail(event.target.value);
-  }
-
-  function handlePasswordChange(event: ChangeEvent<HTMLInputElement>) {
-    setPassword(event.target.value);
-  }
-
-  function handleNicknameChange(event: ChangeEvent<HTMLInputElement>) {
-    setNickname(event.target.value);
+  function handleFormSubmit(event: SubmitEvent<HTMLFormElement>) {
+    void validateAndSubmit(event);
   }
 
   function togglePasswordVisible() {
@@ -71,6 +76,7 @@ export default function useSignUp() {
 
   function goToFirstStep() {
     setIsPhotoPickerOpen(false);
+    reset(getValues());
     setStep(1);
   }
 
@@ -91,20 +97,16 @@ export default function useSignUp() {
   return {
     state: {
       step,
-      email,
-      password,
-      nickname,
-      canSubmit: nickname.trim().length > 0,
+      errors: formState.errors,
+      isSubmitting: formState.isSubmitting,
       passwordVisible,
       selectedProfilePhoto,
       hasSelectedProfilePhoto: profilePhotoId !== null,
       isPhotoPickerOpen,
     },
     methods: {
-      handleSubmit,
-      handleEmailChange,
-      handlePasswordChange,
-      handleNicknameChange,
+      register,
+      handleSubmit: handleFormSubmit,
       togglePasswordVisible,
       goToFirstStep,
       openPhotoPicker,
